@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="GF_assets.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="GF Cheer0000" x="0" y="0" width="1" height="1"/>
+	<SubTexture name="GF Dancing Beat0000" x="1" y="0" width="1" height="1"/>
+	<SubTexture name="GF Down Note0000" x="2" y="0" width="1" height="1"/>
+	<SubTexture name="GF FEAR 0000" x="3" y="0" width="1" height="1"/>
+	<SubTexture name="GF Right Note0000" x="4" y="0" width="1" height="1"/>
+	<SubTexture name="GF Up Note0000" x="5" y="0" width="1" height="1"/>
+	<SubTexture name="GF left note0000" x="6" y="0" width="1" height="1"/>
+	<SubTexture name="gf sad0000" x="7" y="0" width="1" height="1"/>
+</TextureAtlas>

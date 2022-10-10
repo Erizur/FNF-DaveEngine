@@ -1,0 +1,128 @@
+// Main Menu State //
+main_story==Story Mode
+main_freeplay==Freeplay
+main_credits==Credits
+main_ost==OST
+main_options==Options
+main_discord==Discord
+main_resetdata==Press R to reset your data
+main_warningdata==Are you sure you want to reset all of your data?
+
+// Compatibility Mode Screen//
+compat_warning==Do you want to enable compatibility mode?:linebreak:It will help on lag/crashes on low-end PCs, but disables some special effects.
+compat_yes==Yes
+compat_no==No
+
+// Main Menu Descriptions //
+desc_story==Play trough the story of the game!
+desc_freeplay==Play any song as you wish and get new scores!
+desc_credits==Look at the people who have worked or contributed to the engine!
+desc_ost==Listen to the songs of the mod.
+desc_options==Adjust game settings and keybinds.
+desc_discord==Join the official Vs. Dave and Bambi Discord!
+
+// Freeplay State //
+freeplay_base==Base
+
+freeplay_personalBest==PERSONAL BEST:
+freeplay_hard==HARD
+freeplay_normal==NORMAL
+freeplay_easy==EASY
+
+freeplay_skipChar==Hold CTRL To Skip Character Selection
+
+// Pause State //
+pause_Resume==Resume
+pause_Restart Song==Restart Song
+pause_Change Character==Change Character
+pause_Exit to menu==Exit To Menu
+pause_No Miss Mode==No Miss Mode
+
+// Options State //
+option_change_keybinds==Change Keybinds
+
+option_ghostTapping_on==Ghost Tapping
+option_ghostTapping_off==No Ghost Tapping
+
+option_downscroll==Downscroll
+option_upscroll==Upscroll
+
+option_songPosition_on==Song Position ON
+option_songPosition_off==Song Position OFF
+
+option_eyesores_enabled==Eyesores Enabled
+option_eyesores_disabled==Eyesores Disabled
+
+option_hitsound_on==Hitsounds On
+option_hitsound_off==Hitsounds Off
+
+option_fpsCap==FPS Cap
+
+option_freeplay_cutscenes_off==Freeplay Cutscenes Off
+option_freeplay_cutscenes_on==Freeplay Cutscenes On
+
+option_noteCamera_on==Camera Movement On Note
+option_noteCamera_off==Normal Camera
+
+option_change_langauge==Change Language
+option_disable_fps==Disable FPS & Memory Counter
+option_enable_fps==Enable FPS & Memory Counter
+
+option_enable_compat==Compatibility Mode OFF
+option_disable_compat==Compatibility Mode ON
+
+en-US==English
+es-US==Spanish
+pt-br==Brazilian-Portuguese
+ru-RU==Russian
+
+// Keybind State //
+keybind_tutorial==Select a control and then select a keybind
+keybind_preset==Keybind Presets:
+
+// Story Mode State //
+story_track==Tracks
+story_weekScore==WEEK SCORE:
+story_week0==Tutorial
+story_week1==Daddy Dearest
+story_week2==Spooky Month
+story_week3==Pico
+story_week4==Mommy Must Murder
+story_week5==Red Snow
+story_week6==hating simulator ft. moawling
+story_week7==Tankman
+
+// CHARACTER SELECT STATE //
+character_reset==Press R To Reset
+
+// Cool Util / Diffs //
+play_hard==HARD
+play_normal==NORMAL
+play_easy==EASY
+
+// Play State //
+play_score==Score:
+play_miss==Misses:
+play_accuracy==Accuracy:
+
+// Credits State //
+credits_dev==Developers
+credits_translator==Translators
+credits_contributor==Contributors
+credits_betaTester==Beta Testers
+credits_specialThanks==Special Thanks
+
+credits_songby==Song by
+
+//developers 
+credit_Erizur==Dave Engine Main Developer
+credit_MoldyGH==Creator of the original VS. Dave Mod
+credit_MissingTextureMan101==Additional help, Programmer
+credit_T5mpler==Programmer & Assistor
+credit_rapparep lol==Artist for the original VS. Dave Mod
+credit_TheBuilderXD==Artist & Programmer for the original VS. Dave Mod
+
+//translators
+credit_dani==Spanish Translator
+credit_Aizakku==Portguese-Brazillian Translator
+credit_Soulegal==Portguese-Brazillian Translator

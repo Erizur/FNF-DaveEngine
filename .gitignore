@@ -1,0 +1,7 @@
+export/
+.vscode/
+APIStuff.hx
+*.hxml
+BGSource/.vs
+vscode-project.hxml
+.DS_Store

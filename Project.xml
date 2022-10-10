@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://lime.openfl.org/project/1.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
+
+	<!-- _________________________ Application Settings _________________________ -->
+
+	<app title="Friday Night Funkin' Dave Engine" file="DaveEngine" packageName="dnbteam.daveengine" package="dnbteam.daveengine" main="Main" version="3.0.0" company="dnbteam"/>
+	<app preloader="flixel.system.FlxPreloader"/>
+
+	<set name="APP_ID" value="0x0100f6c013bbc000"/>
+	<set name="SWF_VERSION" value="11.8"/>
+
+	<!-- ____________________________ Window Settings ___________________________ -->
+
+	<!--These window settings apply to all targets-->
+	<window width="1280" height="720" fps="120" hardware="true" vsync="true" background="0x0000ffff"/>
+
+	<!--HTML5-->
+	<window if="html5" resizable="true"/>
+
+	<!--Desktop-->
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
+
+	<!--macOS-->
+	<window if="mac" orientation="auto" fullscreen="false" resizable="true" vsync="false" allow-high-dpi="true" />
+
+	<!--Mobile-->
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+
+	<!--Switch-->
+	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
+
+	<!-- _____________________________ Path Settings ____________________________ -->
+
+	<classpath name="source" />
+
+	<set name="BUILD_DIR" value="export/debug" if="debug" />
+	<set name="BUILD_DIR" value="export/release" unless="debug" />
+	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
+
+	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
+	<assets path="assets/preload" rename="assets" exclude="*.mp3" unless="web"/>
+	<assets path="assets/preload/videos" rename="assets/videos" include="*.mp4" embed='false' />
+	<assets path="assets/songs"    library="songs"    exclude="*.ogg" if="web"/>
+	<assets path="assets/songs"    library="songs"    exclude="*.mp3" unless="web"/>
+	<assets path="assets/shared"   library="shared"   exclude="*.ogg" if="web"/>
+	<assets path="assets/shared"   library="shared"   exclude="*.mp3" unless="web"/>
+	<assets path='art/readme.txt' rename='PLEASE READ.txt' />
+	<assets path='art/icons' rename='icons' embed='true'/>
+	<assets path="CHANGELOG.md" rename='changelog.txt'/>
+	<assets path="assets/fonts" embed='true'/>
+
+	<define name="SHADERS_ENABLED" unless="mac"/>
+	<define name="PRELOAD_ALL" unless="web" />
+	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
+	
+	<section if="PRELOAD_ALL">
+		<library name="songs"    preload="true" />
+		<library name="shared"   preload="true" />
+	</section>
+	
+	<section if="NO_PRELOAD_ALL">
+		<library name="songs"    preload="false" />
+		<library name="shared"   preload="false" />
+	</section>
+
+	<!-- _______________________________ Libraries ______________________________ -->
+
+	<haxelib name="flixel" />
+	<haxedev set='webgl' />
+	<haxelib name="flixel-addons" />
+	<haxelib name="hscript" />
+	<haxelib name="actuate" />
+	<haxelib name="flixel-ui" />
+	<haxelib name="faxe" if='switch'/>
+	<haxelib name="hxCodec" if="desktop || android" />
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	
+
+	<setenv name="next"/>
+
+	<haxelib name="discord_rpc" if="desktop"/>
+
+	<!-- _________________________________ Custom _______________________________ -->
+
+	<icon path="art/dave16.png" size='16'/>
+	<icon path="art/dave32.png" size='32'/>
+	<icon path="art/dave64.png" size='64'/>
+	<icon path="art/dave.png" />
+</project>

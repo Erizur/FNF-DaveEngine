@@ -1,0 +1,128 @@
+// Main Menu State //
+main_story==Modo Historia
+main_freeplay==Juego Libre
+main_credits==Creditos
+main_ost==OST
+main_options==Opciones
+main_discord==Discord
+main_resetdata==Presiona R para resetear tus datos
+main_warningdata==¿Estas seguro de que quieres resetar tus datos?
+
+// Compatibility Mode Screen//
+compat_warning==¿Quieres habilitar el modo de compatibilidad?:linebreak:Ayuda evitando el lag/cierre en PCs de bajos recursos, pero desactiva algunos efectos especiales.
+compat_yes==Si
+compat_no==No
+
+// Main Menu Descriptions //
+desc_story==¡Juega la historia del juego!
+desc_freeplay==¡Juega cualquier cancion a tu gusto!
+desc_credits==¡Mira las personas que trabajaron en este mod!
+desc_ost==Escucha la musica de este mod.
+desc_options==Ajusta las opciones o teclas del juego.
+desc_discord==¡Unete al discord oficial de VS. Dave & Bambi!
+
+// Freeplay State //
+freeplay_base==Base
+
+freeplay_personalBest==PUNTAJE MAYOR:
+freeplay_hard==DIFICIL
+freeplay_normal==NORMAL
+freeplay_easy==FACIL
+
+freeplay_skipChar==Mantén CTRL para saltarse la selección de Personaje
+
+// Pause State //
+pause_Resume==Continuar
+pause_Restart Song==Reiniciar cancion
+pause_Change Character==Cambiar personaje
+pause_Exit to menu==Salir al menu
+pause_No Miss Mode==Deshabilitar Fallos
+
+// Options State //
+option_change_keybinds==Cambiar teclas
+
+option_ghostTapping_on==Ghost Tapping
+option_ghostTapping_off==Sin Ghost Tapping
+
+option_downscroll==Notas para abajo
+option_upscroll==Notas para arriba
+
+option_songPosition_on==Barra de progreso
+option_songPosition_off==Sin barra de progreso
+
+option_eyesores_enabled==Eyesores Activados
+option_eyesores_disabled==Eyesores Desactivados
+
+option_hitsound_on==Hitsounds Activados
+option_hitsound_off==Hitsounds Desactivados
+
+option_fpsCap==FPS Cap
+
+option_freeplay_cutscenes_off==Freeplay Cutscenes Off
+option_freeplay_cutscenes_on==Freeplay Cutscenes On
+
+option_noteCamera_on==Camara Dinamica
+option_noteCamera_off==Camara por Defecto
+
+option_change_langauge==Cambiar Idioma
+option_disable_fps==No mostrar FPS y Memoria
+option_enable_fps==Mostrar FPS y Memoria
+
+option_enable_compat==Modo de Compatbilidad ACTIVADO
+option_disable_compat==Modo de Compatibilidad DESACTIVADO
+
+en-US==English
+es-US==Spanish
+pt-br==Brazilian-Portuguese
+ru-RU==Russian
+
+// Keybind State //
+keybind_tutorial==Selecciona un control y presiona una tecla
+keybind_preset==Teclas por defecto:
+
+// Story Mode State //
+story_track==Pistas
+story_weekScore==PUNTUACIÓN:
+story_week0==Tutorial
+story_week1==Daddy Dearest
+story_week2==Spooky Month
+story_week3==Pico
+story_week4==Mommy Must Murder
+story_week5==Nieve Roja
+story_week6==simulador de odio ft. moawling
+story_week7==Tankman
+
+// CHARACTER SELECT STATE //
+character_reset==Presiona R para resetear
+
+// Cool Util / Diffs //
+play_hard==DIFICIL
+play_normal==NORMAL
+play_easy==FACIL
+
+// Play State //
+play_score==Puntuación:
+play_miss==Fallos:
+play_accuracy==Precisión:
+
+// Credits State //
+credits_dev==Desarolladores
+credits_translator==Traductores
+credits_contributor==Contribuidores
+credits_betaTester==Beta Testers
+credits_specialThanks==Agradecimientos Especiales
+
+credits_songby==Canción por
+
+//developers 
+credit_Erizur==Desarollador principal de Dave Engine
+credit_MoldyGH==Creador de VS. Dave & Bambi
+credit_MissingTextureMan101==Ayuda adicional, Programador
+credit_T5mpler==Programador y Asistente
+credit_rapparep lol==Artista del mod original
+credit_TheBuilderXD==Artista y Programador del mod original
+
+//translators
+credit_dani==Traductor al Español
+credit_Aizakku==Traductor al Portugués
+credit_Soulegal==Traductor al Portugués

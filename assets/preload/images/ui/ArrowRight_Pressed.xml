@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="ArrowRight_Pressed.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="arrowRightPressed0000" x="0" y="0" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0001" x="0" y="0" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0002" x="0" y="79" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0003" x="0" y="79" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0004" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0005" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0006" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0007" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0008" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0009" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0010" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0011" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0012" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0013" x="0" y="158" width="120" height="76"/>
+	<SubTexture name="arrowRightPressed0014" x="0" y="158" width="120" height="76"/>
+</TextureAtlas>

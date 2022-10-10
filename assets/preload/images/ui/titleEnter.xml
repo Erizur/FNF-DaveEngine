@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="titleCool.png">
+	<!-- Created with Adobe Flash CS6 version 12.0.0.481 -->
+	<!-- http://www.adobe.com/products/flash.html -->
+	<SubTexture name="ENTER PRESSED0000" x="30" y="30" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0001" x="30" y="119" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0002" x="30" y="208" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0003" x="30" y="297" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0004" x="30" y="386" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0005" x="30" y="475" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0006" x="30" y="564" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0007" x="30" y="653" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0008" x="30" y="742" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0009" x="30" y="831" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0010" x="30" y="920" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0011" x="30" y="1009" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0012" x="30" y="1098" width="1000" height="86"/>
+	<SubTexture name="ENTER PRESSED0013" x="30" y="1098" width="1000" height="86"/>
+	<SubTexture name="Press Enter to Begin0000" x="1033" y="1098" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0001" x="30" y="1199" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0002" x="989" y="1199" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0003" x="30" y="1300" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0004" x="989" y="1300" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0005" x="30" y="1401" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0006" x="989" y="1401" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0007" x="30" y="1502" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0008" x="989" y="1502" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0009" x="30" y="1603" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0010" x="989" y="1603" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0011" x="30" y="1704" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0012" x="989" y="1704" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0013" x="30" y="1805" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0014" x="989" y="1805" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0015" x="30" y="1906" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0016" x="989" y="1906" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0017" x="30" y="2007" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0018" x="989" y="2007" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0019" x="30" y="2108" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0020" x="989" y="2108" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0021" x="30" y="2209" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0022" x="989" y="2209" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0023" x="989" y="2209" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0024" x="30" y="2310" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0025" x="989" y="2310" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0026" x="30" y="2411" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0027" x="989" y="2411" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0028" x="30" y="2512" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0029" x="989" y="2512" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0030" x="30" y="2613" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0031" x="989" y="2613" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0032" x="30" y="2714" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0033" x="989" y="2714" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0034" x="30" y="2815" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0035" x="989" y="2815" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0036" x="30" y="2916" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0037" x="989" y="2916" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0038" x="30" y="3017" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0039" x="989" y="3017" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0040" x="30" y="3118" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0041" x="989" y="3118" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0042" x="30" y="3219" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0043" x="989" y="3219" width="956" height="98"/>
+	<SubTexture name="Press Enter to Begin0044" x="1033" y="1098" width="956" height="98"/>
+</TextureAtlas>
