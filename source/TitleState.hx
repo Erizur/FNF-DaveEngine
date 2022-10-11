@@ -305,7 +305,7 @@ class TitleState extends MusicBeatState
 					addMoreText('TheBuilderXD');
 					addMoreText('Erizur, T5mpler');
 				case 4:
-					addMoreText('and our wonderful contributors!');
+					addMoreText('and Contributors');
 				case 5:
 					deleteCoolText();
 				case 6:

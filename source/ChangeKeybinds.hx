@@ -47,8 +47,7 @@ class ChangeKeybinds extends MusicBeatState
 		new ControlUI('Down', 'down'),
 		new ControlUI('Up', 'up'),
 		new ControlUI('Right', 'right'),
-		new ControlUI('Reset', 'reset'),
-		new ControlUI('Key5', 'key5'),
+		new ControlUI('Reset', 'reset')
 	];
 
 	var currentUIControl:ControlUI;
@@ -61,7 +60,7 @@ class ChangeKeybinds extends MusicBeatState
 	var curKeybindSelected:Int = 0;
 	var currentKeybind:FlxText;
 
-	var keybindPresets:Array<String> = ['Arrow Keys', 'WASD', 'DFJK', 'ASKL', 'ZX,.'];
+	var keybindPresets:Array<String> = ['-', 'WASD', 'DFJK', 'ASKL', 'ZX,.'];
 	var choosePreset:FlxText;
 	var preset:FlxText;
 	var presetLeft:FlxText;
@@ -251,7 +250,7 @@ class ChangeKeybinds extends MusicBeatState
 		var keybindTexts:FlxTypedGroup<FlxText> = new FlxTypedGroup<FlxText>();
 
 		var control:FlxText = new FlxText((FlxG.width / 2) - 200, (preset.y + 125) + (order * 100), 0, uiControl.uiName + ":", 32);
-		control.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
+		control.setFormat(Paths.font("PixelOperator-Bold.ttf"), 32, FlxColor.WHITE, CENTER);
 		control.borderSize = 2;
 		control.antialiasing = true;
 		add(control);
@@ -271,7 +270,7 @@ class ChangeKeybinds extends MusicBeatState
 					keybind.x = (FlxG.width / 2) + (j * 50) + keybindTexts.members[j - 1].width;
 			}
 			keybind.y = control.y;
-			keybind.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
+			keybind.setFormat(Paths.font("PixelOperator-Bold.ttf"), 32, FlxColor.WHITE, CENTER);
 			keybind.borderSize = 2;
 			keybind.antialiasing = true;
 			add(keybind);
@@ -295,23 +294,23 @@ class ChangeKeybinds extends MusicBeatState
 		keybindPresetGroup.add(choosePreset);
 		add(choosePreset);
 
-		preset = new FlxText(0, choosePreset.y + 75, FlxG.width / 2, keybindPresets[curSelectedPreset], 32);
+		preset = new FlxText(0, choosePreset.y + 100, FlxG.width / 2, keybindPresets[curSelectedPreset], 32);
 		preset.screenCenter(X);
-		preset.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		preset.setFormat(Paths.font("PixelOperator-Bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		preset.borderSize = 2;
 		preset.antialiasing = true;
 		add(preset);
 		keybindPresetGroup.add(preset);
 		selectableItems.push(preset);
 
-		presetLeft = new FlxText(preset.x - arrowOffset, preset.y - preset.textField.height - 2, FlxG.width / 2, "<", 32);
+		presetLeft = new FlxText(preset.x - arrowOffset, preset.y - 45, FlxG.width / 2, "<", 32);
 		presetLeft.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		presetLeft.borderSize = 1;
 		presetLeft.antialiasing = true;
 		keybindPresetGroup.add(presetLeft);
 		add(presetLeft);
 
-		presetRight = new FlxText(preset.x + arrowOffset, preset.y - preset.textField.height - 2, FlxG.width / 2, ">", 32);
+		presetRight = new FlxText(preset.x + arrowOffset, preset.y - 45, FlxG.width / 2, ">", 32);
 		presetRight.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		presetRight.borderSize = 1;
 		presetRight.antialiasing = true;
@@ -399,35 +398,42 @@ class ChangeKeybinds extends MusicBeatState
 	}
 	function changePreset()
 	{
-		switch (curPreset)
+		if(curPreset != '-')
 		{
-			case 'WASD':
-				KeybindPrefs.setKeybindPreset(KeyboardScheme.Duo(true));
-			case 'DFJK':
-				KeybindPrefs.setKeybindPreset(KeyboardScheme.Solo);
-			case 'ASKL':
-				KeybindPrefs.setKeybindPreset(KeyboardScheme.Askl);
-			case 'ZX,.':
-				KeybindPrefs.setKeybindPreset(KeyboardScheme.ZxCommaDot);
-		}
-		FlxG.sound.play(Paths.sound('confirmMenu'));
-		KeybindPrefs.saveControls();
-		
-		for (controlGroup in controlGroups)
-		{
-			for (text in controlGroup.texts)
+			switch (curPreset)
+			{
+				case 'WASD':
+					KeybindPrefs.setKeybindPreset(KeyboardScheme.Duo(true));
+				case 'DFJK':
+					KeybindPrefs.setKeybindPreset(KeyboardScheme.Solo);
+				case 'ASKL':
+					KeybindPrefs.setKeybindPreset(KeyboardScheme.Askl);
+				case 'ZX,.':
+					KeybindPrefs.setKeybindPreset(KeyboardScheme.ZxCommaDot);
+			}
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			KeybindPrefs.saveControls();
+
+			for (controlGroup in controlGroups)
+			{
+				for (text in controlGroup.texts)
+				{
+					FlxTween.tween(text, {alpha: 0}, 0.5);
+				}
+			}
+			for (text in controlTexts)
 			{
 				FlxTween.tween(text, {alpha: 0}, 0.5);
 			}
+			FlxFlicker.flicker(preset, 1.1, 0.07, true, false, function(flicker:FlxFlicker)
+			{
+				FlxG.resetState();
+			});
 		}
-		for (text in controlTexts)
+		else
 		{
-			FlxTween.tween(text, {alpha: 0}, 0.5);
+			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
-		FlxFlicker.flicker(preset, 1.1, 0.07, true, false, function(flicker:FlxFlicker)
-		{
-			FlxG.resetState();
-		});
 	}
 
 	function updateText(text:FlxText, selected:Bool)

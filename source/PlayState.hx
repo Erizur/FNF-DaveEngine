@@ -2574,13 +2574,6 @@ class PlayState extends MusicBeatState
 		var down = controls.DOWN;
 		var left = controls.LEFT;
 
-		var key5 = controls.KEY5 && (SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'interdimensional');
-
-		playerStrums.forEach(function(strum:StrumNote)
-		{
-			strum.pressingKey5 = key5;
-		});
-
 		var upP = controls.UP_P;
 		var rightP = controls.RIGHT_P;
 		var downP = controls.DOWN_P;
@@ -2753,24 +2746,21 @@ class PlayState extends MusicBeatState
 			{
 				if (daNote.canBeHit && daNote.mustPress && daNote.isSustainNote)
 				{
-					if ((daNote.noteStyle == 'shape' && key5) || (daNote.noteStyle != 'shape' && !key5))
+					switch (daNote.noteData)
 					{
-						switch (daNote.noteData)
-						{
 							// NOTES YOU ARE HOLDING
-							case 2:
-								if (up || upHold)
-									goodNoteHit(daNote);
-							case 3:
-								if (right || rightHold)
-									goodNoteHit(daNote);
-							case 1:
-								if (down || downHold)
-									goodNoteHit(daNote);
-							case 0:
-								if (left || leftHold)
-									goodNoteHit(daNote);
-						}
+						case 2:
+							if (up || upHold)
+								goodNoteHit(daNote);
+						case 3:
+							if (right || rightHold)
+								goodNoteHit(daNote);
+						case 1:
+							if (down || downHold)
+								goodNoteHit(daNote);
+						case 0:
+							if (left || leftHold)
+								goodNoteHit(daNote);
 					}
 				}
 			});

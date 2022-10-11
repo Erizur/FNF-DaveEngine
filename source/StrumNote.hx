@@ -7,12 +7,10 @@ class StrumNote extends FlxSprite
 	public var baseX:Float;
 	public var baseY:Float;
 	public var playerStrum:Bool;
-	public var pressingKey5:Bool;
    public function new(x:Float, y:Float, type:String, strumID:Int, playerStrum:Bool)
    {
       super(x, y);
 	  baseY = y;
-	  pressingKey5 = false;
 
 	  ID = strumID;
 

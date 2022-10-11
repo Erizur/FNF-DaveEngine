@@ -385,20 +385,6 @@ class Note extends FlxSprite
 		{
 			return;
 		}
-		if (strum.pressingKey5)
-		{
-			if (noteStyle != "shape")
-			{
-				alpha *= 0.5;
-			}
-		}
-		else
-		{
-			if (noteStyle == "shape")
-			{
-				alpha *= 0.5;
-			}
-		}
 	}
 
 	public function isInState(state:String)
