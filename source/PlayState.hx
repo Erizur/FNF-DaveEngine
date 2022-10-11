@@ -1471,7 +1471,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false, false);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false/*, false*/);
 				swagNote.originalType = OGNoteDat;
 				swagNote.sustainLength = songNotes[2];
 				swagNote.scrollFactor.set(0, 0);
@@ -1486,7 +1486,7 @@ class PlayState extends MusicBeatState
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
 					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true,
-						gottaHitNote, daNoteStyle, false, false);
+						gottaHitNote, daNoteStyle, false/*, false*/);
 					sustainNote.originalType = OGNoteDat;
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
@@ -1497,9 +1497,6 @@ class PlayState extends MusicBeatState
 				swagNote.mustPress = gottaHitNote;
 			}
 		}
-
-		// trace(unspawnNotes.length);
-		// playerCounter += 1;
 
 		unspawnNotes.sort(sortByShit);
 
@@ -2066,7 +2063,7 @@ class PlayState extends MusicBeatState
 
 					if (currentSection != null)
 					{
-						if (currentSection.altAnim)
+						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation')
 							altAnim = '-alt';
 					}
 					if (inFiveNights && !daNote.isSustainNote)

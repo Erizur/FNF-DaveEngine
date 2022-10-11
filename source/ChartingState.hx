@@ -103,7 +103,8 @@ class ChartingState extends MusicBeatState
 	
 	var guitarPart:Bool = false;
 
-	var noteTypes = ['normal', 'phone', 'phone-alt', 'shape'];
+	// var noteTypes = ['normal', 'phone', 'phone-alt', 'shape'];
+	var noteTypes = ['normal', 'alt-animation'];
 	var curNoteType:Int;
 
 	override function create()
@@ -711,7 +712,7 @@ class ChartingState extends MusicBeatState
 			var i = pressArray[p];
 			if (i && !delete)
 			{
-				addNote(new Note(Conductor.songPosition , p, null, false, true, noteTypes[curNoteType], true, guitarPart));
+				addNote(new Note(Conductor.songPosition , p, null, false, true, noteTypes[curNoteType], true/*, guitarPart*/));
 			}
 		}
 
@@ -734,75 +735,6 @@ class ChartingState extends MusicBeatState
 				}
 			});
 		}
-		/*curRenderedNotes.forEach(function(note:Note) {
-			if (strumLine.overlaps(note) && strumLine.y == note.y) // yandere dev type shit
-			{
-				if (_song.notes[curSection].mustHitSection)
-					{
-						trace('must hit ' + Math.abs(note.noteData));
-						if (note.noteData < 4)
-						{
-							switch (Math.abs(note.noteData))
-							{
-								case 2:
-									player1.playAnim('singUP', true);
-								case 3:
-									player1.playAnim('singRIGHT', true);
-								case 1:
-									player1.playAnim('singDOWN', true);
-								case 0:
-									player1.playAnim('singLEFT', true);
-							}
-						}
-						if (note.noteData >= 4)
-						{
-							switch (note.noteData)
-							{
-								case 6:
-									player2.playAnim('singUP', true);
-								case 7:
-									player2.playAnim('singRIGHT', true);
-								case 5:
-									player2.playAnim('singDOWN', true);
-								case 4:
-									player2.playAnim('singLEFT', true);
-							}
-						}
-					}
-					else
-					{
-						trace('hit ' + Math.abs(note.noteData));
-						if (note.noteData < 4)
-						{
-							switch (Math.abs(note.noteData))
-							{
-								case 2:
-									player2.playAnim('singUP', true);
-								case 3:
-									player2.playAnim('singRIGHT', true);
-								case 1:
-									player2.playAnim('singDOWN', true);
-								case 0:
-									player2.playAnim('singLEFT', true);
-							}
-						}
-						if (note.noteData >= 4)
-						{
-							switch (note.noteData)
-							{
-								case 6:
-									player1.playAnim('singUP', true);
-								case 7:
-									player1.playAnim('singRIGHT', true);
-								case 5:
-									player1.playAnim('singDOWN', true);
-								case 4:
-									player1.playAnim('singLEFT', true);
-							}
-						}
-					}
-			}
-		});*/
 
 		if (curBeat % 4 == 0 && curStep >= 16 * (curSection + 1))
 		{
@@ -1221,20 +1153,6 @@ class ChartingState extends MusicBeatState
 			Conductor.changeBPM(daBPM);
 		}
 
-		/* // PORT BULLSHIT, INCASE THERE'S NO SUSTAIN DATA FOR A NOTE
-			for (sec in 0..._song.notes.length)
-			{
-				for (notesse in 0..._song.notes[sec].sectionNotes.length)
-				{
-					if (_song.notes[sec].sectionNotes[notesse][2] == null)
-					{
-						trace('SUS NULL');
-						_song.notes[sec].sectionNotes[notesse][2] = 0;
-					}
-				}
-			}
-		 */
-
 		for (i in sectionInfo)
 		{
 			var daNoteInfo = i[1];
@@ -1243,7 +1161,8 @@ class ChartingState extends MusicBeatState
 			var noteType = i[3];
 
 			// (strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal")
-			var note:Note = new Note(daStrumTime, daNoteInfo % (guitarPart ? 5 : 4), null, false, true, noteType, true, guitarPart);
+			// var note:Note = new Note(daStrumTime, daNoteInfo % (guitarPart ? 5 : 4), null, false, true, noteType, true, guitarPart);
+			var note:Note = new Note(daStrumTime, daNoteInfo % 4, null, false, true, noteType, true);
 			note.sustainLength = daSus;
 			note.setGraphicSize(GRID_SIZE, GRID_SIZE);
 			note.updateHitbox();
@@ -1289,7 +1208,8 @@ class ChartingState extends MusicBeatState
 
 		for (i in _song.notes[curSection].sectionNotes)
 		{
-			if (i.strumTime == note.strumTime && i.noteData % (guitarPart ? 5 : 4) == note.noteData)
+			// if (i.strumTime == note.strumTime && i.noteData % (guitarPart ? 5 : 4) == note.noteData)
+			if (i.strumTime == note.strumTime && i.noteData % 4 == note.noteData)
 			{
 				curSelectedNote = _song.notes[curSection].sectionNotes[swagNum];
 			}
@@ -1307,7 +1227,8 @@ class ChartingState extends MusicBeatState
 			lastNote = note;
 			for (i in _song.notes[curSection].sectionNotes)
 			{
-				if (i[0] == note.strumTime && i[1] % (guitarPart ? 5 : 4) == note.noteData)
+				// if (i[0] == note.strumTime && i[1] % (guitarPart ? 5 : 4) == note.noteData)
+				if (i[0] == note.strumTime && i[1] % 4 == note.noteData)
 				{
 					_song.notes[curSection].sectionNotes.remove(i);
 				}
