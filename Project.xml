@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://lime.openfl.org/project/1.0.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/xsd/project-1.0.4.xsd">
+<project>
 
 	<!-- _________________________ Application Settings _________________________ -->
 
@@ -25,9 +25,6 @@
 
 	<!--Mobile-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
-
-	<!--Switch-->
-	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -65,17 +62,14 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
-	<haxedev set='webgl' />
+	<haxedev set='webgl' if="web"/>
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
-	<haxelib name="actuate" />
 	<haxelib name="flixel-ui" />
-	<haxelib name="faxe" if='switch'/>
 	<haxelib name="hxCodec" if="desktop || android" />
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	
 
 	<setenv name="next"/>
 
