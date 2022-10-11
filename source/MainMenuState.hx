@@ -156,7 +156,7 @@ class MainMenuState extends MusicBeatState
 		add(bigIcons);
 
 		curOptText = new FlxText(0, 0, FlxG.width, CoolUtil.formatString(LanguageManager.getTextString(languagesOptions[curSelected]), ' '));
-		curOptText.setFormat(Paths.font("PixelOperator-Bold.ttf"), 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		curOptText.setFormat(Paths.font("vcr.ttf"), 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		curOptText.scrollFactor.set(0, 0);
 		curOptText.borderSize = 2.5;
 		curOptText.antialiasing = true;
@@ -165,9 +165,9 @@ class MainMenuState extends MusicBeatState
 		add(curOptText);
 
 		curOptDesc = new FlxText(0, 0, FlxG.width, LanguageManager.getTextString(languagesDescriptions[curSelected]));
-		curOptDesc.setFormat(Paths.font("PixelOperator-Bold.ttf"), 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		curOptDesc.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		curOptDesc.scrollFactor.set(0, 0);
-		curOptDesc.borderSize = 2;
+		curOptDesc.borderSize = 1.8;
 		curOptDesc.antialiasing = true;
 		curOptDesc.screenCenter(X);
 		curOptDesc.y = FlxG.height - 58;

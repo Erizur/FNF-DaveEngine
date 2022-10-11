@@ -250,7 +250,7 @@ class ChangeKeybinds extends MusicBeatState
 		var keybindTexts:FlxTypedGroup<FlxText> = new FlxTypedGroup<FlxText>();
 
 		var control:FlxText = new FlxText((FlxG.width / 2) - 200, (preset.y + 125) + (order * 100), 0, uiControl.uiName + ":", 32);
-		control.setFormat(Paths.font("PixelOperator-Bold.ttf"), 32, FlxColor.WHITE, CENTER);
+		control.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		control.borderSize = 2;
 		control.antialiasing = true;
 		add(control);
@@ -270,7 +270,7 @@ class ChangeKeybinds extends MusicBeatState
 					keybind.x = (FlxG.width / 2) + (j * 50) + keybindTexts.members[j - 1].width;
 			}
 			keybind.y = control.y;
-			keybind.setFormat(Paths.font("PixelOperator-Bold.ttf"), 32, FlxColor.WHITE, CENTER);
+			keybind.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 			keybind.borderSize = 2;
 			keybind.antialiasing = true;
 			add(keybind);
@@ -296,27 +296,27 @@ class ChangeKeybinds extends MusicBeatState
 
 		preset = new FlxText(0, choosePreset.y + 100, FlxG.width / 2, keybindPresets[curSelectedPreset], 32);
 		preset.screenCenter(X);
-		preset.setFormat(Paths.font("PixelOperator-Bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		preset.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		preset.borderSize = 2;
 		preset.antialiasing = true;
 		add(preset);
 		keybindPresetGroup.add(preset);
 		selectableItems.push(preset);
 
-		presetLeft = new FlxText(preset.x - arrowOffset, preset.y - 45, FlxG.width / 2, "<", 32);
+		presetLeft = new FlxText(preset.x - arrowOffset, preset.y - 10, FlxG.width / 2, "<", 32);
 		presetLeft.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		presetLeft.borderSize = 1;
 		presetLeft.antialiasing = true;
 		keybindPresetGroup.add(presetLeft);
 		add(presetLeft);
 
-		presetRight = new FlxText(preset.x + arrowOffset, preset.y - 45, FlxG.width / 2, ">", 32);
+		presetRight = new FlxText(preset.x + arrowOffset, preset.y - 10, FlxG.width / 2, ">", 32);
 		presetRight.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		presetRight.borderSize = 1;
 		presetRight.antialiasing = true;
 		keybindPresetGroup.add(presetRight);
 		add(presetRight);
-		
+
 		var presetGroup:TextGroup = new TextGroup('presetGroup', keybindPresetGroup);
 		textGroups.push(presetGroup);
 

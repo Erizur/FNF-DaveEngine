@@ -46,6 +46,8 @@ class FpsDisplay extends TextField
 		selectable = false;
 		mouseEnabled = false;
 		defaultTextFormat = new TextFormat("_sans", 12, color);
+		autoSize = LEFT;
+		multiline = true;
 		text = "FPS: ";
 
 		cacheCount = 0;
