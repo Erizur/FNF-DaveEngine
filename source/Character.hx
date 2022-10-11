@@ -551,8 +551,8 @@ class Character extends FlxSprite
 				addOffset('idle');
 				addOffset("singUP", 48, 54);
 				addOffset("singDOWN", 76, -101);
-				addOffset("singRIGHT", 84, -14);
-				addOffset("singLEFT", -21, -31);
+				addOffset("singLEFT", 84, -14);
+				addOffset("singRIGHT", -21, -31);
 				addOffset("singUP-alt", -15, -8);
 				addOffset('singDOWN-alt', 1, 16);
 				addOffset("singUPmiss", 48, 54);
