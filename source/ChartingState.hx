@@ -1175,7 +1175,8 @@ class ChartingState extends MusicBeatState
 			var noteType = i[3];
 
 			// (strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal")
-			var note:Note = new Note(daStrumTime, daNoteInfo % (guitarPart ? 5 : 4), null, false, true, noteType, true, guitarPart);
+			// var note:Note = new Note(daStrumTime, daNoteInfo % (guitarPart ? 5 : 4), null, false, true, noteType, true, guitarPart);
+			var note:Note = new Note(daStrumTime, daNoteInfo % 4, null, false, true, noteType, true);
 			note.sustainLength = daSus;
 			note.setGraphicSize(GRID_SIZE, GRID_SIZE);
 			note.updateHitbox();
