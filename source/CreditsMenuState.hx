@@ -88,7 +88,7 @@ class CreditsMenuState extends MusicBeatState
       [
          new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
          new Social('twitter', 'https://twitter.com/RealT5mpler'),
-         new Social('souncloud', 'https://soundcloud.com/t5mpler')
+         new Social('soundcloud', 'https://soundcloud.com/t5mpler')
       ]),
 
       new Person("rapparep lol", CreditsType.Dev,
