@@ -74,7 +74,7 @@ class FlxSplash extends FlxState
 		if (FlxG.save.data.hasSeenSplash != null && FlxG.save.data.hasSeenSplash)
 		{
 			skipScreen = new FlxText(0, FlxG.height, 0, 'Press Enter To Skip', 16);
-			skipScreen.setFormat("Comic Sans MS Bold", 18, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			skipScreen.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			skipScreen.borderSize = 1.5;
 			skipScreen.antialiasing = true;
 			skipScreen.scrollFactor.set();

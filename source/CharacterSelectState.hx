@@ -180,8 +180,8 @@ class CharacterSelectState extends MusicBeatState
 		add(notemodtext);
 		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
-		characterText.font = 'Comic Sans MS Bold';
-		characterText.setFormat(Paths.font("comic.ttf"), 90, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		characterText.font = 'VCR OSD Mono';
+		characterText.setFormat(Paths.font("vcr.ttf"), 90, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		characterText.autoSize = false;
 		characterText.fieldWidth = 1080;
 		characterText.borderSize = 5;
@@ -192,7 +192,7 @@ class CharacterSelectState extends MusicBeatState
 		add(characterText);
 		
 		var resetText = new FlxText(FlxG.width, FlxG.height, LanguageManager.getTextString('character_reset'));
-		resetText.setFormat(Paths.font("comic.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resetText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resetText.autoSize = false;
 		resetText.fieldWidth = FlxG.height;
 		resetText.x -= resetText.textField.textWidth;

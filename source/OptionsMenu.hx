@@ -138,26 +138,30 @@ class OptionsMenu extends MusicBeatState
 					updateGroupControls((FlxG.save.data.downscroll ? LanguageManager.getTextString('option_downscroll') : LanguageManager.getTextString('option_upscroll')), 2, 'Vertical');
 				case 3:
 					FlxG.save.data.songPosition = !FlxG.save.data.songPosition;
-					updateGroupControls((FlxG.save.data.songPosition ? LanguageManager.getTextString('option_songPosition_on') : LanguageManager.getTextString('option_songPosition_off')), 3, 'Vertical');	
+					updateGroupControls((FlxG.save.data.songPosition ? LanguageManager.getTextString('option_songPosition_on') : LanguageManager.getTextString('option_songPosition_off')), 3, 'Vertical');
 				case 4:
 					FlxG.save.data.eyesores = !FlxG.save.data.eyesores;
 					updateGroupControls((FlxG.save.data.eyesores ? LanguageManager.getTextString('option_eyesores_enabled') : LanguageManager.getTextString('option_eyesores_disabled')), 4, 'Vertical');
 				case 5:
 					FlxG.save.data.donoteclick = !FlxG.save.data.donoteclick;
-					updateGroupControls((FlxG.save.data.donoteclick ? LanguageManager.getTextString('option_hitsound_on') : LanguageManager.getTextString('option_hitsound_off')), 6, 'Vertical');
+					updateGroupControls((FlxG.save.data.donoteclick ? LanguageManager.getTextString('option_hitsound_on') : LanguageManager.getTextString('option_hitsound_off')), 5, 'Vertical');
 				case 6:
 					FlxG.save.data.noteCamera = !FlxG.save.data.noteCamera;
-					updateGroupControls((FlxG.save.data.noteCamera ? LanguageManager.getTextString('option_noteCamera_on') : LanguageManager.getTextString('option_noteCamera_off')), 7, 'Vertical');
+					updateGroupControls((FlxG.save.data.noteCamera ? LanguageManager.getTextString('option_noteCamera_on') : LanguageManager.getTextString('option_noteCamera_off')), 6, 'Vertical');
 				case 7:
-					updateGroupControls(LanguageManager.getTextString('option_change_langauge'), 8, 'Vertical');
+					updateGroupControls(LanguageManager.getTextString('option_change_langauge'), 7, 'Vertical');
 					FlxG.switchState(new ChangeLanguageState());
 				case 8:
 					FlxG.save.data.disableFps = !FlxG.save.data.disableFps;
 					Main.fps.visible = !FlxG.save.data.disableFps;
-					updateGroupControls(FlxG.save.data.disableFps ? LanguageManager.getTextString('option_enable_fps') : LanguageManager.getTextString('option_disable_fps'), 9, 'Vertical');
+					updateGroupControls(FlxG.save.data.disableFps ? LanguageManager.getTextString('option_enable_fps') : LanguageManager.getTextString('option_disable_fps'), 8, 'Vertical');
 				case 9:
 					CompatTool.save.data.compatMode = !CompatTool.save.data.compatMode;
+<<<<<<< Updated upstream
 					updateGroupControls(CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_disable_compat') : LanguageManager.getTextString('option_enable_compat'), 10, 'Vertical');
+=======
+					updateGroupControls(CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_enable_compat') : LanguageManager.getTextString('option_disable_compat'), 9, 'Vertical');
+>>>>>>> Stashed changes
 			}
 		}
 	}

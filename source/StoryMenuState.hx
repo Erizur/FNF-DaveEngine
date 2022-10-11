@@ -86,17 +86,17 @@ class StoryMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxText(10, 0, 0, "SCORE: 49324858", 36);
-		scoreText.setFormat("Comic Sans MS Bold", 32);
+		scoreText.setFormat("VCR OSD Mono", 32);
 		scoreText.antialiasing = true;
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 0, 0, "", 32);
-		txtWeekTitle.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, RIGHT);
+		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.antialiasing = true;
 		txtWeekTitle.alpha = 0.7;
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Paths.font("comic.ttf"), 32);
+		rankText.setFormat(Paths.font("vcr.ttf"), 32);
 		rankText.antialiasing = true;
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);

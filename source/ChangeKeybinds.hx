@@ -80,7 +80,7 @@ class ChangeKeybinds extends MusicBeatState
 		
 		var tutorial:FlxText = new FlxText(0, 50, FlxG.width / 2, LanguageManager.getTextString('keybind_tutorial'), 32);
 		tutorial.screenCenter(X);
-		tutorial.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tutorial.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		tutorial.borderSize = 2;
 		tutorial.antialiasing = true;
 		add(tutorial);
@@ -251,7 +251,7 @@ class ChangeKeybinds extends MusicBeatState
 		var keybindTexts:FlxTypedGroup<FlxText> = new FlxTypedGroup<FlxText>();
 
 		var control:FlxText = new FlxText((FlxG.width / 2) - 200, (preset.y + 125) + (order * 100), 0, uiControl.uiName + ":", 32);
-		control.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+		control.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		control.borderSize = 2;
 		control.antialiasing = true;
 		add(control);
@@ -271,7 +271,7 @@ class ChangeKeybinds extends MusicBeatState
 					keybind.x = (FlxG.width / 2) + (j * 50) + keybindTexts.members[j - 1].width;
 			}
 			keybind.y = control.y;
-			keybind.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+			keybind.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 			keybind.borderSize = 2;
 			keybind.antialiasing = true;
 			add(keybind);
@@ -289,7 +289,7 @@ class ChangeKeybinds extends MusicBeatState
 		
 		choosePreset = new FlxText(0, 175, FlxG.width / 2, LanguageManager.getTextString('keybind_preset'), 32);
 		choosePreset.screenCenter(X);
-		choosePreset.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		choosePreset.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		choosePreset.borderSize = 2;
 		choosePreset.antialiasing = true;
 		keybindPresetGroup.add(choosePreset);
@@ -297,7 +297,7 @@ class ChangeKeybinds extends MusicBeatState
 
 		preset = new FlxText(0, choosePreset.y + 75, FlxG.width / 2, keybindPresets[curSelectedPreset], 32);
 		preset.screenCenter(X);
-		preset.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		preset.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		preset.borderSize = 2;
 		preset.antialiasing = true;
 		add(preset);
@@ -305,14 +305,14 @@ class ChangeKeybinds extends MusicBeatState
 		selectableItems.push(preset);
 
 		presetLeft = new FlxText(preset.x - arrowOffset, preset.y - preset.textField.height - 2, FlxG.width / 2, "<", 32);
-		presetLeft.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+		presetLeft.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		presetLeft.borderSize = 1;
 		presetLeft.antialiasing = true;
 		keybindPresetGroup.add(presetLeft);
 		add(presetLeft);
 
 		presetRight = new FlxText(preset.x + arrowOffset, preset.y - preset.textField.height - 2, FlxG.width / 2, ">", 32);
-		presetRight.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+		presetRight.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		presetRight.borderSize = 1;
 		presetRight.antialiasing = true;
 		keybindPresetGroup.add(presetRight);
@@ -434,12 +434,12 @@ class ChangeKeybinds extends MusicBeatState
 	{
 		if (selected)
 		{
-			text.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			text.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			text.borderSize = 2;
 		}
 		else
 		{
-			text.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+			text.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		}
 	}
 }

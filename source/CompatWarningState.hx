@@ -29,7 +29,7 @@ class CompatWarningState extends MusicBeatState
         add(bg);
 
         warningBox = new FlxText(0, (FlxG.height / 2) - 300, FlxG.width, LanguageManager.getTextString("compat_warning"), 45);
-        warningBox.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        warningBox.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         warningBox.antialiasing = true;
         warningBox.borderSize = 2;
         warningBox.screenCenter(X);
@@ -39,7 +39,7 @@ class CompatWarningState extends MusicBeatState
         {
             var optionText:FlxText = new FlxText((i * 75) - 50, FlxG.height / 2 - 150, FlxG.width, optionTranslate[i], 25);
             optionText.screenCenter(Y);
-            optionText.setFormat("Comic Sans MS Bold", 25, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            optionText.setFormat("VCR OSD Mono", 25, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
             optionText.antialiasing = true;
             optionText.borderSize = 2;
 
@@ -111,11 +111,11 @@ class CompatWarningState extends MusicBeatState
     {
         if (selected)
         {
-            text.setFormat("Comic Sans MS Bold", 25, FlxColor.YELLOW, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            text.setFormat("VCR OSD Mono", 25, FlxColor.YELLOW, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         }
         else
         {
-            text.setFormat("Comic Sans MS Bold", 25, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            text.setFormat("VCR OSD Mono", 25, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         }
     }
 }

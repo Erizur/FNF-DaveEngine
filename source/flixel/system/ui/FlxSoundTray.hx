@@ -73,7 +73,7 @@ class FlxSoundTray extends Sprite
 		text.gridFitType = GridFitType.PIXEL;
 		#else
 		#end
-		var dtf:TextFormat = new TextFormat("Comic Sans MS Bold", 8, 0xffffff);
+		var dtf:TextFormat = new TextFormat("VCR OSD Mono", 8, 0xffffff);
 		dtf.align = TextFormatAlign.CENTER;
 		text.defaultTextFormat = dtf;
 		addChild(text);

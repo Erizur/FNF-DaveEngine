@@ -22,7 +22,7 @@ class OutdatedSubState extends MusicBeatState
 		add(bg);
 		var txt:FlxText = null;
 		txt = new FlxText(0, 0, FlxG.width, 'Hello!', 32);
-		txt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
+		txt.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		txt.screenCenter();
 		txt.antialiasing = true;
 		add(txt);

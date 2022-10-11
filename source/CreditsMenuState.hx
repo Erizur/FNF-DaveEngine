@@ -139,10 +139,10 @@ class CreditsMenuState extends MusicBeatState
       selectedPersonGroup.cameras = [selectPersonCam];
 
       state = State.SelectingName;
-      defaultFormat = new FlxText().setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+      defaultFormat = new FlxText().setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
       defaultFormat.borderSize = 2;
       defaultFormat.borderQuality = 2;
-      selectedFormat = new FlxText().setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+      selectedFormat = new FlxText().setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
       selectedFormat.borderSize = 2;
       selectedFormat.borderQuality = 2;
 
@@ -210,7 +210,7 @@ class CreditsMenuState extends MusicBeatState
                   translatedCreditsType = LanguageManager.getTextString('credits_specialThanks');
             }
             var titleText:FlxText = new FlxText(0, 0, 0, translatedCreditsType);
-            titleText.setFormat("Comic Sans MS Bold", 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            titleText.setFormat("VCR OSD Mono", 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
             titleText.borderSize = 3;
             titleText.borderQuality = 3;
             titleText.screenCenter(X);
