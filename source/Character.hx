@@ -537,8 +537,8 @@ class Character extends FlxSprite
 				animation.addByPrefix('idle', 'Tankman Idle Dance', 24, false);
 				animation.addByPrefix('singUP', 'Tankman UP note 1', 24, false);
 				animation.addByPrefix('singDOWN', 'Tankman DOWN note 1', 24, false);
-				animation.addByPrefix('singRIGHT', 'Tankman Right Note 1', 24, false);
-				animation.addByPrefix('singLEFT', 'Tankman Note Left 1', 24, false);
+				animation.addByPrefix('singRIGHT', 'Tankman Note Left 1', 24, false);
+				animation.addByPrefix('singLEFT', 'Tankman Right Note 1', 24, false);
 
 				animation.addByPrefix('singUP-alt', 'TANKMAN UGH', 24, false);
 				animation.addByPrefix('singDOWN-alt', 'PRETTY GOOD tankman', 24, false);
