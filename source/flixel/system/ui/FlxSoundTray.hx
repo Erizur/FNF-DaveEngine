@@ -174,4 +174,3 @@ class FlxSoundTray extends Sprite
 		x = (0.5 * (Lib.current.stage.stageWidth - _width * _defaultScale) - FlxG.game.x);
 	}
 }
-#end
