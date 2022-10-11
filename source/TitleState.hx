@@ -311,7 +311,7 @@ class TitleState extends MusicBeatState
 				case 6:
 					createCoolText(['Based on Kade Engine']);
 				case 7:
-					addMoreText('specifically version 1.2');
+					addMoreText('for the funnies');
 				case 8:
 					deleteCoolText();
 				case 9:
@@ -338,8 +338,7 @@ class TitleState extends MusicBeatState
 	{
 		for (i in 0...textArray.length)
 		{
-			var money:FlxText = new FlxText(0, 0, FlxG.width, textArray[i], 48);
-			money.setFormat("Comic Sans MS Bold", 48, FlxColor.WHITE, CENTER);
+			var money:Alphabet = new Alphabet(0, 0, textArray[i], true);
 			money.antialiasing = true;
 			money.screenCenter(X);
 			money.y += (i * 60) + 200;
@@ -350,8 +349,7 @@ class TitleState extends MusicBeatState
 
 	function addMoreText(text:String)
 	{
-		var coolText:FlxText = new FlxText(0, 0, FlxG.width, text, 48);
-		coolText.setFormat("Comic Sans MS Bold", 48, FlxColor.WHITE, CENTER);
+		var coolText:Alphabet = new Alphabet(0, 0, text, true);
 		coolText.screenCenter(X);
 		coolText.antialiasing = true;
 		coolText.y += (textGroup.length * 60) + 200;

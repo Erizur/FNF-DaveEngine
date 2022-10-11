@@ -76,7 +76,7 @@ class Main extends Sprite
 
 		#if !mobile
 		fps = new FpsDisplay(10, 3, 0xFFFFFF);
-		var fpsFormat = new TextFormat("Comic Sans MS Bold", 15, 0xFFFFFF, true);
+		var fpsFormat = new TextFormat("_sans", 12, 0xFFFFFF, false);
 		fps.defaultTextFormat = fpsFormat;
 		addChild(fps);
 		#end

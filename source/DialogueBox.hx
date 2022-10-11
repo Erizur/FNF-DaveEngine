@@ -140,25 +140,25 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			case 'polygonized' | 'interdimensional':
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-				dropText.font = 'Comic Sans MS Bold';
+				dropText.font = 'VCR OSD Mono';
 				dropText.color = 0xFFFFFFFF;
 				dropText.antialiasing = true;
 				add(dropText);
 			
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-				swagDialogue.font = 'Comic Sans MS Bold';
+				swagDialogue.font = 'VCR OSD Mono';
 				swagDialogue.color = 0xFF000000;
 				swagDialogue.antialiasing = true;
 				add(swagDialogue);
 			default:
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-				dropText.font = 'Comic Sans MS Bold';
+				dropText.font = 'VCR OSD Mono';
 				dropText.color = 0xFF00137F;
 				dropText.antialiasing = true;
 				add(dropText);
 		
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-				swagDialogue.font = 'Comic Sans MS Bold';
+				swagDialogue.font = 'VCR OSD Mono';
 				swagDialogue.color = 0xFF000000;
 				swagDialogue.antialiasing = true;
 				add(swagDialogue);
@@ -341,8 +341,8 @@ class DialogueBox extends FlxSpriteGroup
 				}
 				#end
 			case 'setfont_normal':
-				dropText.font = 'Comic Sans MS Bold';
-				swagDialogue.font = 'Comic Sans MS Bold';
+				dropText.font = 'VCR OSD Mono';
+				swagDialogue.font = 'VCR OSD Mono';
 			case 'setfont_code':
 				dropText.font = Paths.font("barcode.ttf");
 				swagDialogue.font = Paths.font("barcode.ttf");

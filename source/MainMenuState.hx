@@ -156,16 +156,16 @@ class MainMenuState extends MusicBeatState
 		add(bigIcons);
 
 		curOptText = new FlxText(0, 0, FlxG.width, CoolUtil.formatString(LanguageManager.getTextString(languagesOptions[curSelected]), ' '));
-		curOptText.setFormat("Comic Sans MS Bold", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		curOptText.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		curOptText.scrollFactor.set(0, 0);
 		curOptText.borderSize = 2.5;
 		curOptText.antialiasing = true;
 		curOptText.screenCenter(X);
-		curOptText.y = FlxG.height / 2 + 28;
+		curOptText.y = FlxG.height / 2 + 42;
 		add(curOptText);
 
 		curOptDesc = new FlxText(0, 0, FlxG.width, LanguageManager.getTextString(languagesDescriptions[curSelected]));
-		curOptDesc.setFormat("Comic Sans MS Bold", 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		curOptDesc.setFormat("VCR OSD Mono", 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		curOptDesc.scrollFactor.set(0, 0);
 		curOptDesc.borderSize = 2;
 		curOptDesc.antialiasing = true;
@@ -223,15 +223,14 @@ class MainMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		var versionShit:FlxText = new FlxText(1, FlxG.height - 25, 0, '${daRealEngineVer} Engine v${engineVer}\nFNF v${gameVer}', 12);
+		var versionShit:FlxText = new FlxText(1, FlxG.height - 45, FlxG.width, '${daRealEngineVer} Engine v${engineVer}\nFNF v${gameVer}', 12);
 		versionShit.antialiasing = true;
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		var pressR:FlxText = new FlxText(150, 10, 0, LanguageManager.getTextString("main_resetdata"), 12);
-		pressR.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		pressR.x -= versionShit.textField.textWidth;
+		var pressR:FlxText = new FlxText(1, 10, FlxG.width, LanguageManager.getTextString("main_resetdata"), 12);
+		pressR.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		pressR.antialiasing = true;
 		pressR.alpha = 0;
 		pressR.scrollFactor.set();
@@ -509,7 +508,7 @@ class Prompt extends FlxSpriteGroup
 		FlxG.mouse.visible = true;
 		
 		promptText = new FlxText(0, FlxG.height / 2 - 200, FlxG.width, question, 16);
-		promptText.setFormat("Comic Sans MS Bold", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		promptText.setFormat("VCR OSD Mono", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		promptText.screenCenter(X);
 		promptText.scrollFactor.set(0, 0);
 		promptText.borderSize = 2.5;
@@ -519,7 +518,7 @@ class Prompt extends FlxSpriteGroup
 		noText = new FlxText(0, FlxG.height / 2 + 100, 0, "No", 16);
 		noText.screenCenter(X);
 		noText.x += 200;
-		noText.setFormat("Comic Sans MS Bold", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		noText.setFormat("VCR OSD Mono", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		noText.scrollFactor.set(0, 0);
 		noText.borderSize = 1.5;
 		noText.antialiasing = true;
@@ -528,7 +527,7 @@ class Prompt extends FlxSpriteGroup
 		yesText = new FlxText(0, FlxG.height / 2 + 100, 0, "Yes", 16);
 		yesText.screenCenter(X);
 		yesText.x -= 200;
-		yesText.setFormat("Comic Sans MS Bold", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		yesText.setFormat("VCR OSD Mono", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		yesText.scrollFactor.set(0, 0);
 		yesText.borderSize = 1.5;
 		yesText.antialiasing = true;

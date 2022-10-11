@@ -37,7 +37,7 @@ class SelectLanguageState extends MusicBeatState
       add(bg);
 
       selectLanguage = new FlxText(0, (FlxG.height / 2) - 300, FlxG.width, "Please Select A Language", 45);
-      selectLanguage.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+      selectLanguage.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
       selectLanguage.antialiasing = true;
       selectLanguage.borderSize = 2;
       selectLanguage.screenCenter(X);
@@ -49,7 +49,7 @@ class SelectLanguageState extends MusicBeatState
 
          var langaugeText:FlxText = new FlxText(0, (FlxG.height / 2 - 150) + i * 75, FlxG.width, currentLangauge.langaugeName, 25);
          langaugeText.screenCenter(X);
-         langaugeText.setFormat("Comic Sans MS Bold", 25, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+         langaugeText.setFormat("VCR OSD Mono", 25, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
          langaugeText.antialiasing = true;
          langaugeText.borderSize = 2;
 
@@ -134,11 +134,11 @@ class SelectLanguageState extends MusicBeatState
    {
       if (selected)
       {
-         text.setFormat("Comic Sans MS Bold", 25, FlxColor.YELLOW, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+         text.setFormat("VCR OSD Mono", 25, FlxColor.YELLOW, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
       }
       else
       {
-         text.setFormat("Comic Sans MS Bold", 25);
+         text.setFormat("VCR OSD Mono", 25);
       }
    }
 }
