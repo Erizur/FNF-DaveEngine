@@ -85,11 +85,11 @@ class StoryMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		scoreText = new FlxText(10, 0, 0, "SCORE: 49324858", 36);
+		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32);
 		scoreText.antialiasing = true;
 
-		txtWeekTitle = new FlxText(FlxG.width * 0.7, 0, 0, "", 32);
+		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
 		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.antialiasing = true;
 		txtWeekTitle.alpha = 0.7;
@@ -129,6 +129,7 @@ class StoryMenuState extends MusicBeatState
 		txtTrackdeco.font = rankText.font;
 		txtTrackdeco.color = 0xFFe55777;
 		txtTrackdeco.antialiasing = true;
+		txtTrackdeco.bold = true;
 		txtTrackdeco.screenCenter(X);
 
 		txtTracklist = new FlxText(0, yellowBG.x + yellowBG.height + 80, FlxG.width, '', 28);
