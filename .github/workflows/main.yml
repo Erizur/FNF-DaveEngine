@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   buildLinux:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,10 +33,10 @@ jobs:
         run: |
           sudo apt-get install libvlc-dev
           sudo apt-get install libvlccore-dev
-          sudo apt-get install vlc
-          sudo apt-get install glibc-source
           sudo apt-get install build-essential
           sudo apt-get install binutils
+          sudo apt-get install libidn-dev
+          sudo apt-get install libidn12
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null
           haxelib install lime
@@ -50,14 +50,12 @@ jobs:
           haxelib install tjson
           haxelib install hxjsonast
           haxelib install hxCodec
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib install hscript
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
           haxelib git faxe https://github.com/uhrobots/faxe
           haxelib git polymod https://github.com/MasterEric/polymod.git
-          haxelib git hxCodec https://github.com/polybiusproxy/hxCodec
           haxelib install hxcpp-debug-server
           haxelib list
       - name: Create Version Tag
