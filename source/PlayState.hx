@@ -2066,7 +2066,7 @@ class PlayState extends MusicBeatState
 
 					if (currentSection != null)
 					{
-						if (currentSection.altAnim)
+						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation')
 							altAnim = '-alt';
 					}
 					if (inFiveNights && !daNote.isSustainNote)
