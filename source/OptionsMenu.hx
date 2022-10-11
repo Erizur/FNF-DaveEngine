@@ -157,11 +157,7 @@ class OptionsMenu extends MusicBeatState
 					updateGroupControls(FlxG.save.data.disableFps ? LanguageManager.getTextString('option_enable_fps') : LanguageManager.getTextString('option_disable_fps'), 8, 'Vertical');
 				case 9:
 					CompatTool.save.data.compatMode = !CompatTool.save.data.compatMode;
-<<<<<<< Updated upstream
-					updateGroupControls(CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_disable_compat') : LanguageManager.getTextString('option_enable_compat'), 10, 'Vertical');
-=======
 					updateGroupControls(CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_enable_compat') : LanguageManager.getTextString('option_disable_compat'), 9, 'Vertical');
->>>>>>> Stashed changes
 			}
 		}
 	}
