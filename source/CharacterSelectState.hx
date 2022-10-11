@@ -94,7 +94,8 @@ class CharacterSelectState extends MusicBeatState
 	[
 		new CharacterInSelect('bf', [1, 1, 1, 1], [
 			new CharacterForm('bf', 'Boyfriend', [1,1,1,1]),
-			new CharacterForm('bf-pixel', 'Pixel Boyfriend', [1,1,1,1])
+			new CharacterForm('bf-pixel', 'Pixel Boyfriend', [1,1,1,1]),
+			new CharacterForm('bf-christmas', 'Christmas Boyfriend', [1,1,1,1])
 		])
 	];
 	#if SHADERS_ENABLED
@@ -179,8 +180,8 @@ class CharacterSelectState extends MusicBeatState
 		add(notemodtext);
 		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
-		characterText.font = 'Comic Sans MS Bold';
-		characterText.setFormat(Paths.font("comic.ttf"), 90, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		characterText.font = 'VCR OSD Mono';
+		characterText.setFormat(Paths.font("vcr.ttf"), 90, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		characterText.autoSize = false;
 		characterText.fieldWidth = 1080;
 		characterText.borderSize = 5;
@@ -191,7 +192,7 @@ class CharacterSelectState extends MusicBeatState
 		add(characterText);
 		
 		var resetText = new FlxText(FlxG.width, FlxG.height, LanguageManager.getTextString('character_reset'));
-		resetText.setFormat(Paths.font("comic.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resetText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resetText.autoSize = false;
 		resetText.fieldWidth = FlxG.height;
 		resetText.x -= resetText.textField.textWidth;
@@ -458,6 +459,7 @@ class CharacterSelectState extends MusicBeatState
 		FlxG.save.data.charactersUnlocked = new Array<String>();
 		unlockCharacter('bf');
 		unlockCharacter('bf-pixel');
+		unlockCharacter('bf-christmas');
 		FlxG.save.flush();
 	}
 

@@ -129,7 +129,7 @@ class CreditsPopUp extends FlxSpriteGroup
 			remove(funnyText);
 		}
 		funnyText = new FlxText(1, 0, 650, text, 16);
-		funnyText.setFormat('Comic Sans MS Bold', 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		funnyText.setFormat('VCR OSD Mono', 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		funnyText.borderSize = 2;
 		funnyText.antialiasing = true;
 		add(funnyText);

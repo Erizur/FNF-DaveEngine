@@ -546,7 +546,7 @@ class PlayState extends MusicBeatState
 			gfVersion = 'gf-pixel';
 		}
 
-		if (noGFSongs.contains(SONG.song.toLowerCase()) || !['none', 'bf', 'bf-pixel'].contains(formoverride))
+		if (noGFSongs.contains(SONG.song.toLowerCase()) || !['none', 'bf', 'bf-pixel', 'bf-christmas'].contains(formoverride))
 		{
 			gfVersion = 'gf-none';
 		}
@@ -672,7 +672,7 @@ class PlayState extends MusicBeatState
 		repositionChar(boyfriend);
 		repositionChar(gf);
 
-		var font:String = Paths.font("comic.ttf");
+		var font:String = Paths.font("vcr.ttf");
 		var fontScaler:Int = 1;
 
 		if (FlxG.save.data.songPosition && !isGreetingsCutscene && !['five-nights', 'overdrive'].contains(SONG.song.toLowerCase()))

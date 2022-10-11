@@ -73,7 +73,7 @@ class CharacterDebug extends MusicBeatState
 
 		offsetText = new FlxText(-FlxG.width + 200, FlxG.height - 300, FlxG.width, 'Meee', 32);
 		offsetText.screenCenter();
-		offsetText.setFormat('Comic Sans MS Bold', 32, FlxColor.BLUE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
+		offsetText.setFormat('VCR OSD Mono', 32, FlxColor.BLUE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
 		add(offsetText);
 
 		updateText();

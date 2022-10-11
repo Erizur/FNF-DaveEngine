@@ -238,7 +238,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 0, 0, "", 32);
-		scoreText.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, LEFT);
+		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT);
 		scoreText.antialiasing = true;
 		scoreText.y = -225;
 		scoreText.scrollFactor.set();
@@ -249,14 +249,14 @@ class FreeplayState extends MusicBeatState
 		add(scoreBG);
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 15, 0, "", 24);
-		diffText.setFormat(Paths.font("comic.ttf"), 24, FlxColor.WHITE, LEFT);
+		diffText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT);
 		diffText.antialiasing = true;
 		diffText.scrollFactor.set();
 
 		if (showCharText)
 		{
 			characterSelectText = new FlxText(FlxG.width, FlxG.height, 0, LanguageManager.getTextString("freeplay_skipChar"), 18);
-			characterSelectText.setFormat("Comic Sans MS Bold", 18, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			characterSelectText.setFormat("VCR OSD Mono", 18, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			characterSelectText.borderSize = 1.5;
 			characterSelectText.antialiasing = true;
 			characterSelectText.scrollFactor.set();

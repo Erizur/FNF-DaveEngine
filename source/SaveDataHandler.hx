@@ -48,7 +48,7 @@ class SaveDataHandler
 			FlxG.save.data.wasInCharSelect = false;
 
 		if (FlxG.save.data.charactersUnlocked == null)
-			FlxG.save.data.charactersUnlocked = ['bf', 'bf-pixel'];
+			FlxG.save.data.charactersUnlocked = ['bf', 'bf-pixel', 'bf-christmas']; // i didnt notice this was used to unlock characters woops -redstoneSC
 
 		if (FlxG.save.data.disableFps == null)
 			FlxG.save.data.disableFps = false;
