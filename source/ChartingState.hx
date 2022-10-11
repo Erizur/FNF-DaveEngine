@@ -1221,7 +1221,8 @@ class ChartingState extends MusicBeatState
 
 		for (i in _song.notes[curSection].sectionNotes)
 		{
-			if (i.strumTime == note.strumTime && i.noteData % (guitarPart ? 5 : 4) == note.noteData)
+			// if (i.strumTime == note.strumTime && i.noteData % (guitarPart ? 5 : 4) == note.noteData)
+			if (i.strumTime == note.strumTime && i.noteData % 4 == note.noteData)
 			{
 				curSelectedNote = _song.notes[curSection].sectionNotes[swagNum];
 			}
