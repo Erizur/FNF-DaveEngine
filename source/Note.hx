@@ -104,7 +104,7 @@ class Note extends FlxSprite
 		switch (noteStyle)
 		{
 			case 'alt-animation':
-				notePathLol = 'notes/NOTE_phone';
+				notePathLol = 'notes/NOTE_assets';
 		}
 		// if (guitarSection)
 		// {
