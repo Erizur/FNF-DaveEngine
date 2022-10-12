@@ -312,34 +312,34 @@ class DialogueBox extends FlxSpriteGroup
 		}
 		switch (curMod)
 		{
-			case 'distort':
-				/*var shad:Shaders.PulseEffect = new Shaders.PulseEffect();
-				curshader = shad;
-				shad.waveAmplitude = 1;
-				shad.waveFrequency = 2;
-				shad.waveSpeed = 1;
-				shad.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
-				shad.shader.uampmul.value[0] = 1;*/
-				#if SHADERS_ENABLED
-				PlayState.screenshader.Enabled = true;
-				#end
-			case 'undistort':
-				#if SHADERS_ENABLED
-				PlayState.screenshader.Enabled = false;
-				#end
-			case 'distortbg':
-				#if SHADERS_ENABLED
-				var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
-				curshader = shad;
-				shad.waveAmplitude = 0.1;
-				shad.waveFrequency = 5;
-				shad.waveSpeed = 2;
-				if (curCharacter != 'generic')
-				{
-					portraitLeft.shader = shad.shader;
-					portraitRight.shader = shad.shader;
-				}
-				#end
+			// case 'distort':
+			// 	/*var shad:Shaders.PulseEffect = new Shaders.PulseEffect();
+			// 	curshader = shad;
+			// 	shad.waveAmplitude = 1;
+			// 	shad.waveFrequency = 2;
+			// 	shad.waveSpeed = 1;
+			// 	shad.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
+			// 	shad.shader.uampmul.value[0] = 1;*/
+			// 	#if SHADERS_ENABLED
+			// 	PlayState.screenshader.Enabled = true;
+			// 	#end
+			// case 'undistort':
+			// 	#if SHADERS_ENABLED
+			// 	PlayState.screenshader.Enabled = false;
+			// 	#end
+			// case 'distortbg':
+			// 	#if SHADERS_ENABLED
+			// 	var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
+			// 	curshader = shad;
+			// 	shad.waveAmplitude = 0.1;
+			// 	shad.waveFrequency = 5;
+			// 	shad.waveSpeed = 2;
+			// 	if (curCharacter != 'generic')
+			// 	{
+			// 		portraitLeft.shader = shad.shader;
+			// 		portraitRight.shader = shad.shader;
+			// 	}
+			// 	#end
 			case 'setfont_normal':
 				dropText.font = 'VCR OSD Mono';
 				swagDialogue.font = 'VCR OSD Mono';

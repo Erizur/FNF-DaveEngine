@@ -185,7 +185,7 @@ class PauseSubState extends MusicBeatSubstate
 				FlxG.sound.music.volume = 0;
 				PlayState.instance.vocals.volume = 0;
 
-				PlayState.instance.shakeCam = false;
+				// PlayState.instance.shakeCam = false;
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;
 				FlxG.resetState();
@@ -196,7 +196,7 @@ class PauseSubState extends MusicBeatSubstate
 
 					Application.current.window.title = Main.applicationName;
 
-					PlayState.instance.shakeCam = false;
+					// PlayState.instance.shakeCam = false;
 					PlayState.instance.camZooming = false;
 					FlxG.mouse.visible = false;
 					FlxG.switchState(new CharacterSelectState());	
@@ -209,7 +209,7 @@ class PauseSubState extends MusicBeatSubstate
 
 				Application.current.window.title = Main.applicationName;
 
-				PlayState.instance.shakeCam = false;
+				// PlayState.instance.shakeCam = false;
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new MainMenuState());

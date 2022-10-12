@@ -10,7 +10,7 @@ import flixel.util.FlxArrayUtil;
 import flixel.addons.plugin.FlxScrollingText;
 import Alphabet;
 import flixel.addons.display.FlxBackdrop;
-import openfl.display.ShaderParameter;
+// import openfl.display.ShaderParameter;
 import openfl.display.Graphics;
 import flixel.group.FlxSpriteGroup;
 import lime.tools.ApplicationData;
@@ -27,12 +27,12 @@ import flixel.tweens.misc.ColorTween;
 import flixel.math.FlxRandom;
 import openfl.net.FileFilter;
 import openfl.filters.BitmapFilter;
-import Shaders.PulseEffect;
-import Shaders.BlockedGlitchShader;
-import Shaders.BlockedGlitchEffect;
-import Shaders.DitherEffect;
+// import Shaders.PulseEffect;
+// import Shaders.BlockedGlitchShader;
+// import Shaders.BlockedGlitchEffect;
+// import Shaders.DitherEffect;
 import Shaders.WiggleEffect;
-import Shaders.VCRDistortionShader;
+// import Shaders.VCRDistortionShader;
 import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxBasic;
@@ -69,11 +69,9 @@ import haxe.Json;
 import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
-import openfl.filters.ShaderFilter;
-import flash.system.System;
+// import openfl.filters.ShaderFilter;
+// import flash.system.System;
 import flixel.util.FlxSpriteUtil;
-import flixel.effects.particles.FlxEmitter;
-import flixel.effects.particles.FlxParticle;
 import flixel.addons.effects.chainable.IFlxEffect;
 #if desktop
 import Discord.DiscordClient;
@@ -119,33 +117,21 @@ class PlayState extends MusicBeatState
 	public var bfGroup:FlxGroup;
 	public var gfGroup:FlxGroup;
 
-	public var stupidx:Float = 0;
-	public var stupidy:Float = 0; // stupid velocities for cutscene
-	public var updatevels:Bool = false;
-
-	public var hasTriggeredDumbshit:Bool = false;
-
-	var AUGHHHH:String;
-	var AHHHHH:String;
-
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
-	public var curbg:BGSprite;
-	public var pre3dSkin:String;
+	// public var curbg:BGSprite;
 
 	#if SHADERS_ENABLED
-	public static var screenshader:Shaders.PulseEffect = new PulseEffect();
-	public static var lazychartshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-	public static var blockedShader:BlockedGlitchEffect;
+	// public static var screenshader:Shaders.PulseEffect = new PulseEffect();
+	// public static var lazychartshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
+	// public static var blockedShader:BlockedGlitchEffect;
 
-	public var dither:DitherEffect = new DitherEffect();
+	// public var dither:DitherEffect = new DitherEffect();
 	#end
 
 	public var UsingNewCam:Bool = false;
 
 	public var elapsedtime:Float = 0;
-
-	public var elapsedexpungedtime:Float = 0;
 
 	var focusOnDadGlobal:Bool = true;
 	var fastCarCanDrive:Bool = true;
@@ -190,7 +176,7 @@ class PlayState extends MusicBeatState
 	private var noteLimboFrames:Int;
 
 	public var camZooming:Bool = false;
-	public var crazyZooming:Bool = false;
+	// public var crazyZooming:Bool = false;
 
 	private var curSong:String = "";
 
@@ -205,11 +191,10 @@ class PlayState extends MusicBeatState
 	private var accuracy:Float = 0.00;
 	private var totalNotesHit:Float = 0;
 	private var totalPlayed:Int = 0;
-	private var ss:Bool = false;
 
 	private var windowSteadyX:Float;
 
-	public static var eyesoreson = true;
+	// public static var eyesoreson = true;
 
 	private var STUPDVARIABLETHATSHOULDNTBENEEDED:FlxSprite;
 
@@ -218,7 +203,7 @@ class PlayState extends MusicBeatState
 
 	private var generatedMusic:Bool = false;
 
-	public var shakeCam:Bool = false;
+	// public var shakeCam:Bool = false;
 
 	private var startingSong:Bool = false;
 
@@ -240,11 +225,8 @@ class PlayState extends MusicBeatState
 	public var hasDialogue:Bool = false;
 
 	var notestuffs:Array<String> = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
-	var notestuffsGuitar:Array<String> = ['LEFT', 'DOWN', 'MIDDLE', 'UP', 'RIGHT'];
 
-	var funnyFloatyBoys:Array<String> = [''];
-
-	var fc:Bool = true;
+	// var funnyFloatyBoys:Array<String> = [''];
 
 	#if SHADERS_ENABLED
 	var wiggleShit:WiggleEffect = new WiggleEffect();
@@ -271,7 +253,7 @@ class PlayState extends MusicBeatState
 
 	public static var theFunne:Bool = true;
 
-	var inFiveNights:Bool = false;
+	// var inFiveNights:Bool = false;
 
 	var inCutscene:Bool = false;
 
@@ -300,8 +282,6 @@ class PlayState extends MusicBeatState
 	var video:VideoHandler;
 	var weirdBG:FlxSprite;
 
-	var mcStarted:Bool = false;
-
 	public var noMiss:Bool = false;
 	public var creditsPopup:CreditsPopUp;
 	public var blackScreen:FlxSprite;
@@ -309,35 +289,28 @@ class PlayState extends MusicBeatState
 	public static var scrollType:String = '';
 
 	// bg stuff
-	var spotLight:FlxSprite;
-	var spotLightPart:Bool;
-	var spotLightScaler:Float = 1.3;
-	var lastSinger:Character;
+	// var spotLight:FlxSprite;
+	// var spotLightPart:Bool;
+	// var spotLightScaler:Float = 1.3;
+	// var lastSinger:Character;
 
-	var flyingBgChars:FlxTypedGroup<FlyingBGChar> = new FlxTypedGroup<FlyingBGChar>();
+	// public static var isGreetingsCutscene:Bool;
 
-	public static var isGreetingsCutscene:Bool;
+	// var daveFlying:Bool;
 
-	var originalPosition:FlxPoint = new FlxPoint();
-	var daveFlying:Bool;
+	// var highway:FlxSprite;
+	// var bfSpot:FlxSprite;
+	// var originalBFScale:FlxPoint;
+	// var originBFPos:FlxPoint;
 
-	var highway:FlxSprite;
-	var bfSpot:FlxSprite;
-	var originalBFScale:FlxPoint;
-	var originBFPos:FlxPoint;
+	// var tristan:BGSprite;
+	// var curTristanAnim:String;
 
-	var tristan:BGSprite;
-	var curTristanAnim:String;
-
-	var vcr:VCRDistortionShader;
+	// var vcr:VCRDistortionShader;
 
 	var place:BGSprite;
 
 	var stageCheck:String = 'stage';
-
-	// FUCKING UHH particles
-	var emitter:FlxEmitter;
-	var smashPhone:Array<Int> = new Array<Int>();
 
 	var halloweenBG:FlxSprite;
 	var isHalloween:Bool = false;
@@ -377,21 +350,20 @@ class PlayState extends MusicBeatState
 
 	var switchSide:Bool;
 
-	public var subtitleManager:SubtitleManager;
+	// public var subtitleManager:SubtitleManager;
 
-	public var guitarSection:Bool;
 	public var dadStrumAmount = 4;
 	public var playerStrumAmount = 4;
 
-	var banbiWindowNames:Array<String> = [
-		'when you realize you have school this monday',
-		'industrial society and its future',
-		'my ears burn',
-		'i got that weed card',
-		'my ass itch',
-		'bruh',
-		'alright instagram its shoutout time'
-	];
+	// var banbiWindowNames:Array<String> = [
+	// 	'when you realize you have school this monday',
+	// 	'industrial society and its future',
+	// 	'my ears burn',
+	// 	'i got that weed card',
+	// 	'my ass itch',
+	// 	'bruh',
+	// 	'alright instagram its shoutout time'
+	// ];
 
 	override public function create()
 	{
@@ -399,14 +371,14 @@ class PlayState extends MusicBeatState
 
 		paused = false;
 
-		resetShader();
+		// resetShader();
 
 		scrollType = FlxG.save.data.downscroll ? 'downscroll' : 'upscroll';
 
 		theFunne = FlxG.save.data.newInput;
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
-		eyesoreson = FlxG.save.data.eyesores;
+		// eyesoreson = FlxG.save.data.eyesores;
 
 		sicks = 0;
 		bads = 0;
@@ -453,7 +425,6 @@ class PlayState extends MusicBeatState
 			+ " | Misses: "
 			+ misses, iconRPC);
 		#end
-		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -479,27 +450,6 @@ class PlayState extends MusicBeatState
 		Conductor.changeBPM(SONG.bpm);
 
 		theFunne = theFunne;
-
-		var crazyNumber:Int;
-		crazyNumber = FlxG.random.int(0, 5);
-
-		switch (crazyNumber)
-		{
-			case 0:
-				trace("secret dick message ???");
-			case 1:
-				trace("welcome baldis basics crap");
-			case 2:
-				trace("Hi, song genie here. You're playing " + SONG.song + ", right?");
-			case 3:
-				eatShit("this song doesnt have dialogue idiot. if you want this trace function to call itself then why dont you play a song with ACTUAL dialogue?");
-			case 4:
-				trace("suck my balls");
-			case 5:
-				trace('i hate sick');
-			case 6:
-				trace('lmao secret message hahahaha you cant get me hahahahah secret message bambi phone do you want do you want phone phone phone phone');
-		}
 
 		// DIALOGUE STUFF
 		// Hi guys i know yall are gonna try to add more dialogue here, but with this new system, all you have to do is add a dialogue file with the name of the song in the assets/data/dialogue folder,
@@ -527,11 +477,11 @@ class PlayState extends MusicBeatState
 			stageCheck = SONG.stage;
 		}
 		backgroundSprites = createBackgroundSprites(stageCheck, false);
-		switch (SONG.song.toLowerCase())
-		{
-			case 'secret':
-				UsingNewCam = true;
-		}
+		// switch (SONG.song.toLowerCase())
+		// {
+		// 	case 'secret':
+		// 		UsingNewCam = true;
+		// }
 
 		var gfVersion:String = 'gf';
 
@@ -675,7 +625,7 @@ class PlayState extends MusicBeatState
 		var font:String = Paths.font("vcr.ttf");
 		var fontScaler:Int = 1;
 
-		if (FlxG.save.data.songPosition && !isGreetingsCutscene && !['five-nights', 'overdrive'].contains(SONG.song.toLowerCase()))
+		if (FlxG.save.data.songPosition /*&& !isGreetingsCutscene && !['five-nights', 'overdrive'].contains(SONG.song.toLowerCase())*/)
 		{
 			var yPos = scrollType == 'downscroll' ? FlxG.height * 0.9 + 20 : strumLine.y - 20;
 
@@ -726,7 +676,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.antialiasing = true;
 		add(healthBarBG);
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, inFiveNights ? LEFT_TO_RIGHT : RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8),
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, /*inFiveNights ? LEFT_TO_RIGHT :*/ RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8),
 			Std.int(healthBarBG.height - 8), this, 'health', 0, 2);
 		healthBar.scrollFactor.set();
 		healthBar.createFilledBar(dad.barColor, boyfriend.barColor);
@@ -829,9 +779,9 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		subtitleManager = new SubtitleManager();
-		subtitleManager.cameras = [camHUD];
-		add(subtitleManager);
+		// subtitleManager = new SubtitleManager();
+		// subtitleManager.cameras = [camHUD];
+		// add(subtitleManager);
 
 		super.create();
 
@@ -1725,45 +1675,45 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.pause();
 			vocals.pause();
 		}
-		if (curbg != null)
-		{
-			if (curbg.active) // only the polygonized background is active
-			{
-				#if SHADERS_ENABLED
-				var shad = cast(curbg.shader, Shaders.GlitchShader);
-				shad.uTime.value[0] += elapsed;
-				#end
-			}
-		}
+		// if (curbg != null)
+		// {
+		// 	if (curbg.active) // only the polygonized background is active
+		// 	{
+		// 		#if SHADERS_ENABLED
+		// 		var shad = cast(curbg.shader, Shaders.GlitchShader);
+		// 		shad.uTime.value[0] += elapsed;
+		// 		#end
+		// 	}
+		// }
 
 		var toy = -100 + -Math.sin((curStep / 9.5) * 2) * 30 * 5;
 		var tox = -330 - Math.cos((curStep / 9.5)) * 100;
 
 		// welcome to 3d sinning avenue
 
-		if (funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat)
-		{
-			dad.y += (Math.sin(elapsedtime) * 0.2);
-		}
-		if (funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()) && canFloat)
-		{
-			boyfriend.y += (Math.sin(elapsedtime) * 0.2);
-		}
+		// if (funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat)
+		// {
+		// 	dad.y += (Math.sin(elapsedtime) * 0.2);
+		// }
+		// if (funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()) && canFloat)
+		// {
+		// 	boyfriend.y += (Math.sin(elapsedtime) * 0.2);
+		// }
 		/*if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
 			{
 				dadmirror.y += (Math.sin(elapsedtime) * 0.6);
 		}*/
 
-		if (funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()) && canFloat)
-		{
-			gf.y += (Math.sin(elapsedtime) * 0.2);
-		}
+		// if (funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()) && canFloat)
+		// {
+		// 	gf.y += (Math.sin(elapsedtime) * 0.2);
+		// }
 		// no more 3d sinning avenue
-		if (daveFlying)
-		{
-			dad.y -= elapsed * 50;
-			dad.angle -= elapsed * 6;
-		}
+		// if (daveFlying)
+		// {
+		// 	dad.y -= elapsed * 50;
+		// 	dad.angle -= elapsed * 6;
+		// }
 		if (tweenList != null && tweenList.length != 0)
 		{
 			for (tween in tweenList)
@@ -1773,11 +1723,11 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (shakeCam && eyesoreson)
-		{
-			// var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
-			FlxG.camera.shake(0.010, 0.010);
-		}
+		// if (shakeCam && eyesoreson)
+		// {
+		// 	// var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
+		// 	FlxG.camera.shake(0.010, 0.010);
+		// }
 
 		switch (curStage)
 		{
@@ -1843,9 +1793,9 @@ class PlayState extends MusicBeatState
 			switch (curSong.toLowerCase())
 			{
 				default:
-					#if SHADERS_ENABLED
-					resetShader();
-					#end
+					// #if SHADERS_ENABLED
+					// resetShader();
+					// #end
 					FlxG.switchState(new ChartingState());
 					#if desktop
 					DiscordClient.changePresence("Chart Editor", null, null, true);
@@ -1988,11 +1938,11 @@ class PlayState extends MusicBeatState
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
 			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, 0.95);
 		}
-		if (crazyZooming)
-		{
-			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, 0.95);
-		}
+		// if (crazyZooming)
+		// {
+		// 	FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
+		// 	camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, 0.95);
+		// }
 
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
@@ -2010,10 +1960,10 @@ class PlayState extends MusicBeatState
 				vocals.stop();
 				FlxG.sound.music.stop();
 
-				#if SHADERS_ENABLED
-				screenshader.shader.uampmul.value[0] = 0;
-				screenshader.Enabled = false;
-				#end
+				// #if SHADERS_ENABLED
+				// screenshader.shader.uampmul.value[0] = 0;
+				// screenshader.Enabled = false;
+				// #end
 			}
 
 			if (!perfectMode)
@@ -2066,11 +2016,11 @@ class PlayState extends MusicBeatState
 						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation')
 							altAnim = '-alt';
 					}
-					if (inFiveNights && !daNote.isSustainNote)
-					{
-						dadCombo++;
-						createScorePopUp(0, 0, true, FlxG.random.int(0, 10) == 0 ? "good" : "sick", dadCombo, "3D");
-					}
+					// if (inFiveNights && !daNote.isSustainNote)
+					// {
+					// 	dadCombo++;
+					// 	createScorePopUp(0, 0, true, FlxG.random.int(0, 10) == 0 ? "good" : "sick", dadCombo, "3D");
+					// }
 
 					var noteTypes = notestuffs;
 					var noteToPlay:String = noteTypes[Math.round(Math.abs(daNote.originalType)) % dadStrumAmount];
@@ -2511,7 +2461,6 @@ class PlayState extends MusicBeatState
 			daRating = 'shit';
 			totalNotesHit -= 2;
 			score = 10;
-			ss = false;
 			shits++;
 		}
 		else if (noteDiff < Conductor.safeZoneOffset * -2)
@@ -2519,7 +2468,6 @@ class PlayState extends MusicBeatState
 			daRating = 'shit';
 			totalNotesHit -= 2;
 			score = 25;
-			ss = false;
 			shits++;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.45)
@@ -2527,7 +2475,6 @@ class PlayState extends MusicBeatState
 			daRating = 'bad';
 			score = 100;
 			totalNotesHit += 0.2;
-			ss = false;
 			bads++;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.25)
@@ -2535,7 +2482,6 @@ class PlayState extends MusicBeatState
 			daRating = 'good';
 			totalNotesHit += 0.65;
 			score = 200;
-			ss = false;
 			goods++;
 		}
 		if (daRating == 'sick')
@@ -2911,10 +2857,6 @@ class PlayState extends MusicBeatState
 
 	function updateAccuracy()
 	{
-		if (misses > 0 || accuracy < 96)
-			fc = false;
-		else
-			fc = true;
 		totalPlayed += 1;
 		accuracy = totalNotesHit / totalPlayed * 100;
 	}
@@ -2956,7 +2898,7 @@ class PlayState extends MusicBeatState
 				default:
 					// 'LEFT', 'DOWN', 'UP', 'RIGHT'
 					var fuckingDumbassBullshitFuckYou:String;
-					var noteTypes = guitarSection ? notestuffsGuitar : notestuffs;
+					var noteTypes = notestuffs;
 					fuckingDumbassBullshitFuckYou = noteTypes[Math.round(Math.abs(note.originalType)) % playerStrumAmount];
 					if (!boyfriend.nativelyPlayable)
 					{
@@ -3167,21 +3109,21 @@ class PlayState extends MusicBeatState
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
-		if (crazyZooming && curBeat % 1 == 0)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
-		}
+		// if (crazyZooming && curBeat % 1 == 0)
+		// {
+		// 	FlxG.camera.zoom += 0.015;
+		// 	camHUD.zoom += 0.03;
+		// }
 		/*switch (curSong.toLowerCase())
 			{
 				TEMPORARILY DISABLED
 				MAKING A NEW SYSTEM
 			}
 		 */
-		if (shakeCam)
-		{
-			gf.playAnim('scared', true);
-		}
+		// if (shakeCam)
+		// {
+		// 	gf.playAnim('scared', true);
+		// }
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
 			boyfriend.playAnim('hey', true);
@@ -3204,10 +3146,10 @@ class PlayState extends MusicBeatState
 
 		if (curBeat % gfSpeed == 0)
 		{
-			if (!shakeCam)
-			{
+			// if (!shakeCam)
+			// {
 				gf.dance();
-			}
+			// }
 		}
 
 		switch (curStage)
@@ -3339,12 +3281,12 @@ class PlayState extends MusicBeatState
 
 	public static function resetShader()
 	{
-		PlayState.instance.shakeCam = false;
-		PlayState.instance.camZooming = false;
-		#if SHADERS_ENABLED
-		screenshader.shader.uampmul.value[0] = 0;
-		screenshader.Enabled = false;
-		#end
+		// PlayState.instance.shakeCam = false;
+		// PlayState.instance.camZooming = false;
+		// #if SHADERS_ENABLED
+		// screenshader.shader.uampmul.value[0] = 0;
+		// screenshader.Enabled = false;
+		// #end
 	}
 
 	function sectionStartTime(section:Int):Float
