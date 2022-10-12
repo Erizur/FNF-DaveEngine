@@ -10,7 +10,7 @@ import flixel.util.FlxArrayUtil;
 import flixel.addons.plugin.FlxScrollingText;
 import Alphabet;
 import flixel.addons.display.FlxBackdrop;
-import openfl.display.ShaderParameter;
+// import openfl.display.ShaderParameter;
 import openfl.display.Graphics;
 import flixel.group.FlxSpriteGroup;
 import lime.tools.ApplicationData;
@@ -30,7 +30,7 @@ import openfl.filters.BitmapFilter;
 // import Shaders.PulseEffect;
 // import Shaders.BlockedGlitchShader;
 // import Shaders.BlockedGlitchEffect;
-import Shaders.DitherEffect;
+// import Shaders.DitherEffect;
 import Shaders.WiggleEffect;
 // import Shaders.VCRDistortionShader;
 import Section.SwagSection;
@@ -69,10 +69,9 @@ import haxe.Json;
 import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
-import openfl.filters.ShaderFilter;
-import flash.system.System;
+// import openfl.filters.ShaderFilter;
+// import flash.system.System;
 import flixel.util.FlxSpriteUtil;
-import flixel.effects.particles.FlxParticle;
 import flixel.addons.effects.chainable.IFlxEffect;
 #if desktop
 import Discord.DiscordClient;
@@ -124,10 +123,10 @@ class PlayState extends MusicBeatState
 
 	#if SHADERS_ENABLED
 	// public static var screenshader:Shaders.PulseEffect = new PulseEffect();
-	public static var lazychartshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-	public static var blockedShader:BlockedGlitchEffect;
+	// public static var lazychartshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
+	// public static var blockedShader:BlockedGlitchEffect;
 
-	public var dither:DitherEffect = new DitherEffect();
+	// public var dither:DitherEffect = new DitherEffect();
 	#end
 
 	public var UsingNewCam:Bool = false;
