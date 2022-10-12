@@ -237,7 +237,7 @@ class FreeplayState extends MusicBeatState
 			add(icon);
 		}
 
-		scoreText = new FlxText(FlxG.width * 0.7, 0, 0, "", 32);
+		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, LEFT);
 		scoreText.antialiasing = true;
 		scoreText.y = -225;
