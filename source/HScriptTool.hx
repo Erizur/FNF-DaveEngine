@@ -26,10 +26,10 @@ class HScriptTool implements IFlxDestroyable
 
 
     public function new(){}
-    public function loadScript(path:String):HScriptTool {
+    public static function loadScript(path:String):HScriptTool {
         var script = create(path);
         if (script != null) {
-            script.readFile();
+            script.loadFile();
             return script;
         }
         else
@@ -38,7 +38,7 @@ class HScriptTool implements IFlxDestroyable
         }
     }
 
-    public function create(path:String):HScriptTool
+    public static function create(path:String):HScriptTool
     {
         var p = path.toLowerCase();
         var ext = Path.extension(p);
@@ -87,8 +87,8 @@ class Script extends HScriptTool
         super();
     }
 
-    public override function _executeFunc(funcName:String, ?args:Array<Any>):Dynamic {
-        super._executeFunc(funcName, args);
+    public override function executeFunc(funcName:String, ?args:Array<Any>):Dynamic {
+        super.executeFunc(funcName, args);
         if (hscript == null)
             return null;
 		if (hscript.variables.exists(funcName)) {
@@ -106,8 +106,10 @@ class Script extends HScriptTool
     public override function loadFile() {
         super.loadFile();
         if (filePath == null || filePath.trim() == "") return;
+        var content:String = sys.io.File.getContent(filePath);
+        var parser = new hscript.Parser();
         try {
-            hscript.execute();
+            hscript.execute(parser.parseString(content));
         } catch(e) {
             this.trace('${e.message}', true);
         }

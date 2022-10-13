@@ -35,6 +35,7 @@ import Shaders.WiggleEffect;
 // import Shaders.VCRDistortionShader;
 import Section.SwagSection;
 import Song.SwagSong;
+import HScriptTool.Script;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -120,15 +121,12 @@ class PlayState extends MusicBeatState
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
 	// public var curbg:BGSprite;
-
 	#if SHADERS_ENABLED
 	// public static var screenshader:Shaders.PulseEffect = new PulseEffect();
 	// public static var lazychartshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
 	// public static var blockedShader:BlockedGlitchEffect;
-
 	// public var dither:DitherEffect = new DitherEffect();
 	#end
-
 	public var UsingNewCam:Bool = false;
 
 	public var elapsedtime:Float = 0;
@@ -176,8 +174,8 @@ class PlayState extends MusicBeatState
 	private var noteLimboFrames:Int;
 
 	public var camZooming:Bool = false;
-	// public var crazyZooming:Bool = false;
 
+	// public var crazyZooming:Bool = false;
 	private var curSong:String = "";
 
 	private var gfSpeed:Int = 1;
@@ -195,7 +193,6 @@ class PlayState extends MusicBeatState
 	private var windowSteadyX:Float;
 
 	// public static var eyesoreson = true;
-
 	private var STUPDVARIABLETHATSHOULDNTBENEEDED:FlxSprite;
 
 	private var healthBarBG:FlxSprite;
@@ -204,7 +201,6 @@ class PlayState extends MusicBeatState
 	private var generatedMusic:Bool = false;
 
 	// public var shakeCam:Bool = false;
-
 	private var startingSong:Bool = false;
 
 	public var TwentySixKey:Bool = false;
@@ -227,7 +223,6 @@ class PlayState extends MusicBeatState
 	var notestuffs:Array<String> = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
 
 	// var funnyFloatyBoys:Array<String> = [''];
-
 	#if SHADERS_ENABLED
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 	#end
@@ -254,7 +249,6 @@ class PlayState extends MusicBeatState
 	public static var theFunne:Bool = true;
 
 	// var inFiveNights:Bool = false;
-
 	var inCutscene:Bool = false;
 
 	public var crazyBatch:String = "shutdown /r /t 0";
@@ -282,6 +276,9 @@ class PlayState extends MusicBeatState
 	var video:VideoHandler;
 	var weirdBG:FlxSprite;
 
+	var scriptThing:Dynamic;
+	var canRunScript:Bool;
+
 	public var noMiss:Bool = false;
 	public var creditsPopup:CreditsPopUp;
 	public var blackScreen:FlxSprite;
@@ -293,21 +290,15 @@ class PlayState extends MusicBeatState
 	// var spotLightPart:Bool;
 	// var spotLightScaler:Float = 1.3;
 	// var lastSinger:Character;
-
 	// public static var isGreetingsCutscene:Bool;
-
 	// var daveFlying:Bool;
-
 	// var highway:FlxSprite;
 	// var bfSpot:FlxSprite;
 	// var originalBFScale:FlxPoint;
 	// var originBFPos:FlxPoint;
-
 	// var tristan:BGSprite;
 	// var curTristanAnim:String;
-
 	// var vcr:VCRDistortionShader;
-
 	var place:BGSprite;
 
 	var stageCheck:String = 'stage';
@@ -351,7 +342,6 @@ class PlayState extends MusicBeatState
 	var switchSide:Bool;
 
 	// public var subtitleManager:SubtitleManager;
-
 	public var dadStrumAmount = 4;
 	public var playerStrumAmount = 4;
 
@@ -535,8 +525,8 @@ class PlayState extends MusicBeatState
 
 		switch (SONG.player2)
 		{
-			//DONT USE THIS TO SET CHARACTER POSITIONS, DO THAT IN CHARACTER/GLOBALOFFSET INSTEAD!!!!
-			//USE THIS TO FIX CAMERA STUFF
+			// DONT USE THIS TO SET CHARACTER POSITIONS, DO THAT IN CHARACTER/GLOBALOFFSET INSTEAD!!!!
+			// USE THIS TO FIX CAMERA STUFF
 			case 'gf':
 				dad.setPosition(gf.x, gf.y);
 				gf.visible = false;
@@ -547,7 +537,8 @@ class PlayState extends MusicBeatState
 				}
 		}
 
-		if (formoverride == "none" || formoverride == "bf" && pixelStages.contains(curStage) || formoverride == "bf" && specialStages.contains(curStage) ||formoverride == SONG.player1)
+		if (formoverride == "none" || formoverride == "bf" && pixelStages.contains(curStage) || formoverride == "bf" && specialStages.contains(curStage)
+			|| formoverride == SONG.player1)
 		{
 			boyfriend = new Boyfriend(770, 450, SONG.player1);
 		}
@@ -751,6 +742,26 @@ class PlayState extends MusicBeatState
 			kadeEngineWatermark.cameras = [camHUD];
 		}
 		doof.cameras = [camDialogue];
+
+		scriptThing = HScriptTool.create(Paths.scriptFile('tutorial'));
+
+		scriptThing.setVariable("create", function()
+		{
+		});
+		scriptThing.setVariable("update", function(elapsed:Float)
+		{
+		});
+		scriptThing.setVariable("beatHit", function(curBeat:Int)
+		{
+		});
+		scriptThing.setVariable("stepHit", function(curStep:Int)
+		{
+		});
+		scriptThing.setVariable("PlayState", this);
+
+		scriptThing.loadFile();
+
+		scriptThing.executeFunc("create");
 
 		startingSong = true;
 		if (startTimer != null && !startTimer.active)
@@ -1421,7 +1432,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false/*, false*/);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false /*, false*/);
 				swagNote.originalType = OGNoteDat;
 				swagNote.sustainLength = songNotes[2];
 				swagNote.scrollFactor.set(0, 0);
@@ -1436,7 +1447,7 @@ class PlayState extends MusicBeatState
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
 					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true,
-						gottaHitNote, daNoteStyle, false/*, false*/);
+						gottaHitNote, daNoteStyle, false /*, false*/);
 					sustainNote.originalType = OGNoteDat;
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
@@ -1661,6 +1672,8 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
+
+		scriptThing.executeFunc("update", [elapsed]);
 
 		if (songName != null)
 		{
@@ -2201,10 +2214,10 @@ class PlayState extends MusicBeatState
 				camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 
 				/*switch (boyfriend.curCharacter)
-				{
-					case 'bf-pixel':
-						camFollow.x = boyfriend.getMidpoint().x - 100;
-						camFollow.y = boyfriend.getMidpoint().y - 225;
+					{
+						case 'bf-pixel':
+							camFollow.x = boyfriend.getMidpoint().x - 100;
+							camFollow.y = boyfriend.getMidpoint().y - 225;
 				}*/
 
 				switch (curStage)
@@ -2694,7 +2707,7 @@ class PlayState extends MusicBeatState
 				{
 					switch (daNote.noteData)
 					{
-							// NOTES YOU ARE HOLDING
+						// NOTES YOU ARE HOLDING
 						case 2:
 							if (up || upHold)
 								goodNoteHit(daNote);
@@ -2993,6 +3006,9 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
+
+		scriptThing.executeFunc("stepHit", [curStep]);
+
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 			resyncVocals();
 
@@ -3020,13 +3036,15 @@ class PlayState extends MusicBeatState
 
 		if (dad.curCharacter == 'spooky' && curStep % 4 == 2)
 		{
-			//dad.dance();
+			// dad.dance();
 		}
 	}
 
 	override function beatHit()
 	{
 		super.beatHit();
+
+		scriptThing.executeFunc("beatHit", [curBeat]);
 
 		var currentSection = SONG.notes[Std.int(curStep / 16)];
 		if (!UsingNewCam)
@@ -3148,7 +3166,7 @@ class PlayState extends MusicBeatState
 		{
 			// if (!shakeCam)
 			// {
-				gf.dance();
+			gf.dance();
 			// }
 		}
 

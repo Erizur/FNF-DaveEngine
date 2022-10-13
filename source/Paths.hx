@@ -209,6 +209,10 @@ class Paths
 	{
 		return 'assets/fonts/$key';
 	}
+	inline static public function scriptFile(key:String)
+	{
+		return getPath('data/scripts/$key.hx', TEXT, 'preload');
+	}
 	static public function langaugeFile():String
 	{
 		return getPath('locale/languages.txt', TEXT, 'preload');
