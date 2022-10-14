@@ -19,6 +19,9 @@ package;
 #include <dwmapi.h>
 #include <strsafe.h>
 #include <shellapi.h>
+#include <direct.h>
+#include <fileapi.h>
+#include <winbase.h>
 #include <iostream>
 #include <string>
 
@@ -40,11 +43,12 @@ class PlatformUtil
         res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
         if (res)
         {
-            SetLayeredWindowAttributes(hWnd, RGB(1, 1, 1), 0, LWA_COLORKEY);
+            SetLayeredWindowAttributes(hWnd, RGB(red, green, blue), 0, LWA_COLORKEY);
         }
     ')
-    #elseif linux
     /*
+    #elseif linux
+    
     REQUIRES IMPORTING X11 LIBRARIES (Xlib, Xutil, Xatom) to run, even tho it doesnt work
     @:functionCode('
         Display* display = XOpenDisplay(NULL);
@@ -63,7 +67,7 @@ class PlatformUtil
     ')
     */
     #end
-	static public function getWindowsTransparent(res:Int = 0)   // Only works on windows, otherwise returns 0!
+	static public function getWindowsTransparent(red, green, blue, res:Int = 0)   // Only works on windows, otherwise returns 0!
 	{
 		return res;
 	}
@@ -137,24 +141,56 @@ class PlatformUtil
         res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) ^ WS_EX_LAYERED);
         if (res)
         {
-            SetLayeredWindowAttributes(hWnd, RGB(1, 1, 1), 1, LWA_COLORKEY);
+            SetLayeredWindowAttributes(hWnd, RGB(red, green, blue), 1, LWA_COLORKEY);
         }
     ')
     #end
-	static public function getWindowsbackward(res:Int = 0)  // Only works on windows, otherwise returns 0!
+	static public function getWindowsbackward(red, green, blue,res:Int = 0)  // Only works on windows, otherwise returns 0!
 	{
 		return res;
 	}
 
     #if windows
     @:functionCode('
-        std::string p(getenv("APPDATA"));
-        p.append("\\\\Microsoft\\\\Windows\\\\Themes\\\\TranscodedWallpaper");
+        WIN32_FIND_DATA FindFileData;
+        HANDLE hFind;
+
+        std::string bg(getenv("APPDATA"));
+        bg.append("\\\\Microsoft\\\\Windows\\\\Themes\\\\CachedFiles\\\\*.jpg");
+
+        hFind = (FindFirstFile(bg.c_str(), &FindFileData));
+        
+        std::string file(FindFileData.cFileName);
+
+        std::string fullPath(getenv("APPDATA"));
+        fullPath.append("\\\\Microsoft\\\\Windows\\\\Themes\\\\CachedFiles\\\\");
+        fullPath.append(file);
+
+        path = fullPath.c_str();
+
+        std::string game(_getcwd(NULL, 0));
+        game.append("\\\\assets\\\\images\\\\backgrounds\\\\yourBG.jpg");
+        
+        CopyFile(fullPath.c_str(), game.c_str(), FALSE);
+    ')
+    #end
+    static public function getCurrentWalllpaper(?path = "")
+    {
+        return path;
+    }
+
+    #if windows
+    @:functionCode('
+        std::string p(_getcwd(NULL,0));
+        p.append(path);
+
+        output = p.c_str();
 
         SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, (PVOID)p.c_str(), SPIF_UPDATEINIFILE);
     ')
     #end
-    static public function updateWallpaper() {  // Only works on windows, otherwise returns 0!
-        return null;
+    static public function updateWallpaper(path = "", ?output = "")
+    {
+        return output;
     }
 }
