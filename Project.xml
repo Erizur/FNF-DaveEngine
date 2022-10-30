@@ -70,7 +70,7 @@
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-
+	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
 	<setenv name="next"/>
 
 	<haxelib name="discord_rpc" if="desktop"/>
