@@ -20,6 +20,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
 import lime.app.Application;
+import flixel.input.keyboard.FlxKey;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -59,6 +60,8 @@ class TitleState extends MusicBeatState
 		#if desktop
 		DiscordClient.initialize();
 		#end
+
+		FlxG.sound.muteKeys = [FlxKey.ZERO];
 
 		super.create();
 
