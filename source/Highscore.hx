@@ -9,49 +9,47 @@ class Highscore
 	public static var songChars:Map<String, String> = new Map();
 	#else
 	public static var songScores:Map<String, Int> = new Map<String, Int>();
-	public static var songChars:Map<String, String> = new Map<String,String>();
+	public static var songChars:Map<String, String> = new Map<String, String>();
 	#end
-
 
 	public static function saveScore(song:String, score:Int = 0, ?diff:Int = 0, ?char:String = "bf"):Void
 	{
 		var daSong:String = formatSong(song);
 
 		if (songScores.exists(daSong))
+		{
+			if (songScores.get(daSong) < score)
 			{
-				if (songScores.get(daSong) < score)
-				{
-					setScore(daSong, score,char);
-				}
+				setScore(daSong, score, char);
 			}
-			else
-			{
-				setScore(daSong, score,char);
-			}
+		}
+		else
+		{
+			setScore(daSong, score, char);
+		}
 	}
 
 	public static function saveWeekScore(week:Int = 1, score:Int = 0, ?diff:Int = 0, ?char:String = "bf"):Void
 	{
 		var daWeek:String = formatSong('week' + week);
-	
+
 		if (songScores.exists(daWeek))
 		{
 			if (songScores.get(daWeek) < score)
 			{
-				setScore(daWeek, score,char);
+				setScore(daWeek, score, char);
 			}
 		}
 		else
 		{
-			setScore(daWeek, score,char);
+			setScore(daWeek, score, char);
 		}
 	}
-
 
 	public static function setScore(song:String, score:Int, char:String):Void
 	{
 		songScores.set(song, score);
-		songChars.set(song,char);
+		songChars.set(song, char);
 		FlxG.save.data.songScores = songScores;
 		FlxG.save.data.songNames = songChars;
 		FlxG.save.flush();
@@ -59,7 +57,7 @@ class Highscore
 
 	static function setChar(song:String, char:String):Void
 	{
-		songChars.set(song,char);
+		songChars.set(song, char);
 		FlxG.save.data.songNames = songChars;
 		FlxG.save.flush();
 	}

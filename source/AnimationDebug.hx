@@ -15,6 +15,7 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.events.IOErrorEvent;
 import openfl.events.IOErrorEvent;
+
 /**
 	*DEBUG MODE
  */
@@ -41,7 +42,6 @@ class AnimationDebug extends MusicBeatState
 
 	override function create()
 	{
-		
 		FlxG.sound.music.stop();
 
 		FlxG.mouse.visible = true;
@@ -97,7 +97,7 @@ class AnimationDebug extends MusicBeatState
 
 		super.create();
 
-		animationGhost.alpha = 0.3; 
+		animationGhost.alpha = 0.3;
 	}
 
 	function genBoyOffsets(pushList:Bool = true):Void
@@ -134,7 +134,7 @@ class AnimationDebug extends MusicBeatState
 		{
 			saveOffset();
 		}
-		if(FlxG.keys.justPressed.ESCAPE)
+		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			FlxG.switchState(new MainMenuState());
 		}
@@ -197,7 +197,7 @@ class AnimationDebug extends MusicBeatState
 			updateTexts();
 			genBoyOffsets(false);
 		}
-		
+
 		var upP = FlxG.keys.anyJustPressed([UP]);
 		var rightP = FlxG.keys.anyJustPressed([RIGHT]);
 		var downP = FlxG.keys.anyJustPressed([DOWN]);
@@ -227,14 +227,14 @@ class AnimationDebug extends MusicBeatState
 
 		super.update(elapsed);
 	}
-	
+
 	private function saveOffset()
 	{
 		var offsetString = '';
 		for (anim => offsets in char.animOffsets)
 		{
 			var animationOffsets = offsets;
-			
+
 			offsetString += anim + " " + animationOffsets[0] + ' ' + animationOffsets[1] + '\n';
 		}
 		_file = new FileReference();

@@ -17,7 +17,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	var stageSuffix:String = "";
 	var deathSuffix:String = '';
 
-	public function new(x:Float, y:Float,char:String)
+	public function new(x:Float, y:Float, char:String)
 	{
 		var daBf:String = '';
 		switch (char)
@@ -35,7 +35,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		Conductor.songPosition = 0;
 
 		bf = new Boyfriend(x, y, daBf);
-		if(bf.animation.getByName('firstDeath') == null)
+		if (bf.animation.getByName('firstDeath') == null)
 		{
 			bf = new Boyfriend(x, y, "bf");
 		}
@@ -68,7 +68,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			FlxG.sound.music.stop();
 			Application.current.window.title = Main.applicationName;
-			
+
 			if (PlayState.isStoryMode)
 				FlxG.switchState(new StoryMenuState());
 			else
@@ -97,7 +97,6 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	override function beatHit()
 	{
-		
 	}
 
 	var isEnding:Bool = false;

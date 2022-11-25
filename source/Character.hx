@@ -755,7 +755,7 @@ class Character extends FlxSprite
 			}
 			else
 			{
-				returnedString = currentValue[2]; //this is the color code one
+				returnedString = currentValue[2]; // this is the color code one
 			}
 		}
 		if (returnedString == '')

@@ -1,1 +1,3 @@
 import Paths;
+
+using StringTools;

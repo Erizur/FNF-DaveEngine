@@ -49,7 +49,7 @@ class FlxSplash extends FlxState
 
 		animatedTex = Paths.getSplashSparrowAtlas('ui/flixel_intro', 'preload');
 
-		animatedIntro = new FlxSprite(0,0);
+		animatedIntro = new FlxSprite(0, 0);
 		animatedIntro.frames = animatedTex;
 		animatedIntro.animation.addByPrefix('intro', 'intro', 24);
 		animatedIntro.animation.play('intro');
@@ -85,6 +85,7 @@ class FlxSplash extends FlxState
 			FlxTween.tween(skipScreen, {alpha: 1}, 1);
 		}
 	}
+
 	override public function update(elapsed:Float)
 	{
 		if (FlxG.save.data.hasSeenSplash && FlxG.keys.justPressed.ENTER)

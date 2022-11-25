@@ -41,15 +41,15 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
-		
+
 		funnyTexts = new FlxTypedGroup<FlxText>();
 		add(funnyTexts);
 
-		for(item in menuItems)
+		for (item in menuItems)
 		{
-			if(item.optionName == 'Change Character')
+			if (item.optionName == 'Change Character')
 			{
-				if(PlayState.isStoryMode == true)
+				if (PlayState.isStoryMode == true)
 				{
 					menuItems.remove(item);
 				}
@@ -69,7 +69,7 @@ class PauseSubState extends MusicBeatSubstate
 			default:
 				pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
 		}
-		
+
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 
@@ -138,8 +138,8 @@ class PauseSubState extends MusicBeatSubstate
 	override function update(elapsed:Float)
 	{
 		var scrollSpeed:Float = 50;
-      	bg.x -= scrollSpeed * elapsed;
-      	bg.y -= scrollSpeed * elapsed;
+		bg.x -= scrollSpeed * elapsed;
+		bg.y -= scrollSpeed * elapsed;
 
 		timeElapsed += elapsed;
 		if (pauseMusic.volume < 0.75)
@@ -173,6 +173,7 @@ class PauseSubState extends MusicBeatSubstate
 			selectOption();
 		}
 	}
+
 	function selectOption()
 	{
 		var daSelected:String = menuItems[curSelected].optionName;
@@ -190,16 +191,16 @@ class PauseSubState extends MusicBeatSubstate
 				FlxG.mouse.visible = false;
 				FlxG.resetState();
 			case "Change Character":
-					funnyTexts.clear();
-					PlayState.characteroverride = 'none';
-					PlayState.formoverride = 'none';
+				funnyTexts.clear();
+				PlayState.characteroverride = 'none';
+				PlayState.formoverride = 'none';
 
-					Application.current.window.title = Main.applicationName;
+				Application.current.window.title = Main.applicationName;
 
-					// PlayState.instance.shakeCam = false;
-					PlayState.instance.camZooming = false;
-					FlxG.mouse.visible = false;
-					FlxG.switchState(new CharacterSelectState());	
+				// PlayState.instance.shakeCam = false;
+				PlayState.instance.camZooming = false;
+				FlxG.mouse.visible = false;
+				FlxG.switchState(new CharacterSelectState());
 			case "No Miss Mode":
 				PlayState.instance.noMiss = !PlayState.instance.noMiss;
 			case "Exit to menu":
@@ -215,6 +216,7 @@ class PauseSubState extends MusicBeatSubstate
 				FlxG.switchState(new MainMenuState());
 		}
 	}
+
 	override function close()
 	{
 		funnyTexts.clear();
@@ -228,6 +230,7 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.destroy();
 	}
+
 	function changeSelection(change:Int = 0):Void
 	{
 		curSelected += change;
@@ -255,6 +258,7 @@ class PauseSubState extends MusicBeatSubstate
 		}
 	}
 }
+
 class PauseOption
 {
 	public var optionName:String;
@@ -263,7 +267,7 @@ class PauseOption
 	{
 		this.optionName = optionName;
 	}
-	
+
 	public static function getOption(list:Array<PauseOption>, optionName:String):PauseOption
 	{
 		for (option in list)

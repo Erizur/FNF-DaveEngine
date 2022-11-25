@@ -163,6 +163,7 @@ class PlayState extends MusicBeatState
 	private var noteLimboFrames:Int;
 
 	public var camZooming:Bool = false;
+
 	private var curSong:String = "";
 
 	private var gfSpeed:Int = 1;

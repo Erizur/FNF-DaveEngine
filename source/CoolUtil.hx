@@ -27,7 +27,6 @@ class CoolUtil
 		{
 			default:
 				return difficultyArray[PlayState.storyDifficulty];
-
 		}
 	}
 
@@ -41,18 +40,18 @@ class CoolUtil
 		}
 		return daList;
 	}
-	
+
 	public static function coolStringFile(path:String):Array<String>
+	{
+		var daList:Array<String> = path.trim().split('\n');
+
+		for (i in 0...daList.length)
 		{
-			var daList:Array<String> = path.trim().split('\n');
-	
-			for (i in 0...daList.length)
-			{
-				daList[i] = daList[i].trim();
-			}
-	
-			return daList;
+			daList[i] = daList[i].trim();
 		}
+
+		return daList;
+	}
 
 	public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{
@@ -63,6 +62,7 @@ class CoolUtil
 		}
 		return dumbArray;
 	}
+
 	public static function formatString(string:String, separator:String):String
 	{
 		var split:Array<String> = string.split(separator);
@@ -82,6 +82,7 @@ class CoolUtil
 		}
 		return formattedString;
 	}
+
 	public static function getMinAndMax(value1:Float, value2:Float):Array<Float>
 	{
 		var minAndMaxs = new Array<Float>();
@@ -91,7 +92,7 @@ class CoolUtil
 
 		minAndMaxs.push(min);
 		minAndMaxs.push(max);
-		
+
 		return minAndMaxs;
 	}
 
@@ -99,6 +100,7 @@ class CoolUtil
 	{
 		Assets.cache.image.set(image, lime.graphics.Image.fromFile(image));
 	}
+
 	public static function isArrayEqualTo(array1:Array<Dynamic>, array2:Array<Dynamic>)
 	{
 		if (array1.length != array2.length)

@@ -77,7 +77,7 @@ class FlxSoundTray extends Sprite
 		dtf.align = TextFormatAlign.CENTER;
 		text.defaultTextFormat = dtf;
 		addChild(text);
-		text.text = "Volume - 100%"; //HAHA! I REVERTED YOUR TEXT RAPAREP LOL! LETS GOOOO BABY
+		text.text = "Volume - 100%"; // HAHA! I REVERTED YOUR TEXT RAPAREP LOL! LETS GOOOO BABY
 		text.y = 14;
 
 		var bx:Int = 10;

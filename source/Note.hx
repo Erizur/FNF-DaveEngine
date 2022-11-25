@@ -14,6 +14,7 @@ import flixel.util.FlxColor;
 import PlayState;
 
 using StringTools;
+
 import StringTools;
 
 class Note extends FlxSprite
@@ -27,7 +28,7 @@ class Note extends FlxSprite
 	public var tooLate:Bool = false;
 	public var wasGoodHit:Bool = false;
 	public var prevNote:Note;
- 	@:keep public var LocalScrollSpeed:Float = 1;
+	@:keep public var LocalScrollSpeed:Float = 1;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -51,7 +52,8 @@ class Note extends FlxSprite
 
 	var notes = ['purple', 'blue', 'green', 'red'];
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal", inCharter:Bool = false/*, guitarSection:Bool = false*/)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal",
+			inCharter:Bool = false /*, guitarSection:Bool = false*/)
 	{
 		super();
 
@@ -67,12 +69,12 @@ class Note extends FlxSprite
 		x += 78;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
 		y -= 2000;
-		
+
 		inCharter ? this.strumTime = strumTime : {
 			this.strumTime = Math.round(strumTime);
 			alpha = 0;
 		}
-		
+
 		if (this.strumTime < 0)
 			this.strumTime = 0;
 
@@ -97,17 +99,17 @@ class Note extends FlxSprite
 				animation.addByPrefix('redScroll', 'red0');
 				animation.addByPrefix('blueScroll', 'blue0');
 				animation.addByPrefix('purpleScroll', 'purple0');
-		
+
 				animation.addByPrefix('purpleholdend', 'pruple end hold');
 				animation.addByPrefix('greenholdend', 'green hold end');
 				animation.addByPrefix('redholdend', 'red hold end');
 				animation.addByPrefix('blueholdend', 'blue hold end');
-		
+
 				animation.addByPrefix('purplehold', 'purple hold piece');
 				animation.addByPrefix('greenhold', 'green hold piece');
 				animation.addByPrefix('redhold', 'red hold piece');
 				animation.addByPrefix('bluehold', 'blue hold piece');
-	
+
 				setGraphicSize(Std.int(width * noteSize));
 				updateHitbox();
 				// antialiasing = noteStyle != '3D';
@@ -119,22 +121,21 @@ class Note extends FlxSprite
 				animation.addByPrefix('redScroll', 'red0');
 				animation.addByPrefix('blueScroll', 'blue0');
 				animation.addByPrefix('purpleScroll', 'purple0');
-		
+
 				animation.addByPrefix('purpleholdend', 'pruple end hold');
 				animation.addByPrefix('greenholdend', 'green hold end');
 				animation.addByPrefix('redholdend', 'red hold end');
 				animation.addByPrefix('blueholdend', 'blue hold end');
-		
+
 				animation.addByPrefix('purplehold', 'purple hold piece');
 				animation.addByPrefix('greenhold', 'green hold piece');
 				animation.addByPrefix('redhold', 'red hold piece');
 				animation.addByPrefix('bluehold', 'blue hold piece');
-	
+
 				setGraphicSize(Std.int(width * noteSize));
 				updateHitbox();
 				// antialiasing = noteStyle != '3D';
 				antialiasing = true;
-
 		}
 		var str:String = PlayState.SONG.song.toLowerCase();
 		if (isInState('PlayState'))
@@ -182,7 +183,7 @@ class Note extends FlxSprite
 				}
 				else
 				{
-					//INCOMPLETE
+					// INCOMPLETE
 					prevNote.scale.y *= (Conductor.stepCrochet / 100) * PlayState.SONG.speed * 0.75;
 					prevNote.scale.x *= (Conductor.stepCrochet / 100) * PlayState.SONG.speed * 0.5;
 					prevNote.offset.y += prevNote.height / 3;
@@ -205,7 +206,6 @@ class Note extends FlxSprite
 			alphaMult = 1;
 			noteOffset += (width / 2);
 		}
-
 	}
 
 	override function update(elapsed:Float)
@@ -229,7 +229,7 @@ class Note extends FlxSprite
 			if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset
 				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
 				canBeHit = true;
-			else 
+			else
 				canBeHit = false;
 
 			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
@@ -248,6 +248,7 @@ class Note extends FlxSprite
 			alphaMult = 0.3;
 		}
 	}
+
 	public function GoToStrum(strum:StrumNote)
 	{
 		x = strum.x + noteOffset;

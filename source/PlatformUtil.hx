@@ -1,16 +1,15 @@
 package;
 
 /*
-    VS DAVE WINDOWS/LINUX/MACOS UTIL
-    You can use this code while you give credit to it.
-    65% of the code written by chromasen
-    35% of the code written by Erizur (cross-platform and extra windows utils)
+	VS DAVE WINDOWS/LINUX/MACOS UTIL
+	You can use this code while you give credit to it.
+	65% of the code written by chromasen
+	35% of the code written by Erizur (cross-platform and extra windows utils)
 
-    Windows: You need the Windows SDK (any version) to compile.
-    Linux: TODO
-    macOS: TODO
-*/
-
+	Windows: You need the Windows SDK (any version) to compile.
+	Linux: TODO
+	macOS: TODO
+ */
 #if windows
 @:cppFileCode('#include <stdlib.h>
 #include <stdio.h>
@@ -37,7 +36,7 @@ package;
 #end
 class PlatformUtil
 {
-    #if windows
+	#if windows
 	@:functionCode('
         HWND hWnd = GetActiveWindow();
         res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
@@ -46,34 +45,34 @@ class PlatformUtil
             SetLayeredWindowAttributes(hWnd, RGB(red, green, blue), 0, LWA_COLORKEY);
         }
     ')
-    /*
-    #elseif linux
-    
-    REQUIRES IMPORTING X11 LIBRARIES (Xlib, Xutil, Xatom) to run, even tho it doesnt work
-    @:functionCode('
-        Display* display = XOpenDisplay(NULL);
-        Window wnd;
-        Atom property = XInternAtom(display, "_NET_WM_WINDOW_OPACITY", False);
-        int revert;
-        
-        if(property != None)
-        {
-            XGetInputFocus(display, &wnd, &revert);
-            unsigned long opacity = (0xff000000 / 0xffffffff) * 50;
-            XChangeProperty(display, wnd, property, XA_CARDINAL, 32, PropModeReplace, (unsigned char*)&opacity, 1);
-            XFlush(display);
-        }
-        XCloseDisplay(display);
-    ')
-    */
-    #end
-	static public function getWindowsTransparent(red, green, blue, res:Int = 0)   // Only works on windows, otherwise returns 0!
+	/*
+		#elseif linux
+
+		REQUIRES IMPORTING X11 LIBRARIES (Xlib, Xutil, Xatom) to run, even tho it doesnt work
+		@:functionCode('
+			Display* display = XOpenDisplay(NULL);
+			Window wnd;
+			Atom property = XInternAtom(display, "_NET_WM_WINDOW_OPACITY", False);
+			int revert;
+			
+			if(property != None)
+			{
+				XGetInputFocus(display, &wnd, &revert);
+				unsigned long opacity = (0xff000000 / 0xffffffff) * 50;
+				XChangeProperty(display, wnd, property, XA_CARDINAL, 32, PropModeReplace, (unsigned char*)&opacity, 1);
+				XFlush(display);
+			}
+			XCloseDisplay(display);
+		')
+	 */
+	#end
+	static public function getWindowsTransparent(red, green, blue, res:Int = 0) // Only works on windows, otherwise returns 0!
 	{
 		return res;
 	}
 
-    #if windows
-    @:functionCode('
+	#if windows
+	@:functionCode('
         NOTIFYICONDATA m_NID;
 
         memset(&m_NID, 0, sizeof(m_NID));
@@ -103,8 +102,8 @@ class PlatformUtil
 
         return Shell_NotifyIcon(NIM_MODIFY, &m_NID);
     ')
-    #elseif linux
-    @:functionCode('
+	#elseif linux
+	@:functionCode('
         std::string cmd = "notify-send -u normal \'";
         cmd += title.c_str();
         cmd += "\' \'";
@@ -112,14 +111,14 @@ class PlatformUtil
         cmd += "\'";
         system(cmd.c_str());
     ')
-    #end
-    static public function sendWindowsNotification(title:String = "", desc:String = "", res:Int = 0)    // TODO: Linux (found out how to do it so ill do it soon)
-    {
-        return res;
-    }
+	#end
+	static public function sendWindowsNotification(title:String = "", desc:String = "", res:Int = 0) // TODO: Linux (found out how to do it so ill do it soon)
+	{
+		return res;
+	}
 
-    #if windows
-    @:functionCode('
+	#if windows
+	@:functionCode('
         LPCSTR lwDesc = desc.c_str();
 
         res = MessageBox(
@@ -129,13 +128,13 @@ class PlatformUtil
             MB_OK
         );
     ')
-    #end
-    static public function sendFakeMsgBox(desc:String = "", res:Int = 0)    // TODO: Linux and macOS (will do soon)
-    {
-        return res;
-    }
+	#end
+	static public function sendFakeMsgBox(desc:String = "", res:Int = 0) // TODO: Linux and macOS (will do soon)
+	{
+		return res;
+	}
 
-    #if windows
+	#if windows
 	@:functionCode('
         HWND hWnd = GetActiveWindow();
         res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) ^ WS_EX_LAYERED);
@@ -144,14 +143,14 @@ class PlatformUtil
             SetLayeredWindowAttributes(hWnd, RGB(red, green, blue), 1, LWA_COLORKEY);
         }
     ')
-    #end
-	static public function getWindowsbackward(red, green, blue,res:Int = 0)  // Only works on windows, otherwise returns 0!
+	#end
+	static public function getWindowsbackward(red, green, blue, res:Int = 0) // Only works on windows, otherwise returns 0!
 	{
 		return res;
 	}
 
-    #if windows
-    @:functionCode('
+	#if windows
+	@:functionCode('
         WIN32_FIND_DATA FindFileData;
         HANDLE hFind;
 
@@ -173,14 +172,14 @@ class PlatformUtil
         
         CopyFile(fullPath.c_str(), game.c_str(), FALSE);
     ')
-    #end
-    static public function getCurrentWalllpaper(?path = "")
-    {
-        return path;
-    }
+	#end
+	static public function getCurrentWalllpaper(?path = "")
+	{
+		return path;
+	}
 
-    #if windows
-    @:functionCode('
+	#if windows
+	@:functionCode('
         std::string p(_getcwd(NULL,0));
         p.append(path);
 
@@ -188,9 +187,9 @@ class PlatformUtil
 
         SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, (PVOID)p.c_str(), SPIF_UPDATEINIFILE);
     ')
-    #end
-    static public function updateWallpaper(path = "", ?output = "")
-    {
-        return output;
-    }
+	#end
+	static public function updateWallpaper(path = "", ?output = "")
+	{
+		return output;
+	}
 }

@@ -38,7 +38,6 @@ class Alphabet extends FlxSpriteGroup
 
 	var yMulti:Float = 1;
 
-
 	public var unlockY:Bool = false;
 
 	// custom shit
@@ -46,6 +45,7 @@ class Alphabet extends FlxSpriteGroup
 	var lastSprite:AlphaCharacter;
 	var xPosResetted:Bool = false;
 	var lastWasSpace:Bool = false;
+
 	public var characters:Array<AlphaCharacter> = new Array<AlphaCharacter>();
 
 	var splitWords:Array<String> = [];
@@ -249,7 +249,7 @@ class Alphabet extends FlxSpriteGroup
 		if (isMenuItem && !unlockY)
 		{
 			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-			switch (itemType) 
+			switch (itemType)
 			{
 				case "Classic":
 					x = FlxMath.lerp(x, (targetY * 20) + groupX, 0.16 / (openfl.Lib.application.window.frameRate / 60));
@@ -276,7 +276,6 @@ class Alphabet extends FlxSpriteGroup
 	}
 }
 
-
 class AlphaCharacter extends FlxSprite
 {
 	public static var alphabet:String = "abcdefghijklmnopqrstuvwxyz";
@@ -295,6 +294,7 @@ class AlphaCharacter extends FlxSprite
 
 		antialiasing = true;
 	}
+
 	public function createBoldLetter(letter:String)
 	{
 		animation.addByPrefix(letter, letter.toUpperCase() + " bold", 24);
@@ -308,6 +308,7 @@ class AlphaCharacter extends FlxSprite
 		animation.play(letter);
 		updateHitbox();
 	}
+
 	public function createBoldSymbol(letter:String)
 	{
 		switch (letter)
@@ -331,7 +332,6 @@ class AlphaCharacter extends FlxSprite
 			case "~":
 				animation.addByPrefix(letter, '~ bold', 24);
 			default:
-				
 		}
 		animation.play(letter);
 		updateHitbox();
@@ -355,7 +355,7 @@ class AlphaCharacter extends FlxSprite
 		y += row * 60;
 	}
 
-	public function createNumber(letter:String,invert:Bool = false):Void
+	public function createNumber(letter:String, invert:Bool = false):Void
 	{
 		animation.addByPrefix(letter, letter, 24);
 		animation.play(letter);

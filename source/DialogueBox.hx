@@ -38,7 +38,7 @@ class DialogueBox extends FlxSpriteGroup
 	public var finishThing:Void->Void;
 
 	public var noAa:Array<String> = ["dialogue/dave/dave_3d_scared", "dialogue/dave/dave_3d_festival"];
-	
+
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
 
@@ -57,7 +57,7 @@ class DialogueBox extends FlxSpriteGroup
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>, playMusic:Bool = true)
 	{
 		super();
-		
+
 		if (playMusic)
 		{
 			switch (PlayState.SONG.song.toLowerCase())
@@ -67,7 +67,6 @@ class DialogueBox extends FlxSpriteGroup
 			}
 			FlxG.sound.music.fadeIn(1, 0, 0.8);
 		}
-		
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFF8A9AF5);
 		bgFade.scrollFactor.set();
@@ -75,26 +74,26 @@ class DialogueBox extends FlxSpriteGroup
 		add(bgFade);
 
 		FlxTween.tween(bgFade, {alpha: 0.7}, 4.15);
-		
+
 		blackScreen = new FlxSprite(0, 0).makeGraphic(5000, 5000, FlxColor.BLACK);
 		blackScreen.screenCenter();
 		blackScreen.alpha = 0;
 		add(blackScreen);
-		
+
 		box = new FlxSprite(-20, 400);
-		
+
 		box.frames = Paths.getSparrowAtlas('ui/speech_bubble_talking');
 		box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 		box.updateHitbox();
 		box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
 		box.antialiasing = true;
-		
+
 		if (!PlayState.instance.hasDialogue)
 			return;
 
 		this.dialogueList = dialogueList;
-		
+
 		var portraitLeftCharacter:Array<String> = new Array<String>();
 		var portraitRightCharacter:Array<String> = new Array<String>();
 
@@ -104,11 +103,11 @@ class DialogueBox extends FlxSpriteGroup
 		portraitRightCharacter = ['bf', 'normal'];
 
 		/*
-		switch (PlayState.SONG.song.toLowerCase())
-		{
+			switch (PlayState.SONG.song.toLowerCase())
+			{
 
-		}
-		*/
+			}
+		 */
 
 		var leftPortrait:Portrait = getPortrait(portraitLeftCharacter[0], portraitLeftCharacter[1]);
 		var rightPortrait:Portrait = getPortrait(portraitRightCharacter[0], portraitRightCharacter[1]);
@@ -118,7 +117,6 @@ class DialogueBox extends FlxSpriteGroup
 
 		portraitLeft.visible = false;
 		portraitRight.visible = false;
-		
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
@@ -144,7 +142,7 @@ class DialogueBox extends FlxSpriteGroup
 				dropText.color = 0xFFFFFFFF;
 				dropText.antialiasing = true;
 				add(dropText);
-			
+
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = 'VCR OSD Mono';
 				swagDialogue.color = 0xFF000000;
@@ -156,7 +154,7 @@ class DialogueBox extends FlxSpriteGroup
 				dropText.color = 0xFF00137F;
 				dropText.antialiasing = true;
 				add(dropText);
-		
+
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = 'VCR OSD Mono';
 				swagDialogue.color = 0xFF000000;
@@ -181,11 +179,11 @@ class DialogueBox extends FlxSpriteGroup
 		switch (curCharacter)
 		{
 			case 'bf':
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/bfDialogue'), 0.6)];		
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/bfDialogue'), 0.6)];
 			case 'gf':
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/gfDialogue'), 0.6)];	
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/gfDialogue'), 0.6)];
 			default:
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/pixelText'), 0.6)];	
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dialogue/pixelText'), 0.6)];
 		}
 
 		if (box.animation.curAnim != null)
@@ -203,10 +201,10 @@ class DialogueBox extends FlxSpriteGroup
 			dialogueStarted = true;
 		}
 
-		if (FlxG.keys.justPressed.ANY  && dialogueStarted)
+		if (FlxG.keys.justPressed.ANY && dialogueStarted)
 		{
 			remove(dialogue);
-			
+
 			switch (PlayState.SONG.song.toLowerCase())
 			{
 				default:
@@ -218,7 +216,7 @@ class DialogueBox extends FlxSpriteGroup
 				if (!isEnding)
 				{
 					isEnding = true;
-						
+
 					FlxG.sound.music.fadeOut(2.2, 0);
 
 					switch (PlayState.SONG.song.toLowerCase())
@@ -245,7 +243,7 @@ class DialogueBox extends FlxSpriteGroup
 				startDialogue();
 			}
 		}
-		
+
 		super.update(elapsed);
 	}
 
@@ -274,7 +272,7 @@ class DialogueBox extends FlxSpriteGroup
 			else
 			{
 				generatePortrait(portraitRight, portrait);
-				
+
 				portraitLeft.visible = false;
 				if (!portraitRight.visible)
 				{
@@ -283,7 +281,7 @@ class DialogueBox extends FlxSpriteGroup
 			}
 			switch (curCharacter)
 			{
-				case 'bf' | 'gf': //create boyfriend & genderbent boyfriend
+				case 'bf' | 'gf': // create boyfriend & genderbent boyfriend
 					portraitRight.setPosition(570, 220);
 			}
 			box.flipX = portraitLeft.visible;
@@ -301,7 +299,7 @@ class DialogueBox extends FlxSpriteGroup
 			var pushbackAmount = portrait.left ? -200 : 200;
 			portraitSprite.x += pushbackAmount;
 			portraitSprite.alpha = 0;
-			
+
 			FlxTween.cancelTweensOf(portraitSprite);
 			FlxTween.tween(portraitSprite, {x: portraitSprite.x - pushbackAmount, alpha: 1}, 0.2);
 		}
@@ -347,9 +345,10 @@ class DialogueBox extends FlxSpriteGroup
 				dropText.font = Paths.font("barcode.ttf");
 				swagDialogue.font = Paths.font("barcode.ttf");
 			case 'to_black':
-				FlxTween.tween(blackScreen, {alpha:1}, 0.25); 	
+				FlxTween.tween(blackScreen, {alpha: 1}, 0.25);
 		}
 	}
+
 	function generatePortrait(portraitSprite:FlxSprite, portrait:Portrait)
 	{
 		if (portrait.portraitAnim != null)
@@ -365,6 +364,7 @@ class DialogueBox extends FlxSpriteGroup
 		portraitSprite.updateHitbox();
 		portraitSprite.scrollFactor.set();
 	}
+
 	function getPortrait(character:String, expression:String):Portrait
 	{
 		var portrait:Portrait = new Portrait('', null, true);
@@ -411,16 +411,18 @@ class DialogueBox extends FlxSpriteGroup
 
 		curCharacter = splitCharacters[0];
 		curExpression = splitCharacters[1];
-		
+
 		dialogueList[0] = dialogueList[0].substr(splitName[1].length + splitName[0].length + 2).trim();
 	}
 }
+
 class Portrait
 {
 	public var portraitPath:String;
 	public var portraitAnim:Animation;
 	public var left:Bool;
-	public function new (portraitPath:String, portraitAnim:Animation = null, left:Bool)
+
+	public function new(portraitPath:String, portraitAnim:Animation = null, left:Bool)
 	{
 		this.portraitPath = portraitPath;
 		this.portraitAnim = portraitAnim;

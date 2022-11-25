@@ -18,7 +18,9 @@ import flixel.FlxCamera;
 import Shaders.DitherEffect;
 
 @:keep @:bitmap("assets/images/transitions/diagonal_gradient.png")
-private class GraphicDiagonalGradient extends BitmapData {}
+private class GraphicDiagonalGradient extends BitmapData
+{
+}
 
 /**
  *
@@ -42,7 +44,7 @@ class TransitionFade extends TransitionEffect
 		back = makeSprite(data.direction.x, data.direction.y, data.region);
 		back.scrollFactor.set(1, 1);
 		#if SHADERS_ENABLED
-		if(CompatTool.save.data.compatMode != null && CompatTool.save.data.compatMode == false)
+		if (CompatTool.save.data.compatMode != null && CompatTool.save.data.compatMode == false)
 		{
 			dShader = new DitherEffect();
 			back.shader = dShader.shader;

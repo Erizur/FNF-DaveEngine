@@ -65,9 +65,8 @@ class StoryMenuState extends MusicBeatState
 
 		for (i in 0...weekList.length)
 		{
-			weeks.push(
-				new Week(FreeplayState.createSongArrayFromTxt(weekList[i], 'songs'), LanguageManager.getTextString('story_week${i}'), FlxColor.fromString('#F9CF51'), bannerNames[i])
-			);
+			weeks.push(new Week(FreeplayState.createSongArrayFromTxt(weekList[i], 'songs'), LanguageManager.getTextString('story_week${i}'),
+				FlxColor.fromString('#F9CF51'), bannerNames[i]));
 		}
 
 		#if desktop
