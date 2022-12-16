@@ -17,7 +17,7 @@ compat_no==No
 desc_story==Play trough the story of the game!
 desc_freeplay==Play any song as you wish and get new scores!
 desc_credits==Look at the people who have worked or contributed to the engine!
-desc_ost==Listen to the songs of the mod.
+desc_ost==Listen to the songs of the game.
 desc_options==Adjust game settings and keybinds.
 desc_discord==Join the official Vs. Dave and Bambi Discord!
 

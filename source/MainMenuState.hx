@@ -218,8 +218,6 @@ class MainMenuState extends MusicBeatState
 			spr.y = FlxG.height / 2 + 130;
 		});
 
-		// NG.core.calls.event.logEvent('swag').send();
-
 		super.create();
 	}
 
