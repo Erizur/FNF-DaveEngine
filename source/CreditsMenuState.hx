@@ -26,7 +26,6 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.misc.ColorTween;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
-import flixel.addons.display.FlxBackdrop;
 #if desktop
 import Discord.DiscordClient;
 #end

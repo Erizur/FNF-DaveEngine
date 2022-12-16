@@ -9,7 +9,6 @@ import sys.FileSystem;
 import flixel.util.FlxArrayUtil;
 import flixel.addons.plugin.FlxScrollingText;
 import Alphabet;
-import flixel.addons.display.FlxBackdrop;
 // import openfl.display.ShaderParameter;
 import openfl.display.Graphics;
 import flixel.group.FlxSpriteGroup;
@@ -300,7 +299,6 @@ class PlayState extends MusicBeatState
 
 	var bgGirls:BackgroundGirls;
 
-	var charBackdrop:FlxBackdrop;
 	var alphaCharacters:FlxTypedGroup<Alphabet> = new FlxTypedGroup<Alphabet>();
 
 	var timeLeft:Float;
