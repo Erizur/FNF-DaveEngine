@@ -9,12 +9,14 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
 
-typedef SongHeading = {
+typedef SongHeading =
+{
 	var path:String;
 	var antiAliasing:Bool;
 	var ?animation:Animation;
 	var iconOffset:Float;
 }
+
 class CreditsPopUp extends FlxSpriteGroup
 {
 	public var bg:FlxSprite;
@@ -22,6 +24,7 @@ class CreditsPopUp extends FlxSpriteGroup
 
 	public var funnyText:FlxText;
 	public var funnyIcon:FlxSprite;
+
 	var iconOffset:Float;
 	var curHeading:SongHeading;
 
@@ -36,7 +39,8 @@ class CreditsPopUp extends FlxSpriteGroup
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle' | 'spookeez' | 'south' | 'satin-panties' | 'high' |  'milf' | 'cocoa' | 'eggnog' | 'senpai' | 'roses' | 'thorns' | 'ugh' | 'guns' | 'stress' | 'test':
+			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle' | 'spookeez' | 'south' | 'satin-panties' | 'high' | 'milf' | 'cocoa' | 'eggnog' | 'senpai' |
+				'roses' | 'thorns' | 'ugh' | 'guns' | 'stress' | 'test':
 				songCreator = 'KawaiSprite';
 		}
 		switch (PlayState.storyWeek)
@@ -78,6 +82,7 @@ class CreditsPopUp extends FlxSpriteGroup
 		var yValues = CoolUtil.getMinAndMax(bg.height, funnyText.height);
 		funnyText.y = funnyText.y + ((yValues[0] - yValues[1]) / 2);
 	}
+
 	public function switchHeading(newHeading:SongHeading)
 	{
 		if (bg != null)
@@ -102,13 +107,14 @@ class CreditsPopUp extends FlxSpriteGroup
 		bg.antialiasing = newHeading.antiAliasing;
 		curHeading = newHeading;
 		add(bg);
-		
+
 		rescaleBG();
 	}
+
 	public function changeText(newText:String, newIcon:String, rescaleHeading:Bool = true)
 	{
 		createHeadingText(newText);
-		
+
 		if (funnyIcon != null)
 		{
 			remove(funnyIcon);
@@ -122,6 +128,7 @@ class CreditsPopUp extends FlxSpriteGroup
 			rescaleBG();
 		}
 	}
+
 	function createHeadingText(text:String)
 	{
 		if (funnyText != null)
@@ -134,6 +141,7 @@ class CreditsPopUp extends FlxSpriteGroup
 		funnyText.antialiasing = true;
 		add(funnyText);
 	}
+
 	public function rescaleIcon()
 	{
 		var offset = (curHeading == null ? 0 : curHeading.iconOffset);
@@ -145,6 +153,7 @@ class CreditsPopUp extends FlxSpriteGroup
 		var heightValues = CoolUtil.getMinAndMax(funnyIcon.height, funnyText.height);
 		funnyIcon.setPosition(funnyText.textField.textWidth + offset, (heightValues[0] - heightValues[1]) / 2);
 	}
+
 	function rescaleBG()
 	{
 		bg.setGraphicSize(Std.int((funnyText.textField.textWidth + funnyIcon.width + 0.5)), Std.int(funnyText.height + 0.5));

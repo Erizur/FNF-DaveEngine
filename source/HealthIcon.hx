@@ -11,11 +11,14 @@ class HealthIcon extends FlxSprite
 	public var sprTracker:FlxSprite;
 
 	public var noAaChars:Array<String> = [];
+
 	var char:String;
 	var state:String;
+
 	public var isPlayer:Bool;
+
 	var characterList:Array<String> = [];
-	
+
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		characterList = CoolUtil.coolTextFile(Paths.file('data/characterList.txt', TEXT, 'preload'));
@@ -32,24 +35,24 @@ class HealthIcon extends FlxSprite
 		var theChar:String = '';
 
 		for (i in 0...characterList.length)
+		{
+			var currentValue = characterList[i].trim().split(':');
+			if (currentValue[0] != characterToFind)
 			{
-			   var currentValue = characterList[i].trim().split(':');
-			   if (currentValue[0] != characterToFind)
-			   {
-				  continue;
-			   }
-			   else
-			   {
-				  theChar = currentValue[1];
-			   }
+				continue;
 			}
+			else
+			{
+				theChar = currentValue[1];
+			}
+		}
 
 		if (this.char != char)
 		{
 			if (char != "none")
 			{
 				var reqIcon:String = Paths.image('ui/iconGrid/' + theChar, 'preload');
-				if(FileSystem.exists(reqIcon))
+				if (FileSystem.exists(reqIcon))
 				{
 					loadGraphic(reqIcon, true, 150, 150);
 				}
@@ -62,7 +65,6 @@ class HealthIcon extends FlxSprite
 			{
 				loadGraphic(Paths.image('ui/iconGrid/face', 'preload'), true, 150, 150);
 			}
-
 
 			if (char != "none")
 			{
@@ -81,6 +83,7 @@ class HealthIcon extends FlxSprite
 		if (sprTracker != null)
 			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
 	}
+
 	public function changeState(charState:String)
 	{
 		switch (charState)
@@ -92,10 +95,12 @@ class HealthIcon extends FlxSprite
 		}
 		state = charState;
 	}
+
 	public function getState()
 	{
 		return state;
 	}
+
 	public function getChar():String
 	{
 		return char;

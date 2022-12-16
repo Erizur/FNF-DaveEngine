@@ -44,6 +44,7 @@ class Paths
 
 		return getPreloadPath(file);
 	}
+
 	inline static public function getDirectory(directoryName:String, ?library:String)
 	{
 		return getPath('images/$directoryName', IMAGE, library);
@@ -53,7 +54,7 @@ class Paths
 	{
 		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
 	}
- 
+
 	inline static function getLibraryPathForce(file:String, library:String)
 	{
 		return '$library:assets/$library/$file';
@@ -120,7 +121,7 @@ class Paths
 	{
 		return getPath('data/$key', TEXT, library);
 	}
-	
+
 	inline static public function executable(key:String, ?library:String)
 	{
 		return getPath('executables/$key', BINARY, library);
@@ -186,8 +187,7 @@ class Paths
 		WARNING!!
 		DO NOT USE splashImage, splashFile or getSplashSparrowAtlas for searching stuff in paths!!!!!
 		I'm only using these for FlxSplash since the languages haven't loaded yet!
-	*/
-
+	 */
 	inline static public function splashImage(key:String, ?library:String, ?ext:String = 'png')
 	{
 		var defaultReturnPath = getPath('images/$key.$ext', IMAGE, library);
@@ -209,14 +209,17 @@ class Paths
 	{
 		return 'assets/fonts/$key';
 	}
+
 	inline static public function scriptFile(key:String)
 	{
 		return getPath('data/scripts/$key.hx', TEXT, 'preload');
 	}
+
 	static public function langaugeFile():String
 	{
 		return getPath('locale/languages.txt', TEXT, 'preload');
 	}
+
 	static public function offsetFile(character:String):String
 	{
 		return getPath('offsets/' + character + '.txt', TEXT, 'preload');
@@ -236,5 +239,4 @@ class Paths
 	{
 		return getPath('videos/$key.mp4', BINARY, library);
 	}
-
 }

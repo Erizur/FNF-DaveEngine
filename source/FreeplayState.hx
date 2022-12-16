@@ -56,16 +56,12 @@ class FreeplayState extends MusicBeatState
 
 	var loadingPack:Bool = false;
 
-	var songColors:Array<FlxColor> =
-	[
+	var songColors:Array<FlxColor> = [];
 
-	];
-	public static var skipSelect:Array<String> =
-	[
-		''
-	];
+	public static var skipSelect:Array<String> = [''];
 
 	private var camFollow:FlxObject;
+
 	private static var prevCamFollow:FlxObject;
 
 	private var iconArray:Array<HealthIcon> = [];
@@ -88,7 +84,9 @@ class FreeplayState extends MusicBeatState
 	var stringKey:String;
 
 	var bgShader:Shaders.GlitchEffect;
+
 	public static var packTransitionDone:Bool = false;
+
 	var characterSelectText:FlxText;
 	var showCharText:Bool = true;
 
@@ -110,7 +108,7 @@ class FreeplayState extends MusicBeatState
 		{
 			Highscore.load();
 
-			var CurrentSongIcon:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('packs/' + (Catagories[i].toLowerCase()), "preload"));
+			var CurrentSongIcon:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('packs/' + (Catagories[i].toLowerCase()), "preload"));
 			CurrentSongIcon.centerOffsets(false);
 			CurrentSongIcon.x = (1000 * i + 1) + (512 - CurrentSongIcon.width);
 			CurrentSongIcon.y = (FlxG.height / 2) - 256;
@@ -138,7 +136,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		add(camFollow);
-		
+
 		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		FlxG.camera.focusOn(camFollow.getPosition());
 
@@ -150,26 +148,25 @@ class FreeplayState extends MusicBeatState
 		var tempWeek:Array<String> = CoolUtil.coolTextFile(Paths.file('data/weeks/' + name + '.txt', TEXT, 'preload'));
 		var returned:Array<String> = [];
 
-		if(whatTo.toLowerCase() == 'songs')
+		if (whatTo.toLowerCase() == 'songs')
 		{
 			for (i in 0...tempWeek.length)
-				{
-				   var currentValue = tempWeek[i].trim().split(':');
-				   returned.push(currentValue[0]);
-				}
+			{
+				var currentValue = tempWeek[i].trim().split(':');
+				returned.push(currentValue[0]);
+			}
 		}
 
-		if(whatTo.toLowerCase() == 'char')
+		if (whatTo.toLowerCase() == 'char')
 		{
 			for (i in 0...tempWeek.length)
-				{
-					var currentValue = tempWeek[i].trim().split(':');
-					returned.push(currentValue[1]);
-				}
+			{
+				var currentValue = tempWeek[i].trim().split(':');
+				returned.push(currentValue[1]);
+			}
 		}
 
 		return returned;
-
 	}
 
 	public function getColorCode(char:String):String
@@ -184,7 +181,7 @@ class FreeplayState extends MusicBeatState
 			}
 			else
 			{
-				returnedString = currentValue[2]; //this is the color code one
+				returnedString = currentValue[2]; // this is the color code one
 			}
 		}
 		if (returnedString == '')
@@ -202,7 +199,7 @@ class FreeplayState extends MusicBeatState
 		switch (Catagories[CurrentPack].toLowerCase())
 		{
 			case 'base':
-				for(i in 0...weekList.length)
+				for (i in 0...weekList.length)
 				{
 					var mainCharacter = createSongArrayFromTxt(weekList[i], 'char');
 					addWeek(createSongArrayFromTxt(weekList[i], 'songs'), i, createSongArrayFromTxt(weekList[i], 'char'));
@@ -265,28 +262,30 @@ class FreeplayState extends MusicBeatState
 			characterSelectText.y -= characterSelectText.textField.textHeight;
 			add(characterSelectText);
 
-			FlxTween.tween(characterSelectText,{alpha: 1}, 0.5, {ease: FlxEase.expoInOut});
+			FlxTween.tween(characterSelectText, {alpha: 1}, 0.5, {ease: FlxEase.expoInOut});
 		}
-	
+
 		add(diffText);
 		add(scoreText);
 
-		FlxTween.tween(scoreBG,{y: 0},0.5,{ease: FlxEase.expoInOut});
-		FlxTween.tween(scoreText,{y: -5},0.5,{ease: FlxEase.expoInOut});
-		FlxTween.tween(diffText,{y: 30},0.5,{ease: FlxEase.expoInOut});
-		
+		FlxTween.tween(scoreBG, {y: 0}, 0.5, {ease: FlxEase.expoInOut});
+		FlxTween.tween(scoreText, {y: -5}, 0.5, {ease: FlxEase.expoInOut});
+		FlxTween.tween(diffText, {y: 30}, 0.5, {ease: FlxEase.expoInOut});
 
 		for (song in 0...grpSongs.length)
 		{
 			grpSongs.members[song].unlockY = true;
 
 			// item.targetY = bullShit - curSelected;
-			FlxTween.tween(grpSongs.members[song], {y: song, alpha: song == curSelected ? 1 : 0.6}, 0.5, {ease: FlxEase.expoInOut, onComplete: function(twn:FlxTween)
-			{
-				grpSongs.members[song].unlockY = false;
+			FlxTween.tween(grpSongs.members[song], {y: song, alpha: song == curSelected ? 1 : 0.6}, 0.5, {
+				ease: FlxEase.expoInOut,
+				onComplete: function(twn:FlxTween)
+				{
+					grpSongs.members[song].unlockY = false;
 
-				canInteract = true;
-			}});
+					canInteract = true;
+				}
+			});
 		}
 
 		changeSelection();
@@ -302,7 +301,7 @@ class FreeplayState extends MusicBeatState
 		CurrentPack += change;
 		if (CurrentPack == -1)
 			CurrentPack = Catagories.length - 1;
-		
+
 		if (CurrentPack == Catagories.length)
 			CurrentPack = 0;
 
@@ -312,7 +311,7 @@ class FreeplayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		FlxTween.tween(FlxG.camera, {zoom: 1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
 	}
 
 	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
@@ -330,19 +329,19 @@ class FreeplayState extends MusicBeatState
 				num++;
 		}
 	}
-	
+
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
 		// Selector Menu Functions
-		if (!InMainFreeplayState) 
+		if (!InMainFreeplayState)
 		{
 			scoreBG = null;
 			scoreText = null;
 			diffText = null;
 			characterSelectText = null;
-			
+
 			if (controls.LEFT_P && canInteract)
 			{
 				UpdatePackSelection(-1);
@@ -361,14 +360,26 @@ class FreeplayState extends MusicBeatState
 				{
 					loadingPack = true;
 					LoadProperPack();
-					
-					for (item in icons) { FlxTween.tween(item, {alpha: 0, y: item.y - 200}, 0.2, {ease: FlxEase.cubeInOut}); }
-					for (item in titles) { FlxTween.tween(item, {alpha: 0, y: item.y - 200}, 0.2, {ease: FlxEase.cubeInOut}); }
-					
+
+					for (item in icons)
+					{
+						FlxTween.tween(item, {alpha: 0, y: item.y - 200}, 0.2, {ease: FlxEase.cubeInOut});
+					}
+					for (item in titles)
+					{
+						FlxTween.tween(item, {alpha: 0, y: item.y - 200}, 0.2, {ease: FlxEase.cubeInOut});
+					}
+
 					new FlxTimer().start(0.2, function(Dumbshit:FlxTimer)
 					{
-						for (item in icons) { item.visible = false; }
-						for (item in titles) { item.visible = false; }
+						for (item in icons)
+						{
+							item.visible = false;
+						}
+						for (item in titles)
+						{
+							item.visible = false;
+						}
 
 						GoToActualFreeplay();
 						resetPresses();
@@ -391,7 +402,7 @@ class FreeplayState extends MusicBeatState
 			var upP = controls.UP_P;
 			var downP = controls.DOWN_P;
 			var accepted = controls.ACCEPT;
-	
+
 			if (upP && canInteract)
 			{
 				stringKey = 'up';
@@ -403,74 +414,98 @@ class FreeplayState extends MusicBeatState
 				changeSelection(1);
 			}
 			if (controls.BACK && canInteract)
-			{				
+			{
 				loadingPack = true;
 				canInteract = false;
-				
+
 				for (i in grpSongs)
 				{
 					i.unlockY = true;
 
-					FlxTween.tween(i, {y: 5000, alpha: 0}, 0.3, {onComplete: function(twn:FlxTween)
-					{
-						i.unlockY = false;
-
-						for (item in icons) { item.visible = true; FlxTween.tween(item, {alpha: 1, y: item.y + 200}, 0.2, {ease: FlxEase.cubeInOut}); }
-						for (item in titles) { item.visible = true; FlxTween.tween(item, {alpha: 1, y: item.y + 200}, 0.2, {ease: FlxEase.cubeInOut}); }
-
-						if (scoreBG != null)
+					FlxTween.tween(i, {y: 5000, alpha: 0}, 0.3, {
+						onComplete: function(twn:FlxTween)
 						{
-							FlxTween.tween(scoreBG,{y: scoreBG.y - 100},0.5,{ease: FlxEase.expoInOut, onComplete: 
-							function(spr:FlxTween)
-							{
-								scoreBG = null;
-							}});
-						}
+							i.unlockY = false;
 
-						if (scoreText != null)
-						{
-							FlxTween.tween(scoreText,{y: scoreText.y - 100},0.5,{ease: FlxEase.expoInOut, onComplete: 
-							function(spr:FlxTween)
+							for (item in icons)
 							{
-								scoreText = null;
-							}});
-						}
-
-						if (diffText != null)
-						{
-							FlxTween.tween(diffText,{y: diffText.y - 100}, 0.5,{ease: FlxEase.expoInOut, onComplete: 
-							function(spr:FlxTween)
-							{
-								diffText = null;
-							}});
-						}
-						if (showCharText)
-						{
-							if (characterSelectText != null)
-							{
-								FlxTween.tween(characterSelectText,{alpha: 0}, 0.5,{ease: FlxEase.expoInOut, onComplete: 
-								function(spr:FlxTween)
-								{
-									characterSelectText = null;
-								}});
+								item.visible = true;
+								FlxTween.tween(item, {alpha: 1, y: item.y + 200}, 0.2, {ease: FlxEase.cubeInOut});
 							}
+							for (item in titles)
+							{
+								item.visible = true;
+								FlxTween.tween(item, {alpha: 1, y: item.y + 200}, 0.2, {ease: FlxEase.cubeInOut});
+							}
+
+							if (scoreBG != null)
+							{
+								FlxTween.tween(scoreBG, {y: scoreBG.y - 100}, 0.5, {
+									ease: FlxEase.expoInOut,
+									onComplete: function(spr:FlxTween)
+									{
+										scoreBG = null;
+									}
+								});
+							}
+
+							if (scoreText != null)
+							{
+								FlxTween.tween(scoreText, {y: scoreText.y - 100}, 0.5, {
+									ease: FlxEase.expoInOut,
+									onComplete: function(spr:FlxTween)
+									{
+										scoreText = null;
+									}
+								});
+							}
+
+							if (diffText != null)
+							{
+								FlxTween.tween(diffText, {y: diffText.y - 100}, 0.5, {
+									ease: FlxEase.expoInOut,
+									onComplete: function(spr:FlxTween)
+									{
+										diffText = null;
+									}
+								});
+							}
+							if (showCharText)
+							{
+								if (characterSelectText != null)
+								{
+									FlxTween.tween(characterSelectText, {alpha: 0}, 0.5, {
+										ease: FlxEase.expoInOut,
+										onComplete: function(spr:FlxTween)
+										{
+											characterSelectText = null;
+										}
+									});
+								}
+							}
+
+							InMainFreeplayState = false;
+							loadingPack = false;
+
+							for (i in grpSongs)
+							{
+								remove(i);
+							}
+							for (i in iconArray)
+							{
+								remove(i);
+							}
+
+							FlxTween.color(bg, 0.25, bg.color, defColor);
+
+							// MAKE SURE TO RESET EVERYTHIN!
+							songs = [];
+							grpSongs.members = [];
+							iconArray = [];
+							curSelected = 0;
+							canInteract = true;
 						}
-	
-						InMainFreeplayState = false;
-						loadingPack = false;
-
-						for (i in grpSongs) { remove(i); }
-						for (i in iconArray) { remove(i); }
-
-						FlxTween.color(bg, 0.25, bg.color, defColor);
-
-						// MAKE SURE TO RESET EVERYTHIN!
-						songs = [];
-						grpSongs.members = [];
-						iconArray = [];
-						curSelected = 0;
-						canInteract = true;
-					}});
+					});
 				}
 			}
 			if (accepted && canInteract)
@@ -481,11 +516,11 @@ class FreeplayState extends MusicBeatState
 						FlxG.sound.music.fadeOut(1, 0);
 						PlayState.SONG = Song.loadFromJson(songs[curSelected].songName.toLowerCase());
 						PlayState.isStoryMode = false;
-		
+
 						PlayState.characteroverride = "none";
 						PlayState.formoverride = "none";
 						PlayState.curmult = [1, 1, 1, 1];
-			
+
 						PlayState.storyWeek = songs[curSelected].week;
 
 						packTransitionDone = false;
@@ -518,9 +553,9 @@ class FreeplayState extends MusicBeatState
 
 		if (scoreText != null)
 			scoreText.text = LanguageManager.getTextString('freeplay_personalBest') + lerpScore;
-			positionHighscore();
-
+		positionHighscore();
 	}
+
 	function positionHighscore()
 	{
 		scoreText.x = FlxG.width - scoreText.width - 6;
@@ -552,12 +587,12 @@ class FreeplayState extends MusicBeatState
 				requiredKey = inputKeys;
 			}
 		}
-		
+
 		curSelected += change;
 
 		if (curSelected < 0)
 			curSelected = songs.length - 1;
-	
+
 		if (curSelected >= songs.length)
 			curSelected = 0;
 
@@ -597,6 +632,7 @@ class FreeplayState extends MusicBeatState
 		}
 		FlxTween.color(bg, 0.25, bg.color, songColors[songs[curSelected].week]);
 	}
+
 	function getTrueSongTextWidth(song:Alphabet)
 	{
 		var index = grpSongs.members.indexOf(song);
@@ -604,14 +640,15 @@ class FreeplayState extends MusicBeatState
 
 		return song.width + icon.width + 10;
 	}
+
 	function resetPresses()
 	{
 		pressSpeeds = new Array<Float>();
 		pressUnlockNumber = new FlxRandom().int(20, 40);
 	}
+
 	static function getSongWeek(song:String)
 	{
-		
 	}
 }
 

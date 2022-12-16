@@ -25,6 +25,7 @@ import flixel.FlxCamera;
 class Transition extends FlxSubState
 {
 	public var finishCallback(get, set):Void->Void;
+
 	public static var nextCamera:FlxCamera;
 
 	var _effect:TransitionEffect;
@@ -36,7 +37,8 @@ class Transition extends FlxSubState
 		_effect.scrollFactor.set(0, 0);
 		add(_effect);
 
-		if(nextCamera != null) {
+		if (nextCamera != null)
+		{
 			_effect.cameras = [nextCamera];
 		}
 		nextCamera = null;

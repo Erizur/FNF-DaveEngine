@@ -14,6 +14,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
+
 /**
 	*DEBUG MODE
  */
@@ -29,7 +30,7 @@ class CharacterDebug extends MusicBeatState
 
 	public function new(dadChar:String)
 	{
-		this.dadChar = dadChar; 
+		this.dadChar = dadChar;
 		super();
 	}
 
@@ -42,7 +43,7 @@ class CharacterDebug extends MusicBeatState
 		var gridBG:FlxSprite = FlxGridOverlay.create(10, 10);
 		gridBG.scrollFactor.set(0.5, 0.5);
 		add(gridBG);
-		
+
 		if (['gf-pixel', 'gf-3d'].contains(dadChar))
 		{
 			bf = new Character(0, 0, 'gf');
@@ -59,13 +60,13 @@ class CharacterDebug extends MusicBeatState
 			bf.alpha = 0.3;
 			add(bf);
 		}
-		
+
 		dad = new Character(bf.x, bf.y, dadChar);
 		dad.setPosition(FlxG.width / 2, FlxG.height / 2);
 		dad.debugMode = true;
 		dad.flipX = false;
 		add(dad);
-		
+
 		camFollow = new FlxObject(bf.x, bf.y, 2, 2);
 		add(camFollow);
 
@@ -146,6 +147,7 @@ class CharacterDebug extends MusicBeatState
 		}
 		super.update(elapsed);
 	}
+
 	function updateText()
 	{
 		var dadPosition = dad.getPosition();
