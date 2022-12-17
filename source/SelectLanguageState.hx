@@ -10,6 +10,7 @@ import flixel.FlxG;
 import flixel.text.FlxText;
 import flixel.effects.FlxFlicker;
 import flixel.util.FlxSave;
+import flixel.util.FlxAxes;
 
 class SelectLanguageState extends MusicBeatState
 {
@@ -31,7 +32,7 @@ class SelectLanguageState extends MusicBeatState
 
 		langaugeList = LanguageManager.getLanguages();
 
-		bg = new FlxBackdrop(Paths.image('ui/checkeredBG', 'preload'), 1, 1, true, true, 1, 1);
+		bg = new FlxBackdrop(Paths.image('ui/checkeredBG', 'preload'), #if (flixel < "5.0.0") 1, 1, true, true, #else XY, #end 1, 1);
 		bg.antialiasing = true;
 		bg.color = langaugeList[curLanguageSelected].langaugeColor;
 		add(bg);
