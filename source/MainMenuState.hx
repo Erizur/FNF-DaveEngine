@@ -23,7 +23,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
-import flixel.addons.display.FlxBackdrop;
 import flixel.input.keyboard.FlxKey;
 #if desktop
 import Discord.DiscordClient;
