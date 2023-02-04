@@ -54,11 +54,6 @@ class Main extends Sprite
 		setupGame();
 	}
 
-	public static function toggleFuckedFPS(toggle:Bool)
-	{
-		fps.fuckFps = toggle;
-	}
-
 	private function setupGame():Void
 	{
 		var stageWidth:Int = Lib.current.stage.stageWidth;

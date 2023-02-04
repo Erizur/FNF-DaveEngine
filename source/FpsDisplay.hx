@@ -33,8 +33,6 @@ class FpsDisplay extends TextField
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 
-	public var fuckFps:Bool = false;
-
 	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
 	{
 		super();
@@ -87,10 +85,7 @@ class FpsDisplay extends TextField
 
 		if (currentCount != cacheCount /*&& visible*/)
 		{
-			if (fuckFps)
-				text = "FPS: -" + (currentFPS * 10000) + " RVhQVU5HRUQgV0lMTCBUQUtFIE9WRVI= " + (currentFPS * 10000);
-			else
-				text = "FPS: " + currentFPS;
+			text = "FPS: " + currentFPS;
 			#if openfl
 			var memoryMegas:Float = 0;
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
