@@ -66,8 +66,6 @@ class FreeplayState extends MusicBeatState
 
 	var canInteract:Bool = true;
 
-	var bgShader:Shaders.GlitchEffect;
-
 	var characterSelectText:FlxText;
 	var showCharText:Bool = true;
 
