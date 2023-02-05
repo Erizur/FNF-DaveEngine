@@ -72,7 +72,7 @@ class ChangeKeybinds extends MusicBeatState
 	public override function create()
 	{
 		bg.color = 0xFFea71fd;
-		bg.loadGraphic(MainMenuState.randomizeBG());
+		bg.loadGraphic(Paths.image('backgrounds/menu'));
 		bg.scrollFactor.set();
 		add(bg);
 

@@ -34,10 +34,6 @@ class Note extends FlxSprite
 	public var isSustainNote:Bool = false;
 
 	public static var swagWidth:Float = 160 * 0.7;
-	public static var PURP_NOTE:Int = 0;
-	public static var GREEN_NOTE:Int = 2;
-	public static var BLUE_NOTE:Int = 1;
-	public static var RED_NOTE:Int = 3;
 
 	private var notetolookfor = 0;
 
@@ -79,9 +75,8 @@ class Note extends FlxSprite
 			this.strumTime = 0;
 
 		if (isInState('PlayState'))
-		{
 			this.strumTime += FlxG.save.data.offset;
-		}
+
 		var notePathLol:String = 'notes/NOTE_assets';
 		var noteSize:Float = 0.7; // Here incase we need to do something like pixel arrows
 
@@ -112,7 +107,6 @@ class Note extends FlxSprite
 
 				setGraphicSize(Std.int(width * noteSize));
 				updateHitbox();
-				// antialiasing = noteStyle != '3D';
 				antialiasing = true;
 			case 'alt-animation':
 				frames = Paths.getSparrowAtlas(notePathLol, 'shared');
@@ -138,10 +132,6 @@ class Note extends FlxSprite
 				antialiasing = true;
 		}
 		var str:String = PlayState.SONG.song.toLowerCase();
-		if (isInState('PlayState'))
-		{
-			var state:PlayState = cast(FlxG.state, PlayState);
-		}
 		switch (str)
 		{
 			default:
@@ -163,10 +153,7 @@ class Note extends FlxSprite
 
 			animation.play('${notes[noteData]}holdend');
 
-			if (PlayState.scrollType == 'downscroll')
-			{
-				flipY = true;
-			}
+			if (PlayState.scrollType == 'downscroll') flipY = true;
 
 			updateHitbox();
 
@@ -191,21 +178,6 @@ class Note extends FlxSprite
 				}
 			}
 		}
-
-		if (noteData == 2 && noteStyle == 'shape')
-		{
-			noteOffset += 10;
-		}
-		else if (noteData == 1 && noteStyle == 'shape')
-		{
-			noteOffset += 4;
-		}
-
-		if (noteStyle == 'shape' && isSustainNote)
-		{
-			alphaMult = 1;
-			noteOffset += (width / 2);
-		}
 	}
 
 	override function update(elapsed:Float)
@@ -213,16 +185,11 @@ class Note extends FlxSprite
 		super.update(elapsed);
 
 		if (MyStrum != null)
-		{
 			GoToStrum(MyStrum);
-		}
 		else
-		{
 			if (isInState('PlayState'))
-			{
 				SearchForStrum(mustPress);
-			}
-		}
+
 		if (mustPress && isInState('PlayState'))
 		{
 			// The * 0.5 is so that it's easier to hit them too late, instead of too early
@@ -254,12 +221,10 @@ class Note extends FlxSprite
 		x = strum.x + noteOffset;
 		alpha = strum.alpha * alphaMult;
 		if (!strum.playerStrum)
-		{
 			return;
-		}
 	}
 
-	public function isInState(state:String)
+	inline public function isInState(state:String)
 	{
 		return Type.getClassName(Type.getClass(FlxG.state)).contains(state);
 	}

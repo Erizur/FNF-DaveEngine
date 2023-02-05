@@ -51,18 +51,12 @@ class PauseSubState extends MusicBeatSubstate
 			if (item.optionName == 'Change Character')
 			{
 				if (PlayState.isStoryMode == true)
-				{
 					menuItems.remove(item);
-				}
 				else
-				{
 					continue;
-				}
 			}
 			else
-			{
 				continue;
-			}
 		}
 
 		switch (PlayState.SONG.song.toLowerCase())
@@ -115,10 +109,6 @@ class PauseSubState extends MusicBeatSubstate
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
-		if (FreeplayState.skipSelect.contains(PlayState.SONG.song.toLowerCase()))
-		{
-			menuItems.remove(PauseOption.getOption(menuItems, 'Change Character'));
-		}
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
@@ -138,7 +128,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-		var scrollSpeed:Float = 50;
+		final scrollSpeed:Float = 50;
 		bg.x -= scrollSpeed * elapsed;
 		bg.y -= scrollSpeed * elapsed;
 
@@ -187,7 +177,6 @@ class PauseSubState extends MusicBeatSubstate
 				FlxG.sound.music.volume = 0;
 				PlayState.instance.vocals.volume = 0;
 
-				// PlayState.instance.shakeCam = false;
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;
 				FlxG.resetState();
@@ -198,12 +187,9 @@ class PauseSubState extends MusicBeatSubstate
 
 				Application.current.window.title = Main.applicationName;
 
-				// PlayState.instance.shakeCam = false;
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new CharacterSelectState());
-			case "No Miss Mode":
-				PlayState.instance.noMiss = !PlayState.instance.noMiss;
 			case "Exit to menu":
 				funnyTexts.clear();
 				PlayState.characteroverride = 'none';
@@ -211,7 +197,6 @@ class PauseSubState extends MusicBeatSubstate
 
 				Application.current.window.title = Main.applicationName;
 
-				// PlayState.instance.shakeCam = false;
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new MainMenuState());
@@ -249,13 +234,8 @@ class PauseSubState extends MusicBeatSubstate
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
 
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
-			}
+			if (item.targetY == 0) item.alpha = 1;
 		}
 	}
 }

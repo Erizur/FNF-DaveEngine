@@ -91,7 +91,7 @@ class MainMenuState extends MusicBeatState
 
 		// daRealEngineVer = engineVers[FlxG.random.int(0, 2)];
 
-		bg = new FlxSprite(-80).loadGraphic(randomizeBG());
+		bg = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/menu'));
 		bg.scrollFactor.set();
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
@@ -403,21 +403,13 @@ class MainMenuState extends MusicBeatState
 			if (spr.ID == curSelected && finishedFunnyMove)
 			{
 				spr.animation.play('selected');
-				// camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
 			}
-			// spr.screenCenter(Y);
 			spr.updateHitbox();
 		});
 
 		bigIcons.animation.play(optionShit[curSelected]);
 		curOptText.text = CoolUtil.formatString(LanguageManager.getTextString(languagesOptions[curSelected]), ' ');
 		curOptDesc.text = LanguageManager.getTextString(languagesDescriptions[curSelected]);
-	}
-
-	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
-	{
-		var chance:Int = FlxG.random.int(0, bgPaths.length - 1);
-		return Paths.image('backgrounds/${bgPaths[chance]}');
 	}
 
 	function resetData()

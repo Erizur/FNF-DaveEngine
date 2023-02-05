@@ -103,7 +103,6 @@ class ChartingState extends MusicBeatState
 
 	var guitarPart:Bool = false;
 
-	// var noteTypes = ['normal', 'phone', 'phone-alt', 'shape'];
 	var noteTypes = ['normal', 'alt-animation'];
 	var curNoteType:Int;
 
@@ -111,7 +110,7 @@ class ChartingState extends MusicBeatState
 	{
 		curSection = lastSection;
 
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(MainMenuState.randomizeBG());
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/menu'));
 		bg.scrollFactor.set();
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
@@ -134,7 +133,6 @@ class ChartingState extends MusicBeatState
 				stage: 'stage',
 				speed: 1,
 				gf: "gf",
-				validScore: false
 			};
 		}
 

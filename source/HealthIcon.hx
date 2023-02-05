@@ -96,12 +96,12 @@ class HealthIcon extends FlxSprite
 		state = charState;
 	}
 
-	public function getState()
+	inline public function getState()
 	{
 		return state;
 	}
 
-	public function getChar():String
+	inline public function getChar():String
 	{
 		return char;
 	}

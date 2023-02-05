@@ -1,3 +1,5 @@
+package;
+
 using StringTools;
 
 class Animation

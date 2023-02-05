@@ -20,7 +20,6 @@ class Character extends FlxSprite
 	public var curCharacter:String = 'bf';
 
 	public var holdTimer:Float = 0;
-	public var furiosityScale:Float = 1.02;
 	public var canDance:Bool = true;
 
 	public var nativelyPlayable:Bool = false;
@@ -569,10 +568,7 @@ class Character extends FlxSprite
 		}
 		dance();
 
-		if (isPlayer)
-		{
-			flipX = !flipX;
-		}
+		if (isPlayer) flipX = !flipX;
 	}
 
 	function loadOffsetFile(character:String)
@@ -589,12 +585,7 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		if (animation == null)
-		{
-			super.update(elapsed);
-			return;
-		}
-		else if (animation.curAnim == null)
+		if (animation == null || animation.curAnim == null)
 		{
 			super.update(elapsed);
 			return;
@@ -697,44 +688,29 @@ class Character extends FlxSprite
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
 		if (animation.getByName(AnimName) == null)
-		{
 			return; // why wasn't this a thing in the first place
-		}
 		if ((AnimName.toLowerCase() == 'idle' || AnimName.toLowerCase().startsWith('dance')) && !canDance)
-		{
 			return;
-		}
-
 		if (AnimName.toLowerCase().startsWith('sing') && !canSing)
-		{
 			return;
-		}
 
 		animation.play(AnimName, Force, Reversed, Frame);
 
 		var daOffset = animOffsets.get(AnimName);
 		if (animOffsets.exists(AnimName))
-		{
 			offset.set(daOffset[0] * offsetScale, daOffset[1] * offsetScale);
-		}
 		else
 			offset.set(0, 0);
 
 		if (curCharacter == 'gf')
 		{
 			if (AnimName == 'singLEFT')
-			{
 				danced = true;
-			}
 			else if (AnimName == 'singRIGHT')
-			{
 				danced = false;
-			}
 
 			if (AnimName == 'singUP' || AnimName == 'singDOWN')
-			{
 				danced = !danced;
-			}
 		}
 	}
 
@@ -750,21 +726,13 @@ class Character extends FlxSprite
 		{
 			var currentValue = charList[i].trim().split(':');
 			if (currentValue[0] != char)
-			{
 				continue;
-			}
 			else
-			{
 				returnedString = currentValue[2]; // this is the color code one
-			}
 		}
 		if (returnedString == '')
-		{
 			return char;
-		}
 		else
-		{
 			return returnedString;
-		}
 	}
 }
