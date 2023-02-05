@@ -510,6 +510,7 @@ class PlayState extends MusicBeatState
 		else{
 			scriptThing = null;
 			canRunScript = false;
+			return;
 		}
 
 		scriptThing.setVariable("create", function()
