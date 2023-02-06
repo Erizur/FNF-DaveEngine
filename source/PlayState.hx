@@ -510,26 +510,27 @@ class PlayState extends MusicBeatState
 		else{
 			scriptThing = null;
 			canRunScript = false;
-			return;
 		}
 
-		scriptThing.setVariable("create", function()
-		{
-		});
-		scriptThing.setVariable("update", function(elapsed:Float)
-		{
-		});
-		scriptThing.setVariable("beatHit", function(curBeat:Int)
-		{
-		});
-		scriptThing.setVariable("stepHit", function(curStep:Int)
-		{
-		});
-		scriptThing.setVariable("PlayState", this);
-
-		scriptThing.loadFile();
-
-		scriptThing.executeFunc("create");
+		if (scriptThing != null && canRunScript){
+			scriptThing.setVariable("create", function()
+			{
+			});
+			scriptThing.setVariable("update", function(elapsed:Float)
+			{
+			});
+			scriptThing.setVariable("beatHit", function(curBeat:Int)
+			{
+			});
+			scriptThing.setVariable("stepHit", function(curStep:Int)
+			{
+			});
+			scriptThing.setVariable("PlayState", this);
+	
+			scriptThing.loadFile();
+	
+			scriptThing.executeFunc("create");
+		}
 		#end
 
 		startingSong = true;
@@ -1346,7 +1347,8 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		#if hscript
-		scriptThing.executeFunc("update", [elapsed]);
+		if (scriptThing != null && canRunScript)
+			scriptThing.executeFunc("update", [elapsed]);
 		#end
 
 		if (songName != null)
@@ -2435,7 +2437,8 @@ class PlayState extends MusicBeatState
 		super.stepHit();
 
 		#if hscript
-		scriptThing.executeFunc("stepHit", [curStep]);
+		if (scriptThing != null && canRunScript)
+			scriptThing.executeFunc("stepHit", [curStep]);
 		#end
 
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
@@ -2464,7 +2467,8 @@ class PlayState extends MusicBeatState
 		super.beatHit();
 
 		#if hscript
-		scriptThing.executeFunc("beatHit", [curBeat]);
+		if (scriptThing != null && canRunScript)
+			scriptThing.executeFunc("beatHit", [curBeat]);
 		#end
 
 		var currentSection = SONG.notes[Std.int(curStep / 16)];
@@ -2474,9 +2478,7 @@ class PlayState extends MusicBeatState
 			ZoomCam(!currentSection.mustHitSection);
 		}
 		if (generatedMusic)
-		{
 			notes.sort(FlxSort.byY, FlxSort.DESCENDING);
-		}
 
 		if (currentSection != null)
 		{
@@ -2546,7 +2548,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var funny:Float = Math.max(Math.min(healthBar.value, 1.9),
-			0.1); // Math.clamp(healthBar.value,0.02,1.98);//Math.min(Math.min(healthBar.value,1.98),0.02);
+			0.1);
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (funny + 0.1))), Std.int(iconP1.height - (25 * funny)));
 		iconP2.setGraphicSize(Std.int(iconP2.width + (50 * ((2 - funny) + 0.1))), Std.int(iconP2.height - (25 * ((2 - funny) + 0.1))));
@@ -2609,6 +2611,9 @@ class PlayState extends MusicBeatState
 
 	override function destroy(){
 		instance = null;
+		if (scriptThing != null)
+			scriptThing = null;
+		canRunScript = false;
 
 		super.destroy();
 	}
@@ -2745,6 +2750,11 @@ class PlayState extends MusicBeatState
 		lightningOffset = FlxG.random.int(8, 24);
 
 		boyfriend.playAnim('scared', true);
+		boyfriend.animation.finishCallback = function(s)
+			boyfriend.dance();
+
 		gf.playAnim('scared', true);
+		gf.animation.finishCallback = function(s)
+			gf.dance();
 	}
 }
