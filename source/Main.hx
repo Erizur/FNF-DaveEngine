@@ -11,7 +11,7 @@ import openfl.events.Event;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 
-#if (hxCodec > 2.5.1)
+#if (hxCodec > "2.5.1")
 #error "hxCodec is the git version, please use the haxelib version instead"
 #end
 
