@@ -11,8 +11,8 @@ import openfl.events.Event;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 
-#if (hxCodec > "2.5.1")
-#error "hxCodec is the git version, please use the haxelib version instead"
+#if (hxCodec < "2.5.1")
+#error "hxCodec is the haxelib version, please use the git version instead"
 #end
 
 class Main extends Sprite
