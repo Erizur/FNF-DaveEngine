@@ -72,7 +72,7 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
-		FlxG.signals.preSwitchState.add(function(){
+		FlxG.signals.preStateSwitch.add(function(){
 			FlxG.bitmap.dumpCache();
 			FlxG.sound.destroy(false);
 
