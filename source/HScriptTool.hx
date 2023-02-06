@@ -11,8 +11,6 @@ import haxe.Constraints.Function;
 import haxe.DynamicAccess;
 import lime.app.Application;
 
-using StringTools;
-
 /*
 	HEAVILY BASED ON YOSHICRAFTER ENGINE'S SCRIPT CODE
 	HAVE A LOOK: https://raw.githubusercontent.com/YoshiCrafter29/YoshiCrafterEngine
@@ -28,6 +26,9 @@ class HScriptTool implements IFlxDestroyable
 
 	public static function loadScript(path:String):HScriptTool
 	{
+		#if hscript
+		if (!PlayState.canRunScript) return null;
+
 		var script = create(path);
 		if (script != null)
 		{
@@ -35,13 +36,15 @@ class HScriptTool implements IFlxDestroyable
 			return script;
 		}
 		else
-		{
 			return null;
-		}
+		#else
+		return null;
+		#end
 	}
 
 	public static function create(path:String):HScriptTool
 	{
+		#if hscript
 		var p = path.toLowerCase();
 		var ext = Path.extension(p);
 
@@ -57,12 +60,19 @@ class HScriptTool implements IFlxDestroyable
 		script.filePath = p;
 		script.fileName = quickSplit[quickSplit.length];
 		return script;
+		#else
+		return null;
+		#end
 	}
 
 	public function executeFunc(funcName:String, ?args:Array<Any>):Dynamic
 	{
+		#if hscript
 		var ret = _executeFunc(funcName, args);
 		return ret;
+		#else
+		return null;
+		#end
 	}
 
 	public function _executeFunc(funcName:String, ?args:Array<Any>):Dynamic
@@ -109,6 +119,7 @@ class Script extends HScriptTool
 
 	public override function executeFunc(funcName:String, ?args:Array<Any>):Dynamic
 	{
+		#if hscript
 		super.executeFunc(funcName, args);
 		if (hscript == null)
 			return null;
@@ -124,10 +135,14 @@ class Script extends HScriptTool
 			}
 		}
 		return null;
+		#else
+		return null;
+		#end
 	}
 
 	public override function loadFile()
 	{
+		#if hscript
 		super.loadFile();
 		if (filePath == null || filePath.trim() == "")
 			return;
@@ -141,31 +156,37 @@ class Script extends HScriptTool
 		{
 			this.trace('${e.message}', true);
 		}
-	}
-
-	public function bruh()
-	{
-		super.loadFile();
+		#else
+		return;
+		#end
 	}
 
 	public override function trace(text:String, error:Bool = false)
 	{
+		#if hscript
 		var posInfo = hscript.posInfos();
 
 		var lineNumber = Std.string(posInfo.lineNumber);
 		var methodName = posInfo.methodName;
 		var className = posInfo.className;
+		#end
 	}
 
 	public override function setVariable(name:String, val:Dynamic)
 	{
+		if (!PlayState.canRunScript || hscript == null) return;
+		#if hscript
 		hscript.variables.set(name, val);
 		@:privateAccess
 		hscript.locals.set(name, {r: val, depth: 0});
+		#end
 	}
 
 	public override function getVariable(name:String):Dynamic
 	{
+		if (!PlayState.canRunScript || hscript == null) return null;
+
+		#if hscript
 		if (@:privateAccess hscript.locals.exists(name) && @:privateAccess hscript.locals[name] != null)
 		{
 			@:privateAccess
@@ -175,5 +196,8 @@ class Script extends HScriptTool
 			return hscript.variables.get(name);
 
 		return null;
+		#else
+		return null;
+		#end
 	}
 }

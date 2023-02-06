@@ -1,6 +1,5 @@
 package;
 
-import sys.FileSystem;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.FlxObject;
@@ -69,8 +68,6 @@ class CreditsPopUp extends FlxSpriteGroup
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'supernovae' | 'glitch':
-				funnyIcon = new FlxSprite(0, 0, Paths.image('songCreators/MoldyGH'));
 			default:
 				funnyIcon = new FlxSprite(0, 0, Paths.image('songCreators/' + songCreator));
 		}

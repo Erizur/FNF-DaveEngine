@@ -96,7 +96,7 @@ class CoolUtil
 		return minAndMaxs;
 	}
 
-	public static function cacheImage(image:String)
+	inline public static function cacheImage(image:String)
 	{
 		Assets.cache.image.set(image, lime.graphics.Image.fromFile(image));
 	}
@@ -119,4 +119,16 @@ class CoolUtil
 		}
 		return true;
 	}
+
+	/**
+		Lerps camera, but accountsfor framerate shit?
+		Right now it's simply for use to change the followLerp variable of a camera during update
+		TODO LATER MAYBE:
+			Actually make and modify the scroll and lerp shit in it's own function
+			instead of solely relying on changing the lerp on the fly
+	 */
+	public static function camLerpShit(lerp:Float):Float
+	{
+		return lerp * (FlxG.elapsed / (1 / 60));
+	}	
 }

@@ -36,7 +36,7 @@ class ChangeLanguageState extends MusicBeatState
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.antialiasing = true;
-		menuBG.loadGraphic(MainMenuState.randomizeBG());
+		menuBG.loadGraphic(Paths.image('backgrounds/menu'));
 		add(menuBG);
 
 		var helper:FlxText = new FlxText(0, 150, FlxG.width, "Select a language", 40);

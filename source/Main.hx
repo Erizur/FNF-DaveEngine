@@ -11,6 +11,10 @@ import openfl.events.Event;
 import flixel.system.FlxSound;
 import flixel.FlxG;
 
+#if (hxCodec < "2.5.1")
+#error "hxCodec is the haxelib version, please use the git version instead"
+#end
+
 class Main extends Sprite
 {
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
@@ -25,7 +29,7 @@ class Main extends Sprite
 
 	public static var fps:FpsDisplay;
 
-	public static var applicationName:String = "Friday Night Funkin' | Dave Engine";
+	public static final applicationName:String = "Friday Night Funkin' | Dave Engine";
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -56,26 +60,42 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		var stageWidth:Int = Lib.current.stage.stageWidth;
-		var stageHeight:Int = Lib.current.stage.stageHeight;
+		final stageWidth:Int = Lib.current.stage.stageWidth;
+		final stageHeight:Int = Lib.current.stage.stageHeight;
 
 		if (zoom == -1)
 		{
-			var ratioX:Float = stageWidth / gameWidth;
-			var ratioY:Float = stageHeight / gameHeight;
+			final ratioX:Float = stageWidth / gameWidth;
+			final ratioY:Float = stageHeight / gameHeight;
 			zoom = Math.min(ratioX, ratioY);
 			gameWidth = Math.ceil(stageWidth / zoom);
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
-		initialState = StartStateSelector;
+		FlxG.signals.preStateSwitch.add(function(){
+			FlxG.bitmap.dumpCache();
+			FlxG.sound.destroy(false);
+
+			#if cpp
+			cpp.vm.Gc.enable(true);
+			#else
+			openfl.system.System.gc();
+			#end
+		});
+
+		FlxG.signals.postStateSwitch.add(function(){
+			#if cpp
+			cpp.vm.Gc.enable(true);
+			#else
+			openfl.system.System.gc();
+			#end
+		});
+
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
 
-		#if !mobile
 		fps = new FpsDisplay(10, 3, 0xFFFFFF);
 		var fpsFormat = new TextFormat("_sans", 12, 0xFFFFFF, false);
 		fps.defaultTextFormat = fpsFormat;
 		addChild(fps);
-		#end
 	}
 }

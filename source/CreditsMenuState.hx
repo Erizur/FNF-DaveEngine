@@ -131,7 +131,7 @@ class CreditsMenuState extends MusicBeatState
 
 		if (!DoFunnyScroll)
 		{
-			bg.loadGraphic(MainMenuState.randomizeBG());
+			bg.loadGraphic(Paths.image('backgrounds/menu'));
 			bg.color = FlxColor.LIME;
 			bg.scrollFactor.set();
 			add(bg);
@@ -144,7 +144,7 @@ class CreditsMenuState extends MusicBeatState
 		{
 			FlxG.sound.playMusic(Paths.music('creditsTheme'));
 			// PLACEHOLDER.
-			bg.loadGraphic(MainMenuState.randomizeBG());
+			bg.loadGraphic(Paths.image('backgrounds/menu'));
 			bg.color = FlxColor.GRAY;
 			bg.scrollFactor.set();
 			add(bg);

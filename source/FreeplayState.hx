@@ -15,20 +15,15 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
-import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
 import flixel.FlxObject;
-import flixel.addons.util.FlxAsyncLoop;
 #if sys import sys.FileSystem; #end
 #if desktop import Discord.DiscordClient; #end
-
-using StringTools;
 
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
 
-	var selector:FlxText;
 	var curSelected:Int = 0;
 
 	var bg:FlxSprite = new FlxSprite();
@@ -58,8 +53,6 @@ class FreeplayState extends MusicBeatState
 
 	var songColors:Array<FlxColor> = [];
 
-	public static var skipSelect:Array<String> = [''];
-
 	private var camFollow:FlxObject;
 
 	private static var prevCamFollow:FlxObject;
@@ -69,23 +62,7 @@ class FreeplayState extends MusicBeatState
 	var titles:Array<Alphabet> = [];
 	var icons:Array<FlxSprite> = [];
 
-	var doneCoolTrans:Bool = false;
-
-	var defColor:FlxColor;
 	var canInteract:Bool = true;
-
-	var timeSincePress:Float;
-	var lastTimeSincePress:Float;
-
-	var pressSpeed:Float;
-	var pressSpeeds:Array<Float> = new Array<Float>();
-	var pressUnlockNumber:Int;
-	var requiredKey:Array<Int>;
-	var stringKey:String;
-
-	var bgShader:Shaders.GlitchEffect;
-
-	public static var packTransitionDone:Bool = false;
 
 	var characterSelectText:FlxText;
 	var showCharText:Bool = true;
@@ -98,9 +75,8 @@ class FreeplayState extends MusicBeatState
 
 		showCharText = FlxG.save.data.wasInCharSelect;
 
-		bg.loadGraphic(MainMenuState.randomizeBG());
+		bg.loadGraphic(Paths.image('backgrounds/menu'));
 		bg.color = 0xFF4965FF;
-		defColor = bg.color;
 		bg.scrollFactor.set();
 		add(bg);
 
@@ -176,22 +152,14 @@ class FreeplayState extends MusicBeatState
 		{
 			var currentValue = charList[i].trim().split(':');
 			if (currentValue[0] != char)
-			{
 				continue;
-			}
 			else
-			{
 				returnedString = currentValue[2]; // this is the color code one
-			}
 		}
 		if (returnedString == '')
-		{
 			return char;
-		}
 		else
-		{
 			return returnedString;
-		}
 	}
 
 	public function LoadProperPack()
@@ -276,7 +244,6 @@ class FreeplayState extends MusicBeatState
 		{
 			grpSongs.members[song].unlockY = true;
 
-			// item.targetY = bullShit - curSelected;
 			FlxTween.tween(grpSongs.members[song], {y: song, alpha: song == curSelected ? 1 : 0.6}, 0.5, {
 				ease: FlxEase.expoInOut,
 				onComplete: function(twn:FlxTween)
@@ -291,7 +258,7 @@ class FreeplayState extends MusicBeatState
 		changeSelection();
 	}
 
-	public function addSong(songName:String, weekNum:Int, songCharacter:String)
+	inline public function addSong(songName:String, weekNum:Int, songCharacter:String)
 	{
 		songs.push(new SongMetadata(songName, weekNum, songCharacter));
 	}
@@ -382,7 +349,6 @@ class FreeplayState extends MusicBeatState
 						}
 
 						GoToActualFreeplay();
-						resetPresses();
 						InMainFreeplayState = true;
 						loadingPack = false;
 					});
@@ -395,7 +361,6 @@ class FreeplayState extends MusicBeatState
 
 			return;
 		}
-
 		// Freeplay Functions
 		else
 		{
@@ -404,15 +369,10 @@ class FreeplayState extends MusicBeatState
 			var accepted = controls.ACCEPT;
 
 			if (upP && canInteract)
-			{
-				stringKey = 'up';
 				changeSelection(-1);
-			}
 			if (downP && canInteract)
-			{
-				stringKey = 'down';
 				changeSelection(1);
-			}
+
 			if (controls.BACK && canInteract)
 			{
 				loadingPack = true;
@@ -488,15 +448,9 @@ class FreeplayState extends MusicBeatState
 							loadingPack = false;
 
 							for (i in grpSongs)
-							{
 								remove(i);
-							}
 							for (i in iconArray)
-							{
 								remove(i);
-							}
-
-							FlxTween.color(bg, 0.25, bg.color, defColor);
 
 							// MAKE SURE TO RESET EVERYTHIN!
 							songs = [];
@@ -523,8 +477,7 @@ class FreeplayState extends MusicBeatState
 
 						PlayState.storyWeek = songs[curSelected].week;
 
-						packTransitionDone = false;
-						if ((FlxG.keys.pressed.CONTROL || skipSelect.contains(PlayState.SONG.song.toLowerCase())))
+						if ((FlxG.keys.pressed.CONTROL))
 						{
 							LoadingState.loadAndSwitchState(new PlayState());
 						}
@@ -546,6 +499,8 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 
+		bg.color = FlxColor.interpolate(bg.color, songColors[songs[curSelected].week], CoolUtil.camLerpShit(0.045));
+
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
 
 		if (Math.abs(lerpScore - intendedScore) <= 10)
@@ -559,34 +514,15 @@ class FreeplayState extends MusicBeatState
 	function positionHighscore()
 	{
 		scoreText.x = FlxG.width - scoreText.width - 6;
-
 		scoreBG.scale.x = FlxG.width - scoreText.x + 6;
 		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
 		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
 		diffText.x -= diffText.width / 2;
 	}
 
-	function updateDifficultyText()
-	{
-		switch (songs[curSelected].week)
-		{
-			default:
-				diffText.text = curChar.toUpperCase();
-		}
-	}
-
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
-		if (change != 0)
-		{
-			var inputKeys = controls.getInputsFor(Controls.stringControlToControl(stringKey), Device.Keys);
-			if (pressSpeeds.length == 1)
-			{
-				requiredKey = inputKeys;
-			}
-		}
 
 		curSelected += change;
 
@@ -599,11 +535,9 @@ class FreeplayState extends MusicBeatState
 		curChar = Highscore.getChar(songs[curSelected].songName);
 
 		if (diffText != null)
-			updateDifficultyText();
+			diffText.text = curChar.toUpperCase();
 
-		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName);
-		#end
 
 		#if PRELOAD_ALL
 		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
@@ -612,9 +546,7 @@ class FreeplayState extends MusicBeatState
 		var bullShit:Int = 0;
 
 		for (i in 0...iconArray.length)
-		{
 			iconArray[i].alpha = 0.6;
-		}
 
 		iconArray[curSelected].alpha = 1;
 
@@ -625,30 +557,8 @@ class FreeplayState extends MusicBeatState
 
 			item.alpha = 0.6;
 
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-			}
+			if (item.targetY == 0) item.alpha = 1;
 		}
-		FlxTween.color(bg, 0.25, bg.color, songColors[songs[curSelected].week]);
-	}
-
-	function getTrueSongTextWidth(song:Alphabet)
-	{
-		var index = grpSongs.members.indexOf(song);
-		var icon = iconArray[index];
-
-		return song.width + icon.width + 10;
-	}
-
-	function resetPresses()
-	{
-		pressSpeeds = new Array<Float>();
-		pressUnlockNumber = new FlxRandom().int(20, 40);
-	}
-
-	static function getSongWeek(song:String)
-	{
 	}
 }
 

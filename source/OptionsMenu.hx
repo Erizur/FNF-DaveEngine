@@ -21,7 +21,6 @@ import Discord.DiscordClient;
 
 class OptionsMenu extends MusicBeatState
 {
-	var selector:FlxText;
 	var curSelected:Int = 0;
 
 	var controlsStrings:Array<String> = [];
@@ -32,8 +31,9 @@ class OptionsMenu extends MusicBeatState
 	var bgShader:Shaders.GlitchEffect;
 
 	var languages:Array<Language> = new Array<Language>();
-	var currentLanguage:Int = 0;
 	var curLanguage:String = LanguageManager.save.data.language;
+
+	var oldY:Float = 0;
 
 	override function create()
 	{
@@ -46,7 +46,7 @@ class OptionsMenu extends MusicBeatState
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.antialiasing = true;
-		menuBG.loadGraphic(MainMenuState.randomizeBG());
+		menuBG.loadGraphic(Paths.image('backgrounds/menu'));
 		add(menuBG);
 
 		languages = LanguageManager.getLanguages();
@@ -83,6 +83,8 @@ class OptionsMenu extends MusicBeatState
 			controlLabel.isMenuItem = true;
 			controlLabel.targetY = i;
 			grpControls.add(controlLabel);
+
+			oldY = controlLabel.targetY;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 		}
 
@@ -178,8 +180,6 @@ class OptionsMenu extends MusicBeatState
 		}
 	}
 
-	var isSettingControl:Bool = false;
-
 	override function beatHit()
 	{
 		super.beatHit();
@@ -207,8 +207,6 @@ class OptionsMenu extends MusicBeatState
 		if (curSelected >= grpControls.length)
 			curSelected = 0;
 
-		// selector.y = (70 * curSelected) + 30;
-
 		var bullShit:Int = 0;
 
 		for (item in grpControls.members)
@@ -217,13 +215,8 @@ class OptionsMenu extends MusicBeatState
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
 
-			if (item.targetY == 0)
-			{
-				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
-			}
+			if (item.targetY == 0) item.alpha = 1;
 		}
 	}
 }

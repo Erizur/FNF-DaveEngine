@@ -1,6 +1,5 @@
 package;
 
-import haxe.Http;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -19,18 +18,10 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
-import lime.app.Application;
 import flixel.input.keyboard.FlxKey;
 #if desktop
 import Discord.DiscordClient;
 #end
-// only load this reference if its debug because its only needed for debug??? idk it might help with the file size or something
-#if debug
-import openfl.net.FileReference;
-import haxe.Json;
-#end
-
-using StringTools;
 
 class TitleState extends MusicBeatState
 {
@@ -42,12 +33,6 @@ class TitleState extends MusicBeatState
 	var textGroup:FlxGroup;
 
 	var curWacky:Array<String> = [];
-
-	var wackyImage:FlxSprite;
-
-	var fun:Int;
-	var eye:FlxSprite;
-	var loopEyeTween:FlxTween;
 
 	override public function create():Void
 	{
@@ -84,10 +69,6 @@ class TitleState extends MusicBeatState
 
 		if (FlxG.save.data.weekUnlocked != null)
 		{
-			// FIX LATER!!!
-			// WEEK UNLOCK PROGRESSION!!
-			// StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
-
 			if (StoryMenuState.weekUnlocked.length < 4)
 				StoryMenuState.weekUnlocked.insert(0, true);
 
@@ -169,8 +150,6 @@ class TitleState extends MusicBeatState
 		credTextShit.antialiasing = true;
 		credTextShit.screenCenter();
 
-		// credTextShit.alignment = CENTER;
-
 		credTextShit.visible = false;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
@@ -181,8 +160,6 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		else
 			initialized = true;
-
-		// credGroup.add(credTextShit);
 
 		// Init the first line of text on the intro start to prevent the intro text bug
 		createCoolText(['Engine Created by:']);
@@ -212,7 +189,6 @@ class TitleState extends MusicBeatState
 	{
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
-		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
 		if (FlxG.keys.justPressed.F)
 		{
@@ -355,11 +331,5 @@ class TitleState extends MusicBeatState
 			credGroup.remove(textGroup.members[0], true);
 			textGroup.remove(textGroup.members[0], true);
 		}
-	}
-
-	function deleteOneCoolText()
-	{
-		credGroup.remove(textGroup.members[0], true);
-		textGroup.remove(textGroup.members[0], true);
 	}
 }

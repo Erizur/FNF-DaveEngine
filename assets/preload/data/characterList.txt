@@ -15,4 +15,4 @@ monster:monster:#f3ff6e
 senpai:senpai-pixel:#ffaa6f
 senpai-angry:senpai-pixel:#ffaa6f
 spirit:spirit-pixel:#ff3c6e
-tankman:tankman:#e1e1e1
+tankman:tankman:#f6b604
