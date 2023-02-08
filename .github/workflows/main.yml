@@ -42,7 +42,7 @@ jobs:
           haxelib install flixel-tools
           haxelib install flixel-ui
           haxelib install flixel-addons
-          haxelib install hxCodec
+          haxelib install hxCodec 2.1.5
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
           haxelib git hscript-improved https://github.com/Erizur/hscript-improved
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
