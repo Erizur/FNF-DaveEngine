@@ -26,6 +26,12 @@ import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import openfl.utils.Assets;
+#if hxCodec
+#if (hxCodec == "2.6.0") import VideoHandler;
+#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler;
+#else import vlc.MP4Handler as VideoHandler;
+#end
+#end
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -82,8 +88,6 @@ class PlayState extends MusicBeatState
 	public var dadStrums:FlxTypedGroup<StrumNote>;
 
 	public var camZooming:Bool = false;
-
-	private var curSong:String = "";
 
 	private var gfSpeed:Int = 1;
 
@@ -157,7 +161,9 @@ class PlayState extends MusicBeatState
 	var bfNoteCamOffset:Array<Float> = new Array<Float>();
 	var dadNoteCamOffset:Array<Float> = new Array<Float>();
 
+	#if hxCodec
 	var video:VideoHandler;
+	#end
 
 	var scriptThing:Dynamic;
 
@@ -554,7 +560,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			switch (curSong.toLowerCase())
+			switch (SONG.song.toLowerCase())
 			{
 				default:
 					startCountdown();
@@ -1030,28 +1036,36 @@ class PlayState extends MusicBeatState
 		inCutscene = true;
 		FlxG.sound.music.stop();
 
+		#if hxCodec
 		video = new VideoHandler();
 		video.finishCallback = function()
 		{
-			switch (curSong.toLowerCase())
+			switch (SONG.song.toLowerCase())
 			{
 				default:
 					startCountdown();
 			}
 		}
 		video.playVideo(Paths.video(name));
+		#else
+		return;
+		#end
 	}
 
 	function playEndCutscene(name:String)
 	{
 		inCutscene = true;
 
+		#if hxCodec
 		video = new VideoHandler();
 		video.finishCallback = function()
 		{
 			LoadingState.loadAndSwitchState(new PlayState());
 		}
 		video.playVideo(Paths.video(name));
+		#else
+		return;
+		#end
 	}
 
 	var previousFrameTime:Int = 0;
@@ -1069,9 +1083,7 @@ class PlayState extends MusicBeatState
 			vocals.play();
 		}
 		for (tween in tweenList)
-		{
 			tween.active = true;
-		}
 
 		#if desktop
 		DiscordClient.changePresence(detailsText
@@ -1089,17 +1101,12 @@ class PlayState extends MusicBeatState
 		#end
 		FlxG.sound.music.onComplete = endSong;
 		if (songPosBar != null)
-		{
 			songPosBar.setRange(0, FlxG.sound.music.length);
-		}
 	}
 
 	private function generateSong():Void
 	{
-		var songData = SONG;
-		Conductor.changeBPM(songData.bpm);
-
-		curSong = songData.song;
+		Conductor.changeBPM(SONG.bpm);
 
 		if (SONG.needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song, ""));
@@ -1114,7 +1121,7 @@ class PlayState extends MusicBeatState
 		var noteData:Array<SwagSection>;
 
 		// NEW SHIT
-		noteData = songData.notes;
+		noteData = SONG.notes;
 
 		for (section in noteData)
 		{
@@ -1431,7 +1438,7 @@ class PlayState extends MusicBeatState
 				Transition.nextCamera = null;
 			}
 
-			switch (curSong.toLowerCase())
+			switch (SONG.song.toLowerCase())
 			{
 				default:
 					FlxG.switchState(new ChartingState());
@@ -1849,7 +1856,7 @@ class PlayState extends MusicBeatState
 				{
 					Transition.nextCamera = null;
 				}
-				switch (curSong.toLowerCase())
+				switch (SONG.song.toLowerCase())
 				{
 					default:
 						FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -1900,7 +1907,7 @@ class PlayState extends MusicBeatState
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0]);
 		FlxG.sound.music.stop();
 
-		switch (curSong.toLowerCase())
+		switch (SONG.song.toLowerCase())
 		{
 			default:
 				LoadingState.loadAndSwitchState(new PlayState());
@@ -2277,7 +2284,7 @@ class PlayState extends MusicBeatState
 			songScore -= 100;
 
 			var deathSound:FlxSound = new FlxSound();
-			switch (curSong.toLowerCase())
+			switch (SONG.song.toLowerCase())
 			{
 				default:
 					deathSound.loadEmbedded(Paths.soundRandom('missnote', 1, 3));
@@ -2525,7 +2532,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
+		if (SONG.song.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
@@ -2536,10 +2543,8 @@ class PlayState extends MusicBeatState
 			camHUD.zoom += 0.03;
 		}
 
-		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
-		{
+		if (curBeat % 8 == 7 && SONG.song == 'Bopeebo')
 			boyfriend.playAnim('hey', true);
-		}
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{
@@ -2547,8 +2552,7 @@ class PlayState extends MusicBeatState
 			dad.playAnim('cheer', true);
 		}
 
-		var funny:Float = Math.max(Math.min(healthBar.value, 1.9),
-			0.1);
+		var funny:Float = Math.max(Math.min(healthBar.value, 1.9), 0.1);
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (funny + 0.1))), Std.int(iconP1.height - (25 * funny)));
 		iconP2.setGraphicSize(Std.int(iconP2.width + (50 * ((2 - funny) + 0.1))), Std.int(iconP2.height - (25 * ((2 - funny) + 0.1))));
@@ -2557,9 +2561,7 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 
 		if (curBeat % gfSpeed == 0)
-		{
 			gf.dance();
-		}
 
 		switch (curStage)
 		{
