@@ -31,6 +31,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Install Haxelib
         run: |
+          sudo apt-get update
           sudo apt-get install libvlc-dev libvlccore-dev vlc glibc-source libidn-dev libidn12
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null
