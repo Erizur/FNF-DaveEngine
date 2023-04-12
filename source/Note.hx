@@ -48,8 +48,7 @@ class Note extends FlxSprite
 
 	var notes = ['purple', 'blue', 'green', 'red'];
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal",
-			inCharter:Bool = false /*, guitarSection:Bool = false*/)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal", inCharter:Bool = false)
 	{
 		super();
 
@@ -83,6 +82,8 @@ class Note extends FlxSprite
 		switch (noteStyle)
 		{
 			case 'alt-animation':
+				notePathLol = 'notes/NOTE_assets';
+			default:
 				notePathLol = 'notes/NOTE_assets';
 		}
 		switch (this.noteStyle)
@@ -128,11 +129,9 @@ class Note extends FlxSprite
 
 				setGraphicSize(Std.int(width * noteSize));
 				updateHitbox();
-				// antialiasing = noteStyle != '3D';
 				antialiasing = true;
 		}
-		var str:String = PlayState.SONG.song.toLowerCase();
-		switch (str)
+		switch (PlayState.SONG.song.toLowerCase())
 		{
 			default:
 				x += swagWidth * originalType;
