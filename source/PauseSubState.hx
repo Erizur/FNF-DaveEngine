@@ -33,18 +33,10 @@ class PauseSubState extends MusicBeatSubstate
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
-	var expungedSelectWaitTime:Float = 0;
-	var timeElapsed:Float = 0;
-	var patienceTime:Float = 0;
-
-	public var funnyTexts:FlxTypedGroup<FlxText> = new FlxTypedGroup<FlxText>();
 
 	public function new(x:Float, y:Float)
 	{
 		super();
-
-		funnyTexts = new FlxTypedGroup<FlxText>();
-		add(funnyTexts);
 
 		for (item in menuItems)
 		{
@@ -132,7 +124,6 @@ class PauseSubState extends MusicBeatSubstate
 		bg.x -= scrollSpeed * elapsed;
 		bg.y -= scrollSpeed * elapsed;
 
-		timeElapsed += elapsed;
 		if (pauseMusic.volume < 0.75)
 			pauseMusic.volume += 0.01 * elapsed;
 
@@ -143,26 +134,12 @@ class PauseSubState extends MusicBeatSubstate
 		var accepted = controls.ACCEPT;
 
 		if (upP)
-		{
-			if (expungedSelectWaitTime <= 2)
-			{
-				expungedSelectWaitTime = 2;
-			}
 			changeSelection(-1);
-		}
 		if (downP)
-		{
-			if (expungedSelectWaitTime <= 2)
-			{
-				expungedSelectWaitTime = 2;
-			}
 			changeSelection(1);
-		}
 
 		if (accepted)
-		{
 			selectOption();
-		}
 	}
 
 	function selectOption()
@@ -181,7 +158,6 @@ class PauseSubState extends MusicBeatSubstate
 				FlxG.mouse.visible = false;
 				FlxG.resetState();
 			case "Change Character":
-				funnyTexts.clear();
 				PlayState.characteroverride = 'none';
 				PlayState.formoverride = 'none';
 
@@ -189,7 +165,6 @@ class PauseSubState extends MusicBeatSubstate
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new CharacterSelectState());
 			case "Exit to menu":
-				funnyTexts.clear();
 				PlayState.characteroverride = 'none';
 				PlayState.formoverride = 'none';
 
@@ -199,18 +174,11 @@ class PauseSubState extends MusicBeatSubstate
 		}
 	}
 
-	override function close()
-	{
-		funnyTexts.clear();
-
-		super.close();
-	}
-
 	override function destroy()
 	{
 		pauseMusic.destroy();
 
-		super.destroy();
+		return super.destroy();
 	}
 
 	function changeSelection(change:Int = 0):Void
@@ -250,9 +218,7 @@ class PauseOption
 		for (option in list)
 		{
 			if (option.optionName == optionName)
-			{
 				return option;
-			}
 		}
 		return null;
 	}
