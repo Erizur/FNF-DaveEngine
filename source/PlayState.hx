@@ -4,7 +4,9 @@ import flixel.addons.transition.Transition;
 import flixel.group.FlxGroup;
 import Section.SwagSection;
 import Song.SwagSong;
+#if HSCRIPT_ALLOWED
 import HScriptTool.Script;
+#end
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -508,7 +510,7 @@ class PlayState extends MusicBeatState
 		}
 		doof.cameras = [camDialogue];
 
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		if (Assets.exists(Paths.scriptFile(SONG.song.toLowerCase())))
 			scriptThing = HScriptTool.create(Paths.scriptFile(SONG.song.toLowerCase()));
 		else{
@@ -1351,7 +1353,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
 			scriptThing.executeFunc("update", [elapsed]);
 		#end
@@ -2411,7 +2413,7 @@ class PlayState extends MusicBeatState
 	{
 		super.stepHit();
 
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
 			scriptThing.executeFunc("stepHit", [curStep]);
 		#end
@@ -2441,7 +2443,7 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
 			scriptThing.executeFunc("beatHit", [curBeat]);
 		#end

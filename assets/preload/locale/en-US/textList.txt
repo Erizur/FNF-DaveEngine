@@ -116,6 +116,7 @@ credits_songby==Song by
 
 //developers 
 credit_Erizur==Dave Engine Main Developer
+credit_MemeHoovy==Dave Engine Maintainer
 credit_MoldyGH==Creator of the original VS. Dave Mod
 credit_MissingTextureMan101==Additional help, Programmer
 credit_T5mpler==Programmer & Assistor

@@ -270,7 +270,7 @@ class TitleState extends MusicBeatState
 			{
 				case 3:
 					addMoreText('TheBuilderXD');
-					addMoreText('Erizur, T5mpler');
+					addMoreText('Erizur, T5mpler, MemeHoovy');
 				case 4:
 					addMoreText('and Contributors');
 				case 5:

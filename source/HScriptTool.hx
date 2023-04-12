@@ -1,7 +1,9 @@
 package;
 
+#if sys
 import sys.FileSystem;
 import sys.io.File;
+#end
 import haxe.io.Path;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import hscript.Expr;
@@ -26,7 +28,7 @@ class HScriptTool implements IFlxDestroyable
 
 	public static function loadScript(path:String):HScriptTool
 	{
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		if (!PlayState.canRunScript) return null;
 
 		var script = create(path);
@@ -44,7 +46,7 @@ class HScriptTool implements IFlxDestroyable
 
 	public static function create(path:String):HScriptTool
 	{
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		var p = path.toLowerCase();
 		var ext = Path.extension(p);
 
@@ -67,7 +69,7 @@ class HScriptTool implements IFlxDestroyable
 
 	public function executeFunc(funcName:String, ?args:Array<Any>):Dynamic
 	{
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		var ret = _executeFunc(funcName, args);
 		return ret;
 		#else
@@ -119,7 +121,7 @@ class Script extends HScriptTool
 
 	public override function executeFunc(funcName:String, ?args:Array<Any>):Dynamic
 	{
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		super.executeFunc(funcName, args);
 		if (hscript == null)
 			return null;
@@ -142,7 +144,7 @@ class Script extends HScriptTool
 
 	public override function loadFile()
 	{
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		super.loadFile();
 		if (filePath == null || filePath.trim() == "")
 			return;
@@ -163,7 +165,7 @@ class Script extends HScriptTool
 
 	public override function trace(text:String, error:Bool = false)
 	{
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		var posInfo = hscript.posInfos();
 
 		var lineNumber = Std.string(posInfo.lineNumber);
@@ -175,7 +177,7 @@ class Script extends HScriptTool
 	public override function setVariable(name:String, val:Dynamic)
 	{
 		if (!PlayState.canRunScript || hscript == null) return;
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		hscript.variables.set(name, val);
 		@:privateAccess
 		hscript.locals.set(name, {r: val, depth: 0});
@@ -186,7 +188,7 @@ class Script extends HScriptTool
 	{
 		if (!PlayState.canRunScript || hscript == null) return null;
 
-		#if hscript
+		#if HSCRIPT_ALLOWED
 		if (@:privateAccess hscript.locals.exists(name) && @:privateAccess hscript.locals[name] != null)
 		{
 			@:privateAccess

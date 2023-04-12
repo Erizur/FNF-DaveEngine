@@ -9,9 +9,6 @@ import flixel.util.FlxTimer;
 
 class MusicBeatState extends FlxUIState
 {
-	private var lastBeat:Float = 0;
-	private var lastStep:Float = 0;
-
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
 	private var controls(get, never):Controls;
@@ -21,10 +18,7 @@ class MusicBeatState extends FlxUIState
 
 	override function create()
 	{
-		if (transIn != null)
-			// trace('reg ' + transIn.region);
-
-			super.create();
+		super.create();
 	}
 
 	public function fancyOpenURL(schmancy:String)

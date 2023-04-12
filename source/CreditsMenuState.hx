@@ -68,6 +68,10 @@ class CreditsMenuState extends MusicBeatState
 			new Social('youtube', 'https://www.youtube.com/channel/UCdCAaQzt9yOGfFM0gJDJ4bQ'),
 			new Social('twitter', 'https://twitter.com/am_erizur')
 		]),
+		new Person("MemeHoovy", CreditsType.Dev, [
+			new Social('youtube', 'https://youtube.com/channel/UCMh09vutNZAA6y1ogPqq_9Q/'),
+			new Social('twitter', 'https://twitter.com/meme_hoovy')
+		]),
 		new Person("MoldyGH", CreditsType.Dev, [
 			new Social('youtube', 'https://www.youtube.com/channel/UCHIvkOUDfbMCv-BEIPGgpmA'),
 			new Social('twitter', 'https://twitter.com/moldy_gh'),
@@ -227,7 +231,10 @@ class CreditsMenuState extends MusicBeatState
 			textItem.scrollFactor.set(0, 1);
 
 			var personIcon:PersonIcon = new PersonIcon(textItem);
-			personIcon.loadGraphic(Paths.image('credits/icons/' + creditsTypeString + '/' + currentPerson.name));
+			if (Assets.exists(Paths.image('credits/icons/' + creditsTypeString + '/' + currentPerson.name)))
+				personIcon.loadGraphic(Paths.image('credits/icons/' + creditsTypeString + '/' + currentPerson.name));
+			else
+				personIcon.loadGraphic(Paths.image('credits/icons/Developers/Placeholder'));
 			add(personIcon);
 
 			personIcon.visible = !DoFunnyScroll;
