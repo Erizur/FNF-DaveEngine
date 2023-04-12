@@ -45,10 +45,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		add(camFollow);
 
 		FlxG.sound.play(Paths.sound('death/fnf_loss_sfx' + deathSuffix));
-		Conductor.changeBPM(105);
-
-		// FlxG.camera.followLerp = 1;
-		// FlxG.camera.focusOn(FlxPoint.get(FlxG.width / 2, FlxG.height / 2));
 		FlxG.camera.scroll.set();
 		FlxG.camera.target = null;
 
@@ -60,43 +56,30 @@ class GameOverSubstate extends MusicBeatSubstate
 		super.update(elapsed);
 
 		if (controls.ACCEPT)
-		{
 			endBullshit();
-		}
 
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
-			Application.current.window.title = Main.applicationName;
 
 			if (PlayState.isStoryMode)
 				FlxG.switchState(new StoryMenuState());
 			else
 				FlxG.switchState(new FreeplayState());
 		}
+		#if debug
 		if (FlxG.keys.justPressed.SEVEN)
-		{
 			FlxG.switchState(new AnimationDebug(bf.curCharacter));
-		}
+		#end
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
-		{
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
-		{
 			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
-		}
 
 		if (FlxG.sound.music.playing)
-		{
 			Conductor.songPosition = FlxG.sound.music.time;
-		}
-	}
-
-	override function beatHit()
-	{
 	}
 
 	var isEnding:Bool = false;

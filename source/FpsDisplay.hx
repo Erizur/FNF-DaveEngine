@@ -71,33 +71,24 @@ class FpsDisplay extends TextField
 		times.push(currentTime);
 
 		while (times[0] < currentTime - 1000)
-		{
 			times.shift();
-		}
 
 		var currentCount = times.length;
 		currentFPS = Math.round((currentCount + cacheCount) / 2);
 
 		if (currentFPS > Main.framerate)
-		{
 			currentFPS = Main.framerate;
-		}
 
-		if (currentCount != cacheCount /*&& visible*/)
+		if (currentCount != cacheCount)
 		{
 			text = "FPS: " + currentFPS;
 			#if openfl
 			var memoryMegas:Float = 0;
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			if (memoryMegas > 1000)
-			{
-				var memoryGB = (memoryMegas / 1000);
-				text += "\nMemory: " + FlxMath.roundDecimal(memoryGB, 2) + " GB";
-			}
+				text += "\nMemory: " + FlxMath.roundDecimal((memoryMegas / 1000), 2) + " GB";
 			else
-			{
 				text += "\nMemory: " + memoryMegas + " MB";
-			}
 			#end
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
 			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();

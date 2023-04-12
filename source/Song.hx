@@ -44,11 +44,13 @@ class Song
 		var rawJson = "";
 		rawJson = Assets.getText(Paths.chart(jsonInput.toLowerCase())).trim();
 
-		while (!rawJson.endsWith("}"))
-		{
-			rawJson = rawJson.substr(0, rawJson.length - 1);
-		}
+		if (rawJson == null)
+			throw 'Failed to locate chart JSON in $jsonInput'; // better error when it can't find the JSON
 
+		if (rawJson != null){
+			while (!rawJson.endsWith("}"))
+				rawJson = rawJson.substr(0, rawJson.length - 1);
+		}
 		return parseJSONshit(rawJson);
 	}
 

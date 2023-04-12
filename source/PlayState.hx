@@ -26,7 +26,7 @@ import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import openfl.utils.Assets;
-#if hxCodec
+#if VIDEOS_ALLOWED
 #if (hxCodec == "2.6.0") import VideoHandler;
 #elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler;
 #else import vlc.MP4Handler as VideoHandler;
@@ -161,7 +161,7 @@ class PlayState extends MusicBeatState
 	var bfNoteCamOffset:Array<Float> = new Array<Float>();
 	var dadNoteCamOffset:Array<Float> = new Array<Float>();
 
-	#if hxCodec
+	#if VIDEOS_ALLOWED
 	var video:VideoHandler;
 	#end
 
@@ -265,8 +265,6 @@ class PlayState extends MusicBeatState
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
-
-		theFunne = theFunne;
 
 		// DIALOGUE STUFF
 		// Hi guys i know yall are gonna try to add more dialogue here, but with this new system, all you have to do is add a dialogue file with the name of the song in the assets/data/dialogue folder,
@@ -1036,7 +1034,7 @@ class PlayState extends MusicBeatState
 		inCutscene = true;
 		FlxG.sound.music.stop();
 
-		#if hxCodec
+		#if VIDEOS_ALLOWED
 		video = new VideoHandler();
 		video.finishCallback = function()
 		{
@@ -1056,7 +1054,7 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = true;
 
-		#if hxCodec
+		#if VIDEOS_ALLOWED
 		video = new VideoHandler();
 		video.finishCallback = function()
 		{
@@ -1505,24 +1503,15 @@ class PlayState extends MusicBeatState
 			{
 				if (daNote.strumTime + 800 < Conductor.songPosition)
 				{
-					daNote.active = false;
-					daNote.visible = false;
-
-					daNote.kill();
 					notes.remove(daNote, true);
 					daNote.destroy();
 				}
 			});
 			for (i in 0...unspawnNotes.length)
 			{
-				var daNote:Note = unspawnNotes[0];
+				var daNote:Note = unspawnNotes.shift();
 				if (daNote.strumTime + 800 >= Conductor.songPosition) break;
 
-				daNote.active = false;
-				daNote.visible = false;
-
-				daNote.kill();
-				unspawnNotes.splice(unspawnNotes.indexOf(daNote), 1);
 				daNote.destroy();
 			}
 
@@ -1579,8 +1568,7 @@ class PlayState extends MusicBeatState
 		{
 			boyfriend.stunned = true;
 
-			persistentUpdate = false;
-			persistentDraw = false;
+			persistentUpdate = persistentDraw = false;
 			paused = true;
 
 			vocals.stop();
@@ -1592,13 +1580,10 @@ class PlayState extends MusicBeatState
 		{
 			if (unspawnNotes[0].strumTime - Conductor.songPosition < 1500)
 			{
-				var dunceNote:Note = unspawnNotes[0];
+				var dunceNote:Note = unspawnNotes.shift();
 				dunceNote.finishedGenerating = true;
 
 				notes.add(dunceNote);
-
-				var index:Int = unspawnNotes.indexOf(dunceNote);
-				unspawnNotes.splice(index, 1);
 			}
 		}
 		var currentSection = SONG.notes[Math.floor(curStep / 16)];
@@ -1608,15 +1593,10 @@ class PlayState extends MusicBeatState
 			notes.forEachAlive(function(daNote:Note)
 			{
 				if (daNote.y > FlxG.height)
-				{
-					daNote.active = false;
-					daNote.visible = false;
-				}
+					daNote.active = daNote.visible = false;
 				else
-				{
-					daNote.visible = true;
-					daNote.active = true;
-				}
+					daNote.visible = daNote.active = true;
+
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
 					if (SONG.song != 'Tutorial')
@@ -1681,7 +1661,6 @@ class PlayState extends MusicBeatState
 					if (SONG.needsVoices)
 						vocals.volume = 1;
 
-					daNote.kill();
 					notes.remove(daNote, true);
 					daNote.destroy();
 				}
@@ -1695,9 +1674,8 @@ class PlayState extends MusicBeatState
 				var noteSpeed = (daNote.LocalScrollSpeed == 0 ? 1 : daNote.LocalScrollSpeed);
 
 				if (daNote.wasGoodHit && daNote.isSustainNote && Conductor.songPosition >= (daNote.strumTime + 10))
-				{
 					destroyNote(daNote);
-				}
+
 				if (!daNote.wasGoodHit
 					&& daNote.mustPress
 					&& daNote.finishedGenerating
@@ -1725,10 +1703,8 @@ class PlayState extends MusicBeatState
 
 	function destroyNote(note:Note)
 	{
-		note.active = false;
-		note.visible = false;
-		note.kill();
-		notes.remove(note, true);
+		while (notes.length > 0)
+			notes.remove(note, true);
 		note.destroy();
 	}
 
@@ -1823,8 +1799,7 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-		inCutscene = false;
-		canPause = false;
+		inCutscene = canPause = false;
 
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
@@ -1918,9 +1893,7 @@ class PlayState extends MusicBeatState
 	{
 		var assetPath:String = '';
 
-		var placement:String = Std.string(daCombo);
-
-		var coolText:FlxText = new FlxText(daX, daY, 0, placement, 32);
+		var coolText:FlxText = new FlxText(daX, daY, 0, Std.string(daCombo), 32);
 		if (autoPos)
 		{
 			coolText.screenCenter();
@@ -2132,9 +2105,8 @@ class PlayState extends MusicBeatState
 			}
 		});
 		if (!BOTPLAY_pressed_anything)
-		{
-			releaseArray = [true, true, true, true];
-		}
+			for (e in releaseArray)
+				e = [true];
 		#end
 
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
@@ -2142,8 +2114,6 @@ class PlayState extends MusicBeatState
 			boyfriend.holdTimer = 0;
 
 			possibleNotes = [];
-
-			var ignoreList:Array<Int> = [];
 
 			notes.forEachAlive(function(daNote:Note)
 			{
@@ -2198,7 +2168,6 @@ class PlayState extends MusicBeatState
 
 				if (daNote.wasGoodHit)
 				{
-					daNote.kill();
 					notes.remove(daNote, true);
 					daNote.destroy();
 				}
@@ -2431,7 +2400,6 @@ class PlayState extends MusicBeatState
 			note.wasGoodHit = true;
 			vocals.volume = 1;
 
-			note.kill();
 			notes.remove(note, true);
 			note.destroy();
 
@@ -2617,7 +2585,7 @@ class PlayState extends MusicBeatState
 			scriptThing = null;
 		canRunScript = false;
 
-		super.destroy();
+		return super.destroy();
 	}
 
 	function gameOver()

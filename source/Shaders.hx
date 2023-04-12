@@ -517,7 +517,7 @@ class DitherShader extends FlxShader
         #extension GL_ARB_arrays_of_arrays : require
         // Ordered dithering aka Bayer matrix dithering
 
-        float Scale = 1.0;
+        uniform float Scale = 1.0;
 
         float find_closest(int x, int y, float c0)
         {

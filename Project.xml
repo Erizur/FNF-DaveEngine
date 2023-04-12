@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin' Dave Engine" file="DaveEngine" packageName="dnbteam.daveengine" package="dnbteam.daveengine" main="Main" version="3.0.0" company="dnbteam"/>
@@ -36,7 +35,7 @@
 
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3" unless="web"/>
-	<assets path="assets/preload/videos" rename="assets/videos" include="*.mp4" embed='false' />
+	<assets path="assets/preload/videos" rename="assets/videos" include="*.mp4" embed='false' if="VIDEOS_ALLOWED" />
 	<assets path="assets/songs"    library="songs"    exclude="*.ogg" if="web"/>
 	<assets path="assets/songs"    library="songs"    exclude="*.mp3" unless="web"/>
 	<assets path="assets/shared"   library="shared"   exclude="*.ogg" if="web"/>
@@ -45,6 +44,8 @@
 	<assets path="CHANGELOG.md" rename='changelog.txt'/>
 	<assets path="assets/fonts" embed='true'/>
 
+	<define name="CRASH_HANDLER" if="desktop release" />
+	<define name="VIDEOS_ALLOWED" if="desktop || android" unless="32bits"/>
 	<define name="SHADERS_ENABLED" unless="mac"/>
 	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
@@ -65,13 +66,16 @@
 	<haxedev set='webgl' if="web"/>
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript-improved" />
+	<define name="hscriptPos" />
 	<haxelib name="flixel-ui" />
-	<haxelib name="hxCodec" if="desktop || android" />
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
-	<haxedef name="HXCPP_GC_MOVING"/>
+	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
+	<haxedef name="HXCPP_GC_SUMMARY" if="cpp debug"/>
+	<haxedef name="HXCPP_GC_BIG_BLOCKS" if="cpp" />
+	<haxedef name="HXCPP_GC_MOVING" if="cpp" />
 	<setenv name="next"/>
 
 	<haxelib name="discord_rpc" if="desktop"/>

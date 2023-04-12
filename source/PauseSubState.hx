@@ -185,8 +185,6 @@ class PauseSubState extends MusicBeatSubstate
 				PlayState.characteroverride = 'none';
 				PlayState.formoverride = 'none';
 
-				Application.current.window.title = Main.applicationName;
-
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new CharacterSelectState());
@@ -194,8 +192,6 @@ class PauseSubState extends MusicBeatSubstate
 				funnyTexts.clear();
 				PlayState.characteroverride = 'none';
 				PlayState.formoverride = 'none';
-
-				Application.current.window.title = Main.applicationName;
 
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;

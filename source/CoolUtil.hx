@@ -1,10 +1,6 @@
 package;
 
-import flixel.group.FlxGroup;
 import flixel.FlxG;
-import openfl.utils.AssetCache;
-import flixel.math.FlxRandom;
-import flixel.math.FlxMath;
 import lime.utils.Assets;
 
 using StringTools;
@@ -21,46 +17,34 @@ class CoolUtil
 		difficultyArray.push(LanguageManager.getTextString('play_hard'));
 	}
 
-	public static function difficultyString():String
+	inline public static function difficultyString():String
 	{
-		switch (PlayState.storyWeek)
+		return switch (PlayState.storyWeek)
 		{
 			default:
-				return difficultyArray[PlayState.storyDifficulty];
+				difficultyArray[PlayState.storyDifficulty];
 		}
 	}
 
-	public static function coolTextFile(path:String):Array<String>
+	inline public static function coolTextFile(path:String):Array<String>
 	{
-		var daList:Array<String> = Assets.getText(path).trim().split('\n');
-
-		for (i in 0...daList.length)
-		{
-			daList[i] = daList[i].trim();
-		}
-		return daList;
+		return [
+			for (i in Assets.getText(path).trim().split('\n')) i.trim()
+		];
 	}
 
-	public static function coolStringFile(path:String):Array<String>
+	inline public static function coolStringFile(path:String):Array<String>
 	{
-		var daList:Array<String> = path.trim().split('\n');
-
-		for (i in 0...daList.length)
-		{
-			daList[i] = daList[i].trim();
-		}
-
-		return daList;
+		return [
+			for (i in path.trim().split('\n')) i.trim()
+		];
 	}
 
-	public static function numberArray(max:Int, ?min = 0):Array<Int>
+	inline public static function numberArray(max:Int, ?min = 0):Array<Int>
 	{
-		var dumbArray:Array<Int> = [];
-		for (i in min...max)
-		{
-			dumbArray.push(i);
-		}
-		return dumbArray;
+		return [
+			for (i in min...max) i
+		];
 	}
 
 	public static function formatString(string:String, separator:String):String
@@ -104,17 +88,13 @@ class CoolUtil
 	public static function isArrayEqualTo(array1:Array<Dynamic>, array2:Array<Dynamic>)
 	{
 		if (array1.length != array2.length)
-		{
 			return false;
-		}
 		else
 		{
 			for (i in 0...array2.length)
 			{
 				if (array1[i] != array2[i])
-				{
 					return false;
-				}
 			}
 		}
 		return true;
