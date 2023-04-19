@@ -93,13 +93,6 @@ class StoryMenuState extends MusicBeatState
 		txtWeekTitle.antialiasing = true;
 		txtWeekTitle.alpha = 0.7;
 
-		var rankText:FlxText = new FlxText(0, 10);
-		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Paths.font("vcr.ttf"), 32);
-		rankText.antialiasing = true;
-		rankText.size = scoreText.size;
-		rankText.screenCenter(X);
-
 		yellowBG = new FlxSprite(0, 56).makeGraphic(FlxG.width * 2, 400, FlxColor.WHITE);
 		yellowBG.color = FlxColor.fromString('#F9CF51');
 
@@ -125,7 +118,7 @@ class StoryMenuState extends MusicBeatState
 
 		txtTrackdeco = new FlxText(0, yellowBG.x + yellowBG.height + 60, FlxG.width, LanguageManager.getTextString('story_track').toUpperCase(), 28);
 		txtTrackdeco.alignment = CENTER;
-		txtTrackdeco.font = rankText.font;
+		txtTrackdeco.font = Paths.font("vcr.ttf");
 		txtTrackdeco.color = 0xFFe55777;
 		txtTrackdeco.antialiasing = true;
 		txtTrackdeco.bold = true;
@@ -133,7 +126,7 @@ class StoryMenuState extends MusicBeatState
 
 		txtTracklist = new FlxText(0, yellowBG.x + yellowBG.height + 90, FlxG.width, '', 28);
 		txtTracklist.alignment = CENTER;
-		txtTracklist.font = rankText.font;
+		txtTracklist.font = Paths.font("vcr.ttf");
 		txtTracklist.color = 0xFFe55777;
 		txtTracklist.antialiasing = true;
 		txtTracklist.screenCenter(X);
@@ -168,8 +161,6 @@ class StoryMenuState extends MusicBeatState
 		scoreText.text = LanguageManager.getTextString('story_weekScore') + lerpScore;
 		txtWeekTitle.text = weeks[curWeek].weekName.toUpperCase();
 		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
-
-		// FlxG.watch.addQuick('font', scoreText.font);
 
 		if (!movedBack)
 		{
@@ -286,20 +277,13 @@ class StoryMenuState extends MusicBeatState
 		FlxTween.tween(weekBanners[curWeek], {alpha: 1}, 0.1);
 	}
 
-	function updateText()
+	inline function updateText()
 	{
 		txtTracklist.text = "";
 
 		var stringThing:Array<String> = weeks[curWeek].songList;
 
-		for (i in stringThing)
-		{
-			// txtTracklist.text += " - " + i;
-		}
-
 		txtTracklist.text = stringThing.join(' - ');
-
-		// txtTracklist.text = txtTracklist.text += " - ";
 
 		#if !switch
 		intendedScore = Highscore.getWeekScore(curWeek);
