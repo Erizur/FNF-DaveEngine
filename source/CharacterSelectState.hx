@@ -120,7 +120,8 @@ class CharacterSelectState extends MusicBeatState
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD);
 		FlxG.cameras.add(camTransition);
-		FlxCamera.defaultCameras = [camGame];
+		@:privateAccess
+		FlxCamera._defaultCameras = [camGame];
 		Transition.nextCamera = camTransition;
 
 		FlxG.camera.zoom = 0.75;

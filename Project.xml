@@ -50,7 +50,9 @@
 	<define name="HSCRIPT_ALLOWED"/>
 	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
-	
+
+	<define name="SAVE_LOGS" if="saveLogs"/>
+
 	<section if="PRELOAD_ALL">
 		<library name="songs"    preload="true" />
 		<library name="shared"   preload="true" />

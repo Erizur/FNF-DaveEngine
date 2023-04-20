@@ -1,5 +1,6 @@
 package;
 
+// import haxe.Log;
 import openfl.text.TextFormat;
 import flixel.FlxGame;
 import flixel.FlxState;
@@ -15,6 +16,9 @@ import flixel.FlxG;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
+#end
+
+#if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
@@ -91,6 +95,20 @@ class Main extends Sprite
 		#if CRASH_HANDLER
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
+
+		/*
+		var oldTrace = Log.trace; // keep the old trace if not sys
+
+		Log.trace = (v, ?infos) ->{
+			#if (sys && SAVE_LOGS)
+			final savePath:String = './logs/' + 'DaveEnginelog' + Date.now().toString() + '.txt';
+			if (!FileSystem.exists('./logs/'))
+				FileSystem.createDirectory('./logs/');
+			File.saveContent(savePath, v + '\n');
+			#else
+			oldTrace;
+			#end
+		}*/
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!

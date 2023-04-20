@@ -122,7 +122,8 @@ class CreditsMenuState extends MusicBeatState
 		FlxG.cameras.reset(mainCam);
 		FlxG.cameras.add(selectPersonCam);
 
-		FlxCamera.defaultCameras = [mainCam];
+		@:privateAccess
+		FlxCamera._defaultCameras = [mainCam];
 		selectedPersonGroup.cameras = [selectPersonCam];
 
 		state = State.SelectingName;
@@ -341,7 +342,8 @@ class CreditsMenuState extends MusicBeatState
 							FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer, {
 								onComplete: function(tween:FlxTween)
 								{
-									FlxCamera.defaultCameras = [selectPersonCam];
+									@:privateAccess
+									FlxCamera._defaultCameras = [selectPersonCam];
 									selectPerson(peopleInCredits[curNameSelected]);
 								}
 							});
@@ -368,7 +370,8 @@ class CreditsMenuState extends MusicBeatState
 									{
 										socialButtons.remove(socialButtons[i]);
 									}
-									FlxCamera.defaultCameras = [mainCam];
+									@:privateAccess
+									FlxCamera._defaultCameras = [mainCam];
 									for (creditsText in creditsTextGroup)
 									{
 										FlxTween.tween(creditsText.text, {alpha: 1}, fadeTimer);

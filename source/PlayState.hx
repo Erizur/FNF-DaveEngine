@@ -169,7 +169,7 @@ class PlayState extends MusicBeatState
 
 	var scriptThing:Dynamic;
 
-	public static var canRunScript:Bool = true;
+	public static var canRunScript:Bool = false;
 
 	public static var scrollType:String = '';
 
@@ -257,10 +257,9 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.add(camDialogue);
 		FlxG.cameras.add(camTransition);
 
-		FlxCamera.defaultCameras = [camGame];
+		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
-		persistentUpdate = true;
-		persistentDraw = true;
+		persistentUpdate = persistentDraw = true;
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('test');
@@ -273,8 +272,13 @@ class PlayState extends MusicBeatState
 		// and it will automatically get the dialogue in this function
 		if (Assets.exists(Paths.txt('dialogue/${SONG.song.toLowerCase()}')))
 		{
-			dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/${SONG.song.toLowerCase()}'));
-			hasDialogue = true;
+			try {
+				dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/${SONG.song.toLowerCase()}'));
+				hasDialogue = true;
+			}
+			catch (e){
+				hasDialogue = false;
+			}
 		}
 		else
 			hasDialogue = false;
@@ -511,8 +515,16 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camDialogue];
 
 		#if HSCRIPT_ALLOWED
-		if (Assets.exists(Paths.scriptFile(SONG.song.toLowerCase())))
-			scriptThing = HScriptTool.create(Paths.scriptFile(SONG.song.toLowerCase()));
+		if (Assets.exists(Paths.scriptFile(SONG.song.toLowerCase()))){
+			try {
+				scriptThing = HScriptTool.create(Paths.scriptFile(SONG.song.toLowerCase()));
+				canRunScript = true;
+			}
+			catch (e){
+				scriptThing = null;
+				canRunScript = false;
+			}
+		}
 		else{
 			scriptThing = null;
 			canRunScript = false;
