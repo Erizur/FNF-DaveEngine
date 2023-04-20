@@ -414,25 +414,13 @@ class MainMenuState extends MusicBeatState
 
 	function resetData()
 	{
-		FlxG.save.bind('funkin', 'ninjamuffin99');
+		var e = ['funkin', 'controls', 'language'];
+		for (i in 0...e.length)
+			FlxG.save.bind('${e[i]}', CoolUtil.getSavePath());
 
 		FlxG.save.erase();
 
 		FlxG.save.flush();
-
-		FlxG.save.bind('controls', 'ninjamuffin99');
-
-		FlxG.save.erase();
-
-		FlxG.save.flush();
-
-		FlxG.save.bind('language', 'ninjamuffin99');
-
-		FlxG.save.erase();
-
-		FlxG.save.flush();
-
-		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		Highscore.songScores = new Map();
 		Highscore.songChars = new Map();

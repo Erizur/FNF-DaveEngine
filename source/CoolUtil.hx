@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import lime.utils.Assets;
+import flixel.util.FlxSave;
 
 using StringTools;
 
@@ -110,5 +111,17 @@ class CoolUtil
 	public static function camLerpShit(lerp:Float):Float
 	{
 		return lerp * (FlxG.elapsed / (1 / 60));
-	}	
+	}
+
+	/** Quick Function to Fix Save Files for Flixel 5
+		if you are making a mod, you are gonna wanna change "MemeHoovy" to something else
+		so Base Dave Engine saves won't conflict with yours
+		@BeastlyGabi
+	**/
+	public static function getSavePath(folder:String = 'MemeHoovy'):String {
+		@:privateAccess
+		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
+			+ '/'
+			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
+	}
 }

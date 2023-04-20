@@ -11,6 +11,6 @@ class CompatTool
 	public static function initSave()
 	{
 		save = new FlxSave();
-		save.bind('compatcheck', 'ninjamuffin99');
+		save.bind('compatcheck', CoolUtil.getSavePath());
 	}
 }

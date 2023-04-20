@@ -13,7 +13,7 @@ class LanguageManager
 	public static function initSave()
 	{
 		save = new FlxSave();
-		save.bind('language', 'ninjamuffin99');
+		save.bind('language', CoolUtil.getSavePath());
 	}
 
 	public static function init()
