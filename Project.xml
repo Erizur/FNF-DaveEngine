@@ -75,7 +75,6 @@
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 	<haxedef name="HXCPP_GC_SUMMARY" if="cpp debug"/>
-	<haxedef name="HXCPP_GC_BIG_BLOCKS" if="cpp" />
 	<setenv name="next"/>
 
 	<haxelib name="discord_rpc" if="desktop"/>
