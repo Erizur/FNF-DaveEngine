@@ -76,7 +76,6 @@
 	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 	<haxedef name="HXCPP_GC_SUMMARY" if="cpp debug"/>
 	<haxedef name="HXCPP_GC_BIG_BLOCKS" if="cpp" />
-	<haxedef name="HXCPP_GC_MOVING" if="cpp" />
 	<setenv name="next"/>
 
 	<haxelib name="discord_rpc" if="desktop"/>
