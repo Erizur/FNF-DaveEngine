@@ -41,6 +41,8 @@ class CreditsPopUp extends FlxSpriteGroup
 			case 'tutorial' | 'bopeebo' | 'fresh' | 'dadbattle' | 'spookeez' | 'south' | 'satin-panties' | 'high' | 'milf' | 'cocoa' | 'eggnog' | 'senpai' |
 				'roses' | 'thorns' | 'ugh' | 'guns' | 'stress' | 'test':
 				songCreator = 'KawaiSprite';
+			default:
+				songCreator = 'Unknown';
 		}
 		switch (PlayState.storyWeek)
 		{

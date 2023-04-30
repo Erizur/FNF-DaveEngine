@@ -16,6 +16,7 @@ import lime.app.Application;
 /*
 	HEAVILY BASED ON YOSHICRAFTER ENGINE'S SCRIPT CODE
 	HAVE A LOOK: https://raw.githubusercontent.com/YoshiCrafter29/YoshiCrafterEngine
+	I'mma probably remake this to be either original or modified to be like Codename, or just better in any way possible
  */
 class HScriptTool implements IFlxDestroyable
 {
