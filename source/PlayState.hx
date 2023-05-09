@@ -2048,8 +2048,8 @@ class PlayState extends MusicBeatState
 			totalNotesHit += 1;
 			sicks++;
 		}
-		score = cast(FlxMath.roundDecimal(cast(score, Float) * curmult[note.noteData],
-			0), Int); // this is old code thats stupid Std.Int exists but i dont feel like changing this
+		// this is old code thats stupid Std.Int exists but i dont feel like changing this
+		score = cast(FlxMath.roundDecimal(cast(score, Float) * curmult[note.noteData], 0), Int);
 
 		songScore += score;
 
