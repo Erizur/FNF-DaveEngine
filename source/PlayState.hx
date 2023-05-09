@@ -1721,8 +1721,7 @@ class PlayState extends MusicBeatState
 
 	function destroyNote(note:Note)
 	{
-		while (notes.length > 0)
-			notes.remove(note, true);
+		notes.remove(note, true);
 		note.destroy();
 	}
 
