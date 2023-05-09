@@ -253,9 +253,9 @@ class PlayState extends MusicBeatState
 		camTransition.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
-		FlxG.cameras.add(camHUD);
-		FlxG.cameras.add(camDialogue);
-		FlxG.cameras.add(camTransition);
+		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.add(camDialogue, false);
+		FlxG.cameras.add(camTransition, false);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
@@ -509,9 +509,7 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		if (engineWatermark != null)
-		{
 			engineWatermark.cameras = [camHUD];
-		}
 		doof.cameras = [camDialogue];
 
 		#if HSCRIPT_ALLOWED
@@ -1161,7 +1159,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false /*, false*/);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false);
 				swagNote.originalType = OGNoteDat;
 				swagNote.sustainLength = songNotes[2];
 				swagNote.scrollFactor.set(0, 0);
@@ -1176,7 +1174,7 @@ class PlayState extends MusicBeatState
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
 					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true,
-						gottaHitNote, daNoteStyle, false /*, false*/);
+						gottaHitNote, daNoteStyle, false);
 					sustainNote.originalType = OGNoteDat;
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
@@ -1240,6 +1238,10 @@ class PlayState extends MusicBeatState
 			{
 				FlxG.sound.music.pause();
 				vocals.pause();
+				@:privateAccess { //This is so hiding the debugger doesn't play the music again
+					FlxG.sound.music._alreadyPaused = true;
+					vocals._alreadyPaused = true;
+				}
 			}
 			if (tweenList != null && tweenList.length != 0)
 			{
@@ -1371,9 +1373,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		if (songName != null)
-		{
 			songName.text = FlxStringUtil.formatTime((FlxG.sound.music.length - FlxG.sound.music.time) / 1000);
-		}
 
 		if (startingSong && startTimer != null && !startTimer.active)
 			startTimer.active = true;
@@ -1382,6 +1382,10 @@ class PlayState extends MusicBeatState
 		{
 			FlxG.sound.music.pause();
 			vocals.pause();
+			@:privateAccess { //This is so hiding the debugger doesn't play the music again
+				FlxG.sound.music._alreadyPaused = true;
+				vocals._alreadyPaused = true;
+			}
 		}
 
 		if (tweenList != null && tweenList.length != 0)
