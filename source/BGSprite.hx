@@ -9,7 +9,9 @@ class BGSprite extends FlxSprite
 {
 	public var spriteName:String;
 
-	public function new(spriteName:String, posX:Float, posY:Float, path:String = '', animations:Array<Animation>, ?scrollX:Float = 1, ?scrollY:Float = 1,
+	public var anims:Animation = null;
+
+	public function new(spriteName:String, posX:Float, posY:Float, path:String = '', animations:Animation = null, ?scrollX:Float = 1, ?scrollY:Float = 1,
 			?antialiasing:Bool = true, ?active:Bool = false)
 	{
 		super(posX, posY);
@@ -17,32 +19,28 @@ class BGSprite extends FlxSprite
 		this.spriteName = spriteName;
 		var hasAnimations:Bool = animations != null;
 
+		if (hasAnimations)
+			anims = Reflect.copy(animations);
+
 		if (path != '')
 		{
 			if (hasAnimations)
 			{
 				frames = Paths.getSparrowAtlas(path);
-				for (i in 0...animations.length)
+				var curAnim = animations;
+				if (curAnim != null)
 				{
-					var curAnim = animations[i];
-					if (curAnim != null)
+					if (curAnim.indices != null)
 					{
-						if (curAnim.indices != null)
-						{
-							animation.addByIndices(curAnim.name, curAnim.prefixName, curAnim.indices, "", curAnim.frames, curAnim.looped, curAnim.flip[0],
-								curAnim.flip[1]);
-						}
-						else
-						{
-							animation.addByPrefix(curAnim.name, curAnim.prefixName, curAnim.frames, curAnim.looped, curAnim.flip[0], curAnim.flip[1]);
-						}
+						animation.addByIndices(curAnim.name, curAnim.prefixName, curAnim.indices, "", curAnim.frames, curAnim.looped, curAnim.flip[0],
+							curAnim.flip[1]);
 					}
+					else
+						animation.addByPrefix(curAnim.name, curAnim.prefixName, curAnim.frames, curAnim.looped, curAnim.flip[0], curAnim.flip[1]);
 				}
 			}
 			else
-			{
 				loadGraphic(path);
-			}
 		}
 		this.antialiasing = antialiasing;
 		scrollFactor.set(scrollX, scrollY);
@@ -59,5 +57,11 @@ class BGSprite extends FlxSprite
 			}
 		}
 		return null;
+	}
+
+	public function dance():Void
+	{
+		if (anims != null)
+			animation.play(anims.name);
 	}
 }

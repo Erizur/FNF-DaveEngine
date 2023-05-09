@@ -17,7 +17,6 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.FlxObject;
-#if sys import sys.FileSystem; #end
 #if desktop import Discord.DiscordClient; #end
 
 class FreeplayState extends MusicBeatState
@@ -55,8 +54,6 @@ class FreeplayState extends MusicBeatState
 
 	private var camFollow:FlxObject;
 
-	private static var prevCamFollow:FlxObject;
-
 	private var iconArray:Array<HealthIcon> = [];
 
 	var titles:Array<Alphabet> = [];
@@ -72,6 +69,8 @@ class FreeplayState extends MusicBeatState
 	override function create()
 	{
 		#if desktop DiscordClient.changePresence("In the Freeplay Menu", null); #end
+
+		openfl.system.System.gc();
 
 		showCharText = FlxG.save.data.wasInCharSelect;
 
@@ -104,12 +103,6 @@ class FreeplayState extends MusicBeatState
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollow.setPosition(icons[CurrentPack].x + 256, icons[CurrentPack].y + 256);
-
-		if (prevCamFollow != null)
-		{
-			camFollow = prevCamFollow;
-			prevCamFollow = null;
-		}
 
 		add(camFollow);
 
