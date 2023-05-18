@@ -46,7 +46,7 @@ class MainMenuState extends MusicBeatState
 	public static var finishedFunnyMove:Bool = false;
 
 	public static var daRealEngineVer:String = 'Dave';
-	public static var engineVer:String = '0.1 ALPHA';
+	public static var engineVer:String = '0.2 ALPHA-Prerelease';
 
 	public static var engineVers:Array<String> = ['Dave'];
 

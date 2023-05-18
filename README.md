@@ -3,7 +3,7 @@ THE ENGINE IS AT A VERY UNSTABLE STATE AT THE MOMENT, IT HAS NO MODDING SUPPORT 
 IF YOU WANNA MAKE A MOD WITH THE ENGINE AS OF NOW, YOU WILL HAVE TO MODIFY THE SOURCE CODE.
 
 # NOTICE
-If you are getting an issue with random crashes without no error messages, update your hxcpp with `haxelib update hxcpp`.
+If you are getting an issue with random crashes without no error messages, update your hxcpp with `haxelib update hxcpp` or use the git version (not recommended) via `haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp`.
 
 # DAVE ENGINE
 this is dave
