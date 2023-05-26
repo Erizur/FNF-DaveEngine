@@ -37,6 +37,8 @@ class Character extends FlxSprite
 
 	public var animationNotes:Array<Dynamic> = [];
 
+	public var specialAnim:Bool = false;
+
 	public function new(x:Float, y:Float, ?character:String = "bf", ?isPlayer:Bool = false)
 	{
 		super(x, y);
@@ -665,9 +667,7 @@ class Character extends FlxSprite
 		if (!nativelyPlayable && !isPlayer)
 		{
 			if (animation.curAnim.name.startsWith('sing'))
-			{
 				holdTimer += elapsed;
-			}
 
 			var dadVar:Float = 4;
 
@@ -677,6 +677,11 @@ class Character extends FlxSprite
 			{
 				dance();
 				holdTimer = 0;
+			}
+
+			if (specialAnim && animation.finished){
+				specialAnim = false;
+				dance();
 			}
 		}
 
@@ -776,7 +781,9 @@ class Character extends FlxSprite
 					else
 						playAnim('danceLeft');
 				default:
-					playAnim('idle');
+					if (!specialAnim){
+						playAnim('idle');
+					}
 			}
 		}
 	}

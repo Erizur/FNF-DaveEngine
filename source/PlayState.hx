@@ -1803,8 +1803,18 @@ class PlayState extends MusicBeatState
 
 					if (currentSection != null)
 					{
-						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation')
+						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation'){
 							altAnim = '-alt';
+
+							if (!daNote.mustPress){
+								dad.specialAnim = true;
+
+								if (dadmirror != null)
+									dadmirror.specialAnim = true;
+							}
+							else
+								boyfriend.specialAnim = true;
+						}
 					}
 
 					var noteTypes = notestuffs;
@@ -1842,10 +1852,9 @@ class PlayState extends MusicBeatState
 								sprite.offset.y -= 13;
 							}
 							else
-							{
 								sprite.centerOffsets();
-							}
-							sprite.animation.finishCallback = function(name:String)
+
+							sprite.animation.finishCallback = name ->
 							{
 								sprite.animation.play('static', true);
 								sprite.centerOffsets();
@@ -2933,11 +2942,9 @@ class PlayState extends MusicBeatState
 		lightningOffset = FlxG.random.int(8, 24);
 
 		boyfriend.playAnim('scared', true);
-		boyfriend.animation.finishCallback = function(s)
-			boyfriend.dance();
+		boyfriend.animation.finishCallback = s -> boyfriend.dance();
 
 		gf.playAnim('scared', true);
-		gf.animation.finishCallback = function(s)
-			gf.dance();
+		gf.animation.finishCallback = s -> gf.dance();
 	}
 }
