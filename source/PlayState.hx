@@ -2878,8 +2878,8 @@ class PlayState extends MusicBeatState
 	var tankResetShit:Bool = false;
 	var tankMoving:Bool = false;
 	var tankAngle:Float = FlxG.random.int(-90, 45);
-	var tankSpeed:Float = FlxG.random.float(5, 7);
-	var tankX:Float = 400;
+	final tankSpeed:Float = FlxG.random.float(5, 7);
+	final tankX:Float = 400;
 
 	var trainMoving:Bool = false;
 	var trainFrameTiming:Float = 0;
