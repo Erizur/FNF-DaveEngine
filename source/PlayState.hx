@@ -29,11 +29,17 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import openfl.utils.Assets;
 #if VIDEOS_ALLOWED
-#if (hxCodec == "2.6.0") import VideoHandler;
-#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler;
-#else import vlc.MP4Handler as VideoHandler;
+#if (hxCodec >= "2.7.0")
+import hxcodec.flixel.FlxVideo as MP4Handler;
+#elseif (hxCodec == "2.6.1")
+import hxcodec.VideoHandler as MP4Handler;
+#elseif (hxCodec == "2.6.0")
+import VideoHandler as MP4Handler;
+#else
+import vlc.MP4Handler;
 #end
 #end
+
 #if desktop
 import Discord.DiscordClient;
 #end
