@@ -1054,7 +1054,8 @@ class PlayState extends MusicBeatState
 
 		#if VIDEOS_ALLOWED
 		video = new VideoHandler();
-		video.finishCallback = function()
+		#if (hxCodec < "2.7.0")
+		video.finishCallback = () ->
 		{
 			switch (SONG.song.toLowerCase())
 			{
@@ -1063,6 +1064,19 @@ class PlayState extends MusicBeatState
 			}
 		}
 		video.playVideo(Paths.video(name));
+		#else
+		video.play(Paths.video(name));
+		video.onEndReached.add(() ->
+		{
+			video.dispose();
+			switch (SONG.song.toLowerCase())
+			{
+				default:
+					startCountdown();
+			}
+			return;
+		});
+		#end
 		#else
 		return;
 		#end
@@ -1074,11 +1088,13 @@ class PlayState extends MusicBeatState
 
 		#if VIDEOS_ALLOWED
 		video = new VideoHandler();
-		video.finishCallback = function()
-		{
-			LoadingState.loadAndSwitchState(new PlayState());
-		}
+		#if (hxCodec < "2.7.0")
+		video.finishCallback = () -> LoadingState.loadAndSwitchState(new PlayState());
 		video.playVideo(Paths.video(name));
+		#else
+		video.play(Paths.video(name));
+		video.onEndReached.add(() -> LoadingState.loadAndSwitchState(new PlayState())});
+		#end
 		#else
 		return;
 		#end
