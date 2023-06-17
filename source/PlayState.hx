@@ -1093,7 +1093,7 @@ class PlayState extends MusicBeatState
 		video.playVideo(Paths.video(name));
 		#else
 		video.play(Paths.video(name));
-		video.onEndReached.add(() -> LoadingState.loadAndSwitchState(new PlayState())});
+		video.onEndReached.add(() -> LoadingState.loadAndSwitchState(new PlayState()));
 		#end
 		#else
 		return;
