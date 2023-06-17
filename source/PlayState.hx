@@ -30,13 +30,13 @@ import flixel.util.FlxTimer;
 import openfl.utils.Assets;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "2.7.0")
-import hxcodec.flixel.FlxVideo as MP4Handler;
+import hxcodec.flixel.FlxVideo as VideoHandler;
 #elseif (hxCodec == "2.6.1")
-import hxcodec.VideoHandler as MP4Handler;
+import hxcodec.VideoHandler;
 #elseif (hxCodec == "2.6.0")
-import VideoHandler as MP4Handler;
+import VideoHandler;
 #else
-import vlc.MP4Handler;
+import vlc.MP4Handler as VideoHandler;
 #end
 #end
 
