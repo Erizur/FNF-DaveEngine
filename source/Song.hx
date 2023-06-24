@@ -55,7 +55,5 @@ class Song
 	}
 
 	inline public static function parseJSONshit(rawJson:String):SwagSong
-	{
 		return cast Json.parse(rawJson).song;
-	}
 }
