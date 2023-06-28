@@ -421,7 +421,7 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.save.data.songPosition)
 		{
-			var yPos = scrollType == 'downscroll' ? FlxG.height * 0.9 + 20 : strumLine.y - 20;
+			final yPos = scrollType == 'downscroll' ? FlxG.height * 0.9 + 20 : strumLine.y - 20;
 
 			songPosBG = new FlxSprite(0, yPos).loadGraphic(Paths.image('ui/timerBar'));
 			songPosBG.antialiasing = true;
@@ -1451,14 +1451,8 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				playerStrums.forEach(function(note:StrumNote)
-				{
-					FlxTween.completeTweensOf(note);
-				});
-				dadStrums.forEach(function(note:StrumNote)
-				{
-					FlxTween.completeTweensOf(note);
-				});
+				playerStrums.forEach((note:StrumNote) -> FlxTween.completeTweensOf(note));
+				dadStrums.forEach((note:StrumNote) -> FlxTween.completeTweensOf(note));
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			}
 		}
@@ -1763,13 +1757,8 @@ class PlayState extends MusicBeatState
 		{
 			notes.forEachAlive(function(daNote:Note)
 			{
-				if (!bfplaying)
-				{
-					if (daNote.mustPress)
-					{
-						bfplaying = true;
-					}
-				}
+				if (!bfplaying && daNote.mustPress)
+					bfplaying = true;
 			});
 		}
 		if (focusondad)
@@ -2425,9 +2414,7 @@ class PlayState extends MusicBeatState
 			playerStrums.forEach(function(spr:StrumNote)
 			{
 				if (Math.abs(note.noteData) == spr.ID)
-				{
 					spr.animation.play('confirm', true);
-				}
 			});
 
 			note.wasGoodHit = true;
