@@ -29,7 +29,7 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import openfl.utils.Assets;
 #if VIDEOS_ALLOWED
-#if (hxCodec >= "2.7.0")
+#if (hxCodec >= "3.0.0")
 import hxcodec.flixel.FlxVideo as VideoHandler;
 #elseif (hxCodec == "2.6.1")
 import hxcodec.VideoHandler;
@@ -337,11 +337,9 @@ class PlayState extends MusicBeatState
 		dad = new Character(100, 100, SONG.player2);
 
 		for (tween in tweenList)
-		{
 			tween.active = false;
-		}
 
-		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+		var camPos:FlxPoint = FlxPoint.get(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
 		switch (SONG.player2)
 		{
@@ -359,22 +357,17 @@ class PlayState extends MusicBeatState
 
 		if (formoverride == "none" || formoverride == "bf" && pixelStages.contains(curStage) || formoverride == "bf" && specialStages.contains(curStage)
 			|| formoverride == SONG.player1)
-		{
 			boyfriend = new Boyfriend(770, 450, SONG.player1);
-		}
 		else
-		{
 			boyfriend = new Boyfriend(770, 450, formoverride);
-		}
 
 		repositionCharStages();
 
 		gfGroup.add(gf);
 		dadGroup.add(dad);
 		if (dadmirror != null)
-		{
 			dadGroup.add(dadmirror);
-		}
+
 		bfGroup.add(boyfriend);
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue, isStoryMode);
@@ -402,6 +395,7 @@ class PlayState extends MusicBeatState
 
 		camFollow.setPosition(camPos.x, camPos.y);
 
+		camPos.put();
 		if (prevCamFollow != null)
 		{
 			camFollow = prevCamFollow;
@@ -1054,7 +1048,7 @@ class PlayState extends MusicBeatState
 
 		#if VIDEOS_ALLOWED
 		video = new VideoHandler();
-		#if (hxCodec < "2.7.0")
+		#if (hxCodec < "3.0.0")
 		video.finishCallback = () ->
 		{
 			switch (SONG.song.toLowerCase())
@@ -1088,7 +1082,7 @@ class PlayState extends MusicBeatState
 
 		#if VIDEOS_ALLOWED
 		video = new VideoHandler();
-		#if (hxCodec < "2.7.0")
+		#if (hxCodec < "3.0.0")
 		video.finishCallback = () -> LoadingState.loadAndSwitchState(new PlayState());
 		video.playVideo(Paths.video(name));
 		#else
