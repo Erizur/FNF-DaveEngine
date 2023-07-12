@@ -77,9 +77,12 @@
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
 	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 	<haxedef name="HXCPP_GC_SUMMARY" if="cpp debug"/>
+	<haxelib name="discord_rpc" if="desktop"/>
+
 	<setenv name="next"/>
 
-	<haxelib name="discord_rpc" if="desktop"/>
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 
