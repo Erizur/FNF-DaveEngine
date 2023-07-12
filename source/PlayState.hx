@@ -28,6 +28,7 @@ import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import openfl.utils.Assets;
+import flixel.math.FlxAngle;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
 import hxcodec.flixel.FlxVideo as VideoHandler;
@@ -139,6 +140,12 @@ class PlayState extends MusicBeatState
 	var lightningStrikeBeat:Int = 0;
 	var lightningOffset:Int = 8;
 
+	var tankmanRun:FlxTypedGroup<TankmenBG>;
+	var gfCutsceneLayer:FlxGroup;
+	var bfTankCutsceneLayer:FlxGroup;
+	var tankWatchtower:BGSprite;
+	var tankGround:BGSprite;
+
 	var scoreTxt:FlxText;
 	var engineWatermark:FlxText;
 	var songName:FlxText;
@@ -197,6 +204,8 @@ class PlayState extends MusicBeatState
 	var santa:FlxSprite;
 
 	var bgGirls:BackgroundGirls;
+
+	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
 	override public function create()
 	{
@@ -273,6 +282,8 @@ class PlayState extends MusicBeatState
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
 
+		foregroundSprites = new FlxTypedGroup<BGSprite>();
+
 		// DIALOGUE STUFF
 		// Hi guys i know yall are gonna try to add more dialogue here, but with this new system, all you have to do is add a dialogue file with the name of the song in the assets/data/dialogue folder,
 		// and it will automatically get the dialogue in this function
@@ -293,6 +304,24 @@ class PlayState extends MusicBeatState
 		{
 			switch (SONG.song.toLowerCase())
 			{
+				case 'bopeebo' | 'fresh' | 'dad-battle':
+					stageCheck = 'stage';
+				case 'spookeez' | 'south' | 'monster':
+					stageCheck = 'spooky';
+				case 'pico' | 'philly' | 'blammed':
+					stageCheck = 'philly';
+				case 'satin-panties' | 'high' | 'milf':
+					stageCheck = 'limo';
+				case 'cocoa' | 'eggnog':
+					stageCheck = 'mall';
+				case 'winter-horrorland':
+					stageCheck = 'mallEvil';
+				case 'senpai' | 'roses':
+					stageCheck = 'school';
+				case 'thorns':
+					stageCheck = 'schoolEvil';
+				case 'ugh' | 'guns' | 'stress':
+					stageCheck = 'tank';
 				default:
 					stageCheck = 'stage';
 			}
@@ -330,6 +359,30 @@ class PlayState extends MusicBeatState
 
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
+
+		switch (gfVersion)
+		{
+			case 'pico-speaker':
+				gf.x -= 50;
+				gf.y -= 200;
+
+				var tempTankman:TankmenBG = new TankmenBG(20, 500, true);
+				tempTankman.strumTime = 10;
+				tempTankman.resetShit(20, 600, true);
+				tankmanRun.add(tempTankman);
+
+				for (i in 0...TankmenBG.animationNotes.length)
+				{
+					if (FlxG.random.bool(16))
+					{
+						var tankman:TankmenBG = tankmanRun.recycle(TankmenBG);
+						// new TankmenBG(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
+						tankman.strumTime = TankmenBG.animationNotes[i][0];
+						tankman.resetShit(500, 200 + FlxG.random.int(50, 100), TankmenBG.animationNotes[i][1] < 2);
+						tankmanRun.add(tankman);
+					}
+				}
+		}
 
 		if (gfVersion == 'gf-none')
 			gf.visible = false;
@@ -369,6 +422,8 @@ class PlayState extends MusicBeatState
 			dadGroup.add(dadmirror);
 
 		bfGroup.add(boyfriend);
+
+		add(foregroundSprites);
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue, isStoryMode);
 		doof.scrollFactor.set();
@@ -857,6 +912,128 @@ class PlayState extends MusicBeatState
 				bg.scale.set(6, 6);
 				sprites.add(bg);
 				add(bg);
+			case 'tank':
+				defaultCamZoom = 0.90;
+				curStage = 'tank';
+
+				var bg:BGSprite = new BGSprite('tankSky', -400, -400, Paths.image('stages/tank/tankSky'), null, 0, 0);
+				add(bg);
+
+				var tankSky:BGSprite = new BGSprite('tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), Paths.image('stages/tank/tankClouds'), null, 0.1, 0.1);
+				tankSky.active = true;
+				tankSky.velocity.x = FlxG.random.float(5, 15);
+				add(tankSky);
+
+				var tankMountains:BGSprite = new BGSprite('tankMountains', -300, -20, Paths.image('stages/tank/tankMountains'), null, 0.2, 0.2);
+				tankMountains.setGraphicSize(Std.int(tankMountains.width * 1.2));
+				tankMountains.updateHitbox();
+				add(tankMountains);
+
+				var tankBuildings:BGSprite = new BGSprite('tankBuildings', -200, 0, Paths.image('stages/tank/tankBuildings'), null, 0.30, 0.30);
+				tankBuildings.setGraphicSize(Std.int(tankBuildings.width * 1.1));
+				tankBuildings.updateHitbox();
+				add(tankBuildings);
+
+				var tankRuins:BGSprite = new BGSprite('tankRuins', -200, 0, Paths.image('stages/tank/tankRuins'), null, 0.35, 0.35);
+				tankRuins.setGraphicSize(Std.int(tankRuins.width * 1.1));
+				tankRuins.updateHitbox();
+				add(tankRuins);
+
+				var smokeLeft:BGSprite = new BGSprite('smokeLeft', -200, -100, Paths.image('stages/tank/smokeLeft'), {
+					name: 'SmokeBlurLeft',
+					prefixName: 'SmokeBlurLeft instance',
+					frames: 24,
+					looped: true
+				}, 0.4, 0.4);
+				add(smokeLeft);
+
+				var smokeRight:BGSprite = new BGSprite('smokeRight', 1100, -100, Paths.image('stages/tank/smokeLeft'), {
+					name: 'SmokeRight',
+					prefixName: 'SmokeRight instance',
+					frames: 24,
+					looped: true
+				}, 0.4, 0.4);
+				add(smokeRight);
+
+				// tankGround.
+
+				tankWatchtower = new BGSprite('tankWatchtower', 100, 50, Paths.image('stages/tank/tankWatchtower'), {
+					name: 'tankWatchtower',
+					prefixName: 'watchtower gradient color instance',
+					frames: 24,
+					looped: false
+				}, 0.5, 0.5);
+				add(tankWatchtower);
+
+				tankGround = new BGSprite('tankRolling', 300, 300, Paths.image('stages/tank/tankWatchtower'), {
+					name: 'tankRolling',
+					prefixName: 'BG tank w lighting',
+					frames: 24,
+					looped: true
+				}, 0.5, 0.5);
+				add(tankGround);
+				// tankGround.active = false;
+
+				tankmanRun = new FlxTypedGroup<TankmenBG>();
+				add(tankmanRun);
+
+				var tankGround:BGSprite = new BGSprite('tankGround', -420, -150, Paths.image('stages/tank/tankGround'), null);
+				tankGround.setGraphicSize(Std.int(tankGround.width * 1.15));
+				tankGround.updateHitbox();
+				add(tankGround);
+
+				moveTank();
+
+				// smokeLeft.screenCenter();
+
+				var fgTank0:BGSprite = new BGSprite('tank0', -500, 650, Paths.image('stages/tank/tank0'), {
+					name: 'tank0',
+					prefixName: 'fg',
+					frames: 24,
+					looped: false
+				}, 1.7, 1.5);
+				foregroundSprites.add(fgTank0);
+
+				var fgTank1:BGSprite = new BGSprite('tank1', -300, 750, Paths.image('stages/tank/tank1'), {
+					name: 'tank1',
+					prefixName: 'fg',
+					frames: 24,
+					looped: false
+				}, 2, 0.2);
+				foregroundSprites.add(fgTank1);
+
+				// just called 'foreground' just cuz small inconsistency no bbiggei
+				var fgTank2:BGSprite = new BGSprite('tank2', 450, 940, Paths.image('stages/tank/tank2'), {
+					name: 'tank2',
+					prefixName: 'foreground',
+					frames: 24,
+					looped: false
+				}, 1.5, 1.5);
+				foregroundSprites.add(fgTank2);
+
+				var fgTank3:BGSprite = new BGSprite('tank3', 1300, 1200, Paths.image('stages/tank/tank3'), {
+					name: 'tank3',
+					prefixName: 'fg',
+					frames: 24,
+					looped: false
+				}, 3.5, 2.5);
+				foregroundSprites.add(fgTank3);
+
+				var fgTank4:BGSprite = new BGSprite('tank4', 1300, 900, Paths.image('stages/tank/tank4'), {
+					name: 'tank4',
+					prefixName: 'fg',
+					frames: 24,
+					looped: false
+				}, 1.5, 1.5);
+				foregroundSprites.add(fgTank4);
+
+				var fgTank5:BGSprite = new BGSprite('tank5', 1620, 700, Paths.image('stages/tank/tank5'), {
+					name: 'tank5',
+					prefixName: 'fg',
+					frames: 24,
+					looped: false
+				}, 1.5, 1.5);
+				foregroundSprites.add(fgTank5);
 			default:
 				bgZoom = 0.9;
 				stageName = 'stage';
@@ -1427,6 +1604,8 @@ class PlayState extends MusicBeatState
 					}
 				}
 				phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed * 1.5;
+			case 'tank':
+				moveTank();
 		}
 
 		super.update(elapsed);
@@ -1634,8 +1813,18 @@ class PlayState extends MusicBeatState
 
 					if (currentSection != null)
 					{
-						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation')
+						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation'){
 							altAnim = '-alt';
+
+							if (!daNote.mustPress){
+								dad.specialAnim = true;
+
+								if (dadmirror != null)
+									dadmirror.specialAnim = true;
+							}
+							else
+								boyfriend.specialAnim = true;
+						}
 					}
 
 					var noteTypes = notestuffs;
@@ -1673,10 +1862,9 @@ class PlayState extends MusicBeatState
 								sprite.offset.y -= 13;
 							}
 							else
-							{
 								sprite.centerOffsets();
-							}
-							sprite.animation.finishCallback = function(name:String)
+
+							sprite.animation.finishCallback = name ->
 							{
 								sprite.animation.play('static', true);
 								sprite.centerOffsets();
@@ -1938,9 +2126,7 @@ class PlayState extends MusicBeatState
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		add(rating);
 		if (combo >= 10)
-		{
 			add(comboSpr);
-		}
 
 		rating.setGraphicSize(Std.int(rating.width * 0.7));
 		rating.antialiasing = true;
@@ -2150,9 +2336,8 @@ class PlayState extends MusicBeatState
 				var notetypecompare:Int = Std.int(a.noteData - b.noteData);
 
 				if (notetypecompare == 0)
-				{
 					return Std.int(a.strumTime - b.strumTime);
-				}
+
 				return notetypecompare;
 			});
 
@@ -2167,9 +2352,8 @@ class PlayState extends MusicBeatState
 				for (note in possibleNotes)
 				{
 					if (!note.mustPress)
-					{
 						continue;
-					}
+
 					if (controlArray[note.noteData % 4])
 					{
 						if (lasthitnotetime > Conductor.songPosition - Conductor.safeZoneOffset
@@ -2540,6 +2724,8 @@ class PlayState extends MusicBeatState
 			dad.playAnim('cheer', true);
 		}
 
+		foregroundSprites.forEach(spr -> spr.dance());
+
 		var funny:Float = Math.max(Math.min(healthBar.value, 1.9), 0.1);
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (funny + 0.1))), Std.int(iconP1.height - (25 * funny)));
@@ -2679,6 +2865,25 @@ class PlayState extends MusicBeatState
 		fastCarCanDrive = true;
 	}
 
+	function moveTank():Void
+	{
+		if (!inCutscene)
+		{
+			var daAngleOffset:Float = 1;
+			tankAngle += FlxG.elapsed * tankSpeed;
+			tankGround.angle = tankAngle - 90 + 15;
+
+			tankGround.x = tankX + Math.cos(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1500;
+			tankGround.y = 1300 + Math.sin(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1100;
+		}
+	}
+
+	var tankResetShit:Bool = false;
+	var tankMoving:Bool = false;
+	var tankAngle:Float = FlxG.random.int(-90, 45);
+	final tankSpeed:Float = FlxG.random.float(5, 7);
+	final tankX:Float = 400;
+
 	var trainMoving:Bool = false;
 	var trainFrameTiming:Float = 0;
 
@@ -2740,11 +2945,9 @@ class PlayState extends MusicBeatState
 		lightningOffset = FlxG.random.int(8, 24);
 
 		boyfriend.playAnim('scared', true);
-		boyfriend.animation.finishCallback = function(s)
-			boyfriend.dance();
+		boyfriend.animation.finishCallback = s -> boyfriend.dance();
 
 		gf.playAnim('scared', true);
-		gf.animation.finishCallback = function(s)
-			gf.dance();
+		gf.animation.finishCallback = s -> gf.dance();
 	}
 }
