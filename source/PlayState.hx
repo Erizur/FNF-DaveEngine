@@ -1639,9 +1639,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			if (FlxTransitionableState.skipNextTransIn)
-			{
 				Transition.nextCamera = null;
-			}
 
 			switch (SONG.song.toLowerCase())
 			{
@@ -2103,15 +2101,9 @@ class PlayState extends MusicBeatState
 	{
 		var assetPath:String = '';
 
-		var coolText:FlxText = new FlxText(daX, daY, 0, Std.string(daCombo), 32);
-		if (autoPos)
-		{
-			coolText.screenCenter();
-			coolText.x = FlxG.width * 0.55;
-		}
 		var rating = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + daRating));
 		rating.screenCenter();
-		rating.x = coolText.x - 40;
+		rating.x = autoPos ? FlxG.width * 0.55 : daX - 40;
 		rating.y -= 60;
 		rating.acceleration.y = 550;
 		rating.velocity.y -= FlxG.random.int(140, 175);
@@ -2119,7 +2111,7 @@ class PlayState extends MusicBeatState
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "combo"));
 		comboSpr.screenCenter();
-		comboSpr.x = coolText.x;
+		comboSpr.x = autoPos ? FlxG.width * 0.55 : daX;
 		comboSpr.acceleration.y = 600;
 		comboSpr.velocity.y -= 150;
 
@@ -2154,7 +2146,7 @@ class PlayState extends MusicBeatState
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "num" + Std.int(i)));
 			numScore.screenCenter();
-			numScore.x = coolText.x + (43 * daLoop) - 90;
+			numScore.x = autoPos ? FlxG.width * 0.55 : daX + (43 * daLoop) - 90;
 			numScore.y += 80;
 
 			numScore.antialiasing = true;
@@ -2179,8 +2171,6 @@ class PlayState extends MusicBeatState
 			daLoop++;
 		}
 
-		coolText.text = Std.string(seperatedScore);
-
 		FlxTween.tween(rating, {alpha: 0}, 0.2, {
 			startDelay: Conductor.crochet * 0.001
 		});
@@ -2188,7 +2178,6 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(comboSpr, {alpha: 0}, 0.2, {
 			onComplete: function(tween:FlxTween)
 			{
-				coolText.destroy();
 				comboSpr.destroy();
 
 				rating.destroy();
