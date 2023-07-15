@@ -32,7 +32,7 @@ class BGSprite extends FlxSprite
 				var animPrefix:String = curAnim.prefixName;
 				var animFrames:Int = curAnim.frames;
 				var animLooped:Bool = curAnim.looped;
-				var animFlipped:Array<Bool> = curAnim.flip;
+				var animFlipped:Array<Bool> = Reflect.field(curAnim, 'flip') != null ? curAnim.flip : [false, false];
 				var animIndices:Array<Int> = curAnim.indices;
 
 				if (curAnim != null)

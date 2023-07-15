@@ -2099,9 +2099,8 @@ class PlayState extends MusicBeatState
 
 	public function createScorePopUp(daX:Float, daY:Float, autoPos:Bool, daRating:String, daCombo:Int, daStyle:String):Void
 	{
-		var assetPath:String = '';
-
-		var rating = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + daRating));
+		// daStyle is for week6
+		var rating = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + daRating));
 		rating.screenCenter();
 		rating.x = autoPos ? FlxG.width * 0.55 : daX - 40;
 		rating.y -= 60;
@@ -2109,7 +2108,7 @@ class PlayState extends MusicBeatState
 		rating.velocity.y -= FlxG.random.int(140, 175);
 		rating.velocity.x -= FlxG.random.int(0, 10);
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "combo"));
+		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + "combo"));
 		comboSpr.screenCenter();
 		comboSpr.x = autoPos ? FlxG.width * 0.55 : daX;
 		comboSpr.acceleration.y = 600;
@@ -2128,23 +2127,15 @@ class PlayState extends MusicBeatState
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
 
-		var seperatedScore:Array<Int> = [];
+		comboSpr.cameras = [camHUD];
+		rating.cameras = [camHUD];
 
 		var comboSplit:Array<String> = (daCombo + "").split('');
 
-		if (comboSplit.length == 2)
-			seperatedScore.push(0); // make sure theres a 0 in front or it looks weird lol!
-
-		for (i in 0...comboSplit.length)
-		{
-			var str:String = comboSplit[i];
-			seperatedScore.push(Std.parseInt(str));
-		}
-
 		var daLoop:Int = 0;
-		for (i in seperatedScore)
+		for (i in comboSplit)
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "num" + Std.int(i)));
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + "num" + i));
 			numScore.screenCenter();
 			numScore.x = autoPos ? FlxG.width * 0.55 : daX + (43 * daLoop) - 90;
 			numScore.y += 80;
@@ -2157,8 +2148,10 @@ class PlayState extends MusicBeatState
 			numScore.velocity.y -= FlxG.random.int(140, 160);
 			numScore.velocity.x = FlxG.random.float(-5, 5);
 
-			if (daCombo >= 10 || daCombo == 0)
+			if (daCombo >= 10)
 				add(numScore);
+
+			numScore.cameras = [camHUD];
 
 			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 				onComplete: function(tween:FlxTween)
