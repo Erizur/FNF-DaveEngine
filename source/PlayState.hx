@@ -2174,7 +2174,7 @@ class PlayState extends MusicBeatState
 			numScore.velocity.y -= FlxG.random.int(140, 160);
 			numScore.velocity.x = FlxG.random.float(-5, 5);
 
-			if (daCombo >= 10)
+			if (daCombo >= 10 || daCombo == 0)
 				add(numScore);
 
 			numScore.cameras = [camHUD];
