@@ -1895,7 +1895,7 @@ class PlayState extends MusicBeatState
 					&& daNote.finishedGenerating
 					&& Conductor.songPosition >= daNote.strumTime + (350 / (0.45 * FlxMath.roundDecimal(SONG.speed * noteSpeed, 2))))
 				{
-					noteMiss(daNote.originalType, daNote);
+					noteMiss(daNote.originalType);
 
 					vocals.volume = 0;
 
@@ -2078,8 +2078,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 	}
-
-	var endingSong:Bool = false;
 
 	function nextSong()
 	{
@@ -2385,10 +2383,14 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			}
-			else if (!theFunne)
+			else
 			{
-				if (!inCutscene)
-					badNoteCheck();
+				for (shit in 0...controlArray.length){
+					if (controlArray[shit] && !theFunne && !inCutscene){
+						noteMiss(shit);
+						updateAccuracy();
+					}
+				}
 			}
 		}
 
@@ -2451,7 +2453,7 @@ class PlayState extends MusicBeatState
 		});
 	}
 
-	function noteMiss(direction:Int = 1, note:Note):Void
+	function noteMiss(direction:Int = 1):Void
 	{
 		if (true)
 		{
@@ -2527,38 +2529,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function badNoteCheck()
-	{
-		// just double pasting this shit cuz fuk u
-		// REDO THIS SYSTEM!
-		var note:Note = null;
-
-		if (note != null)
-		{
-			if (note.mustPress && note.finishedGenerating)
-			{
-				noteMiss(note.noteData, note);
-			}
-			return;
-		}
-		var upP = controls.UP_P;
-		var rightP = controls.RIGHT_P;
-		var downP = controls.DOWN_P;
-		var leftP = controls.LEFT_P;
-
-		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
-
-		for (i in 0...controlArray.length)
-		{
-			if (controlArray[i])
-			{
-				noteMiss(i, note);
-			}
-		}
-		updateAccuracy();
-	}
-
-	inline function updateAccuracy()
+	inline final function updateAccuracy()
 	{
 		totalPlayed += 1;
 		accuracy = totalNotesHit / totalPlayed * 100;
@@ -2575,7 +2546,7 @@ class PlayState extends MusicBeatState
 				{
 					FlxG.sound.play(Paths.sound('note_click'));
 				}
-				combo += 1;
+				combo++;
 			}
 			else
 				totalNotesHit += 1;
