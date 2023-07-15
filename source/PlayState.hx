@@ -2099,8 +2099,15 @@ class PlayState extends MusicBeatState
 
 	public function createScorePopUp(daX:Float, daY:Float, autoPos:Bool, daRating:String, daCombo:Int, daStyle:String):Void
 	{
+		if (daStyle.length <= 0)
+			daStyle = '';
+
 		// daStyle is for week6
 		var rating = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + daRating));
+		if (rating.graphic == null){
+			rating.loadGraphic(Paths.image("ui/" + daRating));
+			trace("Rating image not found in " + (Paths.image('ui/$daStyle')));
+		}
 		rating.screenCenter();
 		rating.x = autoPos ? FlxG.width * 0.55 : daX - 40;
 		rating.y -= 60;
@@ -2109,6 +2116,10 @@ class PlayState extends MusicBeatState
 		rating.velocity.x -= FlxG.random.int(0, 10);
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + "combo"));
+		if (comboSpr.graphic == null){
+			comboSpr.loadGraphic(Paths.image("ui/combo"));
+			trace("Combo image not found in " + (Paths.image('ui/$daStyle')));
+		}
 		comboSpr.screenCenter();
 		comboSpr.x = autoPos ? FlxG.width * 0.55 : daX;
 		comboSpr.acceleration.y = 600;
@@ -2130,12 +2141,27 @@ class PlayState extends MusicBeatState
 		comboSpr.cameras = [camHUD];
 		rating.cameras = [camHUD];
 
+		var seperatedScore:Array<Int> = [];
+
 		var comboSplit:Array<String> = (daCombo + "").split('');
 
-		var daLoop:Int = 0;
-		for (i in comboSplit)
+		if (comboSplit.length == 2)
+			seperatedScore.push(0); // make sure theres a 0 in front or it looks weird lol!
+
+		for (i in 0...comboSplit.length)
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + "num" + i));
+			var str:String = comboSplit[i];
+			seperatedScore.push(Std.parseInt(str));
+		}
+
+		var daLoop:Int = 0;
+		for (i in seperatedScore)
+		{
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + "num" + Std.int(i)));
+			if (numScore.graphic == null){
+				numScore.loadGraphic(Paths.image("ui/num" + Std.int(i)));
+				trace("Number images not found in " + (Paths.image('ui/$daStyle')));
+			}
 			numScore.screenCenter();
 			numScore.x = autoPos ? FlxG.width * 0.55 : daX + (43 * daLoop) - 90;
 			numScore.y += 80;
@@ -2226,7 +2252,7 @@ class PlayState extends MusicBeatState
 
 		songScore += score;
 
-		createScorePopUp(0, 0, true, daRating, combo, note.noteStyle);
+		createScorePopUp(0, 0, true, daRating, combo, '');
 	}
 
 	var upHold:Bool = false;
