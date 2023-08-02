@@ -29,6 +29,7 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import openfl.utils.Assets;
 import flixel.math.FlxAngle;
+import flixel.util.FlxDestroyUtil;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
 import hxcodec.flixel.FlxVideo as VideoHandler;
@@ -133,6 +134,8 @@ class PlayState extends MusicBeatState
 	public var hasDialogue:Bool = false;
 
 	final notestuffs:Array<String> = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
+
+	var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
 	var songScore:Int = 0;
 
@@ -409,6 +412,13 @@ class PlayState extends MusicBeatState
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
 
+		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
+
+		final noteSplash:NoteSplash = new NoteSplash(100, 100, 0);
+		grpNoteSplashes.add(noteSplash);
+		noteSplash.alpha = 0.00001;
+		add(grpNoteSplashes);
+
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
 		dadStrums = new FlxTypedGroup<StrumNote>();
@@ -525,6 +535,7 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
+		grpNoteSplashes.cameras = [camHUD];
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
@@ -2258,6 +2269,13 @@ class PlayState extends MusicBeatState
 
 		songScore += score;
 
+		if (daRating == 'sick')
+		{
+			var noteSplash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
+			noteSplash.setupNoteSplash(note.x, note.y, note.noteData);
+			grpNoteSplashes.add(noteSplash);
+		}
+
 		createScorePopUp(0, 0, true, daRating, combo, '');
 	}
 
@@ -2776,7 +2794,9 @@ class PlayState extends MusicBeatState
 			scriptThing = null;
 		canRunScript = false;
 
-		return super.destroy();
+		grpNoteSplashes = FlxDestroyUtil.destroy(grpNoteSplashes);
+
+		super.destroy();
 	}
 
 	function gameOver()
