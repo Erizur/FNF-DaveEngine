@@ -224,41 +224,10 @@ class PlayState extends MusicBeatState
 		goods = 0;
 		misses = 0;
 
-		// Making difficulty text for Discord Rich Presence.
-		storyDifficultyText = CoolUtil.difficultyString();
-
-		// To avoid having duplicate images in Discord assets
-		switch (SONG.player2)
-		{
-			default:
-				iconRPC = 'none';
-		}
-
-		if (isStoryMode)
-			detailsText = "Story Mode: Week " + storyWeek;
-		else
-			detailsText = "Freeplay Mode: ";
-
-		// String for when the game is paused
-		detailsPausedText = "Paused - " + detailsText;
-
 		curStage = "";
 
-		// Updating Discord Rich Presence.
-		#if desktop
-		DiscordClient.changePresence(detailsText
-			+ " "
-			+ SONG.song
-			+ " ("
-			+ storyDifficultyText
-			+ ") ",
-			"\nAcc: "
-			+ truncateFloat(accuracy, 2)
-			+ "% | Score: "
-			+ songScore
-			+ " | Misses: "
-			+ misses, iconRPC);
-		#end
+		initDiscord();
+
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -1063,6 +1032,42 @@ class PlayState extends MusicBeatState
 		return sprites;
 	}
 
+	inline function initDiscord():Void{
+		// Making difficulty text for Discord Rich Presence.
+		storyDifficultyText = CoolUtil.difficultyString();
+
+		// To avoid having duplicate images in Discord assets
+		switch (SONG.player2)
+		{
+			default:
+				iconRPC = 'none';
+		}
+
+		if (isStoryMode)
+			detailsText = "Story Mode: Week " + storyWeek;
+		else
+			detailsText = "Freeplay Mode: ";
+
+		// String for when the game is paused
+		detailsPausedText = "Paused - " + detailsText;
+
+		// Updating Discord Rich Presence.
+		#if desktop
+		DiscordClient.changePresence(detailsText
+			+ " "
+			+ SONG.song
+			+ " ("
+			+ storyDifficultyText
+			+ ") ",
+			"\nAcc: "
+			+ truncateFloat(accuracy, 2)
+			+ "% | Score: "
+			+ songScore
+			+ " | Misses: "
+			+ misses, iconRPC);
+		#end
+	}
+
 	function schoolIntro(?dialogueBox:DialogueBox, isStart:Bool = true):Void
 	{
 		inCutscene = true;
@@ -1825,8 +1830,7 @@ class PlayState extends MusicBeatState
 						}
 					}
 
-					var noteTypes = notestuffs;
-					var noteToPlay:String = noteTypes[Math.round(Math.abs(daNote.originalType)) % 4];
+					var noteToPlay:String = notestuffs[Math.round(Math.abs(daNote.originalType)) % 4];
 					switch (daNote.noteStyle)
 					{
 						default:
@@ -2476,8 +2480,7 @@ class PlayState extends MusicBeatState
 			deathSound.volume = FlxG.random.float(0.1, 0.2);
 			deathSound.play();
 
-			var noteTypes = notestuffs;
-			var noteToPlay:String = noteTypes[Math.round(Math.abs(direction)) % 4];
+			var noteToPlay:String = notestuffs[Math.round(Math.abs(direction)) % 4];
 			if (!boyfriend.nativelyPlayable)
 			{
 				switch (noteToPlay)
@@ -2557,11 +2560,10 @@ class PlayState extends MusicBeatState
 			{
 				default:
 					var fuckingDumbassBullshitFuckYou:String;
-					var noteTypes = notestuffs;
-					fuckingDumbassBullshitFuckYou = noteTypes[Math.round(Math.abs(note.originalType)) % 4];
+					fuckingDumbassBullshitFuckYou = notestuffs[Math.round(Math.abs(note.originalType)) % 4];
 					if (!boyfriend.nativelyPlayable)
 					{
-						switch (noteTypes[Math.round(Math.abs(note.originalType)) % 4])
+						switch (notestuffs[Math.round(Math.abs(note.originalType)) % 4])
 						{
 							case 'LEFT':
 								fuckingDumbassBullshitFuckYou = 'RIGHT';
