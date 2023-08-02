@@ -2104,11 +2104,16 @@ class PlayState extends MusicBeatState
 		if (daStyle.length <= 0)
 			daStyle = '';
 
-		// daStyle is for week6
-		var rating = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + daRating));
+		var assetPath:String = switch(daStyle){
+			case 'pixel': 'pixel/';
+			default: '';
+		}
+
+		// assetPath is for week6
+		var rating = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + daRating));
 		if (rating.graphic == null){
 			rating.loadGraphic(Paths.image("ui/" + daRating));
-			trace("Rating image not found in " + (Paths.image('ui/$daStyle')));
+			trace("Rating image not found in " + (Paths.image('ui/$assetPath')));
 		}
 		rating.screenCenter();
 		rating.x = autoPos ? FlxG.width * 0.55 : daX - 40;
@@ -2117,10 +2122,10 @@ class PlayState extends MusicBeatState
 		rating.velocity.y -= FlxG.random.int(140, 175);
 		rating.velocity.x -= FlxG.random.int(0, 10);
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + "combo"));
+		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "combo"));
 		if (comboSpr.graphic == null){
 			comboSpr.loadGraphic(Paths.image("ui/combo"));
-			trace("Combo image not found in " + (Paths.image('ui/$daStyle')));
+			trace("Combo image not found in " + (Paths.image('ui/$assetPath')));
 		}
 		comboSpr.screenCenter();
 		comboSpr.x = autoPos ? FlxG.width * 0.55 : daX;
@@ -2159,13 +2164,13 @@ class PlayState extends MusicBeatState
 		var daLoop:Int = 0;
 		for (i in seperatedScore)
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + daStyle + "num" + Std.int(i)));
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "num" + Std.int(i)));
 			if (numScore.graphic == null){
 				numScore.loadGraphic(Paths.image("ui/num" + Std.int(i)));
-				trace("Number images not found in " + (Paths.image('ui/$daStyle')));
+				trace("Number images not found in " + (Paths.image('ui/$assetPath')));
 			}
 			numScore.screenCenter();
-			numScore.x = autoPos ? FlxG.width * 0.55 : daX + (43 * daLoop) - 90;
+			numScore.x = autoPos ? FlxG.width * 0.55 + (43 * daLoop) - 90 : daX + (43 * daLoop) - 90;
 			numScore.y += 80;
 
 			numScore.antialiasing = true;
