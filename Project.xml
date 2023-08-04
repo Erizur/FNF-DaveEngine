@@ -78,6 +78,7 @@
 	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 	<haxedef name="HXCPP_GC_SUMMARY" if="cpp debug"/>
 	<haxelib name="discord_rpc" if="desktop"/>
+	<haxelib name="flixel-screenshot-plugin" />
   
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />

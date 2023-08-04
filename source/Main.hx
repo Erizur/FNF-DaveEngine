@@ -96,19 +96,7 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 
-		/*
-		var oldTrace = Log.trace; // keep the old trace if not sys
-
-		Log.trace = (v, ?infos) ->{
-			#if (sys && SAVE_LOGS)
-			final savePath:String = './logs/' + 'DaveEnginelog' + Date.now().toString() + '.txt';
-			if (!FileSystem.exists('./logs/'))
-				FileSystem.createDirectory('./logs/');
-			File.saveContent(savePath, v + '\n');
-			#else
-			oldTrace;
-			#end
-		}*/
+		FlxG.plugins.add(new screenshotplugin.ScreenShotPlugin());
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!

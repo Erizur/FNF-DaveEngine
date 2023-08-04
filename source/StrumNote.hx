@@ -61,17 +61,13 @@ class StrumNote extends FlxSprite
 		this.playerStrum = playerStrum;
 	}
 
-	public function resetX()
-	{
+	inline final public function resetX()
 		x = baseX;
-	}
 
-	public function resetY()
-	{
+	inline final public function resetY()
 		y = baseY;
-	}
 
-	public function centerStrum()
+	inline final public function centerStrum()
 	{
 		x = baseX + 320 * (playerStrum ? -1 : 1) + 78 / 4;
 	}
