@@ -489,11 +489,10 @@ class PlayState extends MusicBeatState
 			songName.cameras = [camHUD];
 		}
 
-		var healthBarPath = '';
-		switch (SONG.song.toLowerCase())
+		var healthBarPath = switch (SONG.song.toLowerCase())
 		{
 			default:
-				healthBarPath = Paths.image('ui/healthBar');
+				Paths.image('ui/healthBar');
 		}
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(healthBarPath);
