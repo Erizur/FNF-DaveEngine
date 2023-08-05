@@ -70,18 +70,18 @@ class Main extends Sprite
 			FlxG.sound.destroy(false);
 
 			#if cpp
-			cpp.vm.Gc.enable(false);
-			#else
-			openfl.system.System.gc();
+			cpp.NativeGc.enable(true);
+			cpp.NativeGc.run(true);
 			#end
+			openfl.system.System.gc();
 		});
 
 		FlxG.signals.postStateSwitch.add(function(){
 			#if cpp
-			cpp.vm.Gc.enable(true);
-			#else
-			openfl.system.System.gc();
+			cpp.NativeGc.enable(true);
+			cpp.NativeGc.run(true);
 			#end
+			openfl.system.System.gc();
 		});
 
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));

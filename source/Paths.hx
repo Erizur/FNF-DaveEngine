@@ -42,9 +42,9 @@ class Paths
 		return getPath('images/$directoryName', IMAGE, library);
 	}
 
-	static public function getLibraryPath(file:String, library = "preload")
+	inline static public function getLibraryPath(file:String, library = "preload")
 	{
-		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
+		return (library == "preload" || library == "default") ? getPreloadPath(file) : getLibraryPathForce(file, library);
 	}
 
 	inline static function getLibraryPathForce(file:String, library:String)
@@ -63,7 +63,7 @@ class Paths
 		if (isLocale())
 		{
 			var langaugeReturnPath = getPath('locale/${LanguageManager.save.data.language}/' + file, type, library);
-			if (FileSystem.exists(langaugeReturnPath))
+			if (FileAssets.exists(langaugeReturnPath))
 			{
 				return langaugeReturnPath;
 			}
@@ -84,7 +84,7 @@ class Paths
 		if (isLocale())
 		{
 			var langaugeReturnPath = getPath('locale/${LanguageManager.save.data.language}/data/$key.txt', TEXT, library);
-			if (FileSystem.exists(langaugeReturnPath))
+			if (FileAssets.exists(langaugeReturnPath))
 			{
 				return langaugeReturnPath;
 			}
@@ -112,11 +112,6 @@ class Paths
 	inline static public function data(key:String, ?library:String)
 	{
 		return getPath('data/$key', TEXT, library);
-	}
-
-	inline static public function executable(key:String, ?library:String)
-	{
-		return getPath('executables/$key', BINARY, library);
 	}
 
 	inline static public function chart(key:String, ?library:String)
@@ -160,7 +155,7 @@ class Paths
 		if (isLocale())
 		{
 			var langaugeReturnPath = getPath('locale/${LanguageManager.save.data.language}/images/$key.png', IMAGE, library);
-			if (FileSystem.exists(langaugeReturnPath))
+			if (FileAssets.exists(langaugeReturnPath))
 			{
 				return langaugeReturnPath;
 			}
@@ -232,3 +227,11 @@ class Paths
 		return getPath('videos/$key.mp4', BINARY, library);
 	}
 }
+
+/**
+ * there's a big difference between the two
+ * sys.FileSystem actually checks the directory while OpenFL only checks the manifest and could return true for a non-existing directory/file
+ * so we're gonna use this for one over the other
+ * but, OpenFL assets is compatible on every platform compared to sys's FileSystem
+ */
+typedef FileAssets = #if sys FileSystem; #else OpenFlAssets; #end
