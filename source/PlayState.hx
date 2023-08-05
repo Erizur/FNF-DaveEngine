@@ -444,8 +444,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
-		FlxG.fixedTimestep = false;
-
 		// char repositioning
 		repositionChar(dad);
 		if (dadmirror != null)
