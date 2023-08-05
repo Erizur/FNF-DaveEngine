@@ -8,23 +8,15 @@ import openfl.utils.Assets as OpenFlAssets;
 
 class Paths
 {
-	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
+	inline public static final SOUND_EXT = #if web "mp3" #else "ogg" #end;
 
 	static var currentLevel:String;
 
-	static public function isLocale():Bool
-	{
-		if (LanguageManager.save.data.language != 'en-US')
-		{
-			return true;
-		}
-		return false;
-	}
+	inline static public function isLocale():Bool
+		return LanguageManager.save.data.language != 'en-US';
 
-	static public function setCurrentLevel(name:String)
-	{
+	inline static public function setCurrentLevel(name:String)
 		currentLevel = name.toLowerCase();
-	}
 
 	static function getPath(file:String, type:AssetType, library:Null<String>)
 	{
@@ -132,7 +124,7 @@ class Paths
 		return getPath('data/charts/$key.json', TEXT, library);
 	}
 
-	static public function sound(key:String, ?library:String)
+	inline static public function sound(key:String, ?library:String)
 	{
 		return getPath('sounds/$key.$SOUND_EXT', SOUND, library);
 	}
@@ -215,12 +207,12 @@ class Paths
 		return getPath('data/scripts/$key.hx', TEXT, 'preload');
 	}
 
-	static public function langaugeFile():String
+	inline static public function langaugeFile():String
 	{
 		return getPath('locale/languages.txt', TEXT, 'preload');
 	}
 
-	static public function offsetFile(character:String):String
+	inline static public function offsetFile(character:String):String
 	{
 		return getPath('offsets/' + character + '.txt', TEXT, 'preload');
 	}
