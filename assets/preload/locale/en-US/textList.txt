@@ -105,7 +105,12 @@ play_score==Score:
 play_miss==Misses:
 play_accuracy==Accuracy:
 
-// Subtitles //
+// Example Subtitles 1 //
+example_sub1==dave's corn farm
+example_sub2==where the corn is dave
+example_sub3==sub to dave or he steal the corn
+example_sub4==AAAAAAAAAAAAAAAAAA SHIT
+example_sub5==u steal u noob
 
 // Credits State //
 credits_dev==Developers
