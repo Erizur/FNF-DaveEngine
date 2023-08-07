@@ -105,6 +105,15 @@ play_score==Puntuación:
 play_miss==Fallos:
 play_accuracy==Precisión:
 
+// Example Subtitles 1 //
+example_sub1==granja de maíz de dave
+example_sub2==donde el maíz es dave
+example_sub3==sub a dave o él roba el maíz
+example_sub4==AAAAAAAAAAAAAAAAAA MIERDA
+example_sub5==u robar u noob
+
+me when google translate funni!!! HAHWFHTRINYJHGBVIN
+
 // Credits State //
 credits_dev==Desarolladores
 credits_translator==Traductores
