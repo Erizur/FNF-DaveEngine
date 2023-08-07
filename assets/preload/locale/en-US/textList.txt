@@ -105,6 +105,8 @@ play_score==Score:
 play_miss==Misses:
 play_accuracy==Accuracy:
 
+// Subtitles //
+
 // Credits State //
 credits_dev==Developers
 credits_translator==Translators
