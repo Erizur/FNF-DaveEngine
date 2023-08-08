@@ -2321,49 +2321,50 @@ class PlayState extends MusicBeatState
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 		var releaseArray:Array<Bool> = [leftR, downR, upR, rightR];
 
-		#if botplay
-		var BOTPLAY_pressed_anything = false;
-
-		notes.forEachAlive(function(daNote:Note)
+		if (FlxG.save.data.botplay)
 		{
-			if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && daNote.finishedGenerating)
+			var BOTPLAY_pressed_anything = false;
+
+			notes.forEachAlive(function(daNote:Note)
 			{
-				if (daNote.strumTime <= Conductor.songPosition)
+				if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && daNote.finishedGenerating)
 				{
-					BOTPLAY_pressed_anything = true;
-					if (!daNote.isSustainNote)
+					if (daNote.strumTime <= Conductor.songPosition)
 					{
-						controlArray[daNote.noteData % 4] = true;
+						BOTPLAY_pressed_anything = true;
+						if (!daNote.isSustainNote)
+						{
+							controlArray[daNote.noteData % 4] = true;
+							switch (daNote.noteData % 4)
+							{
+								case 0:
+									leftP = true;
+								case 1:
+									downP = true;
+								case 2:
+									upP = true;
+								case 3:
+									rightP = true;
+							}
+						}
 						switch (daNote.noteData % 4)
 						{
 							case 0:
-								leftP = true;
+								left = true;
 							case 1:
-								downP = true;
+								down = true;
 							case 2:
-								upP = true;
+								up = true;
 							case 3:
-								rightP = true;
+								right = true;
 						}
 					}
-					switch (daNote.noteData % 4)
-					{
-						case 0:
-							left = true;
-						case 1:
-							down = true;
-						case 2:
-							up = true;
-						case 3:
-							right = true;
-					}
 				}
-			}
-		});
-		if (!BOTPLAY_pressed_anything)
-			for (e in releaseArray)
-				e = [true];
-		#end
+			});
+			if (!BOTPLAY_pressed_anything)
+				for (e in releaseArray)
+					e = [true];
+		}
 
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
 		{
