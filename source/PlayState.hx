@@ -1127,9 +1127,20 @@ class PlayState extends MusicBeatState
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
-			dad.dance();
-			gf.dance();
-			boyfriend.playAnim('idle', true);
+			// this just based on beatHit stuff but compact
+			if (swagCounter % gfSpeed == 0)
+				gf.dance();
+			if (swagCounter % 2 == 0)
+			{
+				if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+					boyfriend.playAnim('idle');
+				if (!dad.animation.curAnim.name.startsWith("sing"))
+					dad.dance();
+				else if (dadmirror != null && !dadmirror.animation.curAnim.name.startsWith("sing"))
+					dadmirror.dance();
+			}
+			else if (dad.curCharacter == 'spooky' && !dad.animation.curAnim.name.startsWith("sing"))
+				dad.dance();
 
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			var introSoundAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
@@ -2685,41 +2696,20 @@ class PlayState extends MusicBeatState
 				FlxG.log.add('CHANGED BPM!');
 			}
 		}
-		if (dad.animation.finished)
-		{
-			switch (SONG.song.toLowerCase())
-			{
-				case 'tutorial':
-					dad.dance();
-					if (dadmirror != null)
-					{
-						dadmirror.dance();
-					}
-				default:
-					if (dad.holdTimer <= 0 && curBeat % 2 == 0)
-					{
-						dad.dance();
-						if (dadmirror != null)
-						{
-							dadmirror.dance();
-						}
 
-						dadNoteCamOffset[0] = 0;
-						dadNoteCamOffset[1] = 0;
-					}
-			}
+		if (curBeat % 2 == 0)
+		{
+			if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+				boyfriend.playAnim('idle');
+			if (!dad.animation.curAnim.name.startsWith("sing"))
+				dad.dance();
+			else if (dadmirror != null && !dadmirror.animation.curAnim.name.startsWith("sing"))
+				dadmirror.dance();
 		}
-
-		if (boyfriend.animation.finished)
+		else if (dad.curCharacter == 'spooky')
 		{
-			switch (SONG.song.toLowerCase())
-			{
-				default:
-					if (boyfriend.holdTimer <= 0 && curBeat % 2 == 0)
-					{
-						boyfriend.dance();
-					}
-			}
+			if (!dad.animation.curAnim.name.startsWith("sing"))
+				dad.dance();
 		}
 
 		if (SONG.song.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
