@@ -2363,7 +2363,7 @@ class PlayState extends MusicBeatState
 			});
 			if (!BOTPLAY_pressed_anything)
 				for (e in releaseArray)
-					e = [true];
+					e = true;
 		}
 
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
