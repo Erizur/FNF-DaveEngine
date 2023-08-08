@@ -2637,7 +2637,7 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut, onComplete: function(tween){
 						FlxTween.tween(camGame, {zoom: defaultCamZoom}, 0.5, {ease: FlxEase.quadInOut});
 					}});
-					subtitleManager.addSubtitle(LanguageManager.getTextString('example_sub1'), 0.02, 1);
+					subtitleManager.addSubtitle(LanguageManager.getTextString('ugh'), 0.02, 1);
 			}
 		}
 
