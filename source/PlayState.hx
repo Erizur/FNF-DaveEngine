@@ -613,6 +613,10 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		subtitleManager = new SubtitleManager();
+		subtitleManager.cameras = [camHUD];
+		add(subtitleManager);
+
 		super.create();
 
 		Transition.nextCamera = camTransition;
@@ -2626,6 +2630,16 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 			resyncVocals();
+
+		switch (SONG.song.toLowerCase()){
+			case 'ugh': switch(curStep){
+				case 60 | 444 | 524 | 828:
+					FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut, onComplete: function(tween){
+						FlxTween.tween(camGame, {zoom: defaultCamZoom}, 0.5, {ease: FlxEase.quadInOut});
+					}});
+					subtitleManager.addSubtitle(LanguageManager.getTextString('example_sub1'), 0.02, 1);
+			}
+		}
 
 		#if desktop
 		DiscordClient.changePresence(detailsText

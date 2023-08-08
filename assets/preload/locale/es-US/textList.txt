@@ -112,7 +112,7 @@ example_sub3==sub a dave o él roba el maíz
 example_sub4==AAAAAAAAAAAAAAAAAA MIERDA
 example_sub5==u robar u noob
 
-me when google translate funni!!! HAHWFHTRINYJHGBVIN
+// me when google translate funni!!! HAHWFHTRINYJHGBVIN
 
 // Credits State //
 credits_dev==Desarolladores

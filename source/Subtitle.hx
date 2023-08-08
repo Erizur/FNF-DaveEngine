@@ -27,7 +27,7 @@ class Subtitle extends FlxTypeText
       super(properties.x, properties.y, FlxG.width, text, 36);
       sounds = null;
 	  
-      setFormat("Comic Sans MS Bold", properties.subtitleSize, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+      setFormat(Paths.font("vcr.ttf"), properties.subtitleSize, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
       antialiasing = true;
       borderSize = 2;
 

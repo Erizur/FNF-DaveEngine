@@ -112,7 +112,7 @@ example_sub3==sub para dave ou ele roubar o milho
 example_sub4==AAAAAAAAAAAAAAAAAA MERDA
 example_sub5==u roubar u noob
 
-google from translate guys (ok ok u can remove this line sorry i was joking around)
+// google from translate guys (ok ok u can remove this line sorry i was joking around)
 
 // Credits State //
 credits_dev==Desenvolvedores
