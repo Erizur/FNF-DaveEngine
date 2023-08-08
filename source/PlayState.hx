@@ -165,6 +165,8 @@ class PlayState extends MusicBeatState
 
 	public var backgroundSprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 
+	public var subtitleManager:SubtitleManager;
+
 	var revertedBG:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 
 	var possibleNotes:Array<Note> = [];

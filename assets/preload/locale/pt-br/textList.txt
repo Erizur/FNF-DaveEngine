@@ -105,6 +105,15 @@ play_score==Pontuação:
 play_miss==Erros:
 play_accuracy==Precisão:
 
+// Example Subtitles 1 //
+example_sub1==fazenda de milho de dave
+example_sub2==onde o milho é dave
+example_sub3==sub para dave ou ele roubar o milho
+example_sub4==AAAAAAAAAAAAAAAAAA MERDA
+example_sub5==u roubar u noob
+
+google from translate guys (ok ok u can remove this line sorry i was joking around)
+
 // Credits State //
 credits_dev==Desenvolvedores
 credits_translator==Tradutores
