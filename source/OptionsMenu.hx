@@ -63,6 +63,8 @@ class OptionsMenu extends MusicBeatState
 			+ "\n"
 			+ (FlxG.save.data.donoteclick ? LanguageManager.getTextString('option_hitsound_on') : LanguageManager.getTextString('option_hitsound_off'))
 			+ "\n"
+			+ (FlxG.save.data.botplay ? "Botplay On" : "Botplay Off")
+			+ "\n"
 			+ (FlxG.save.data.noteCamera ? LanguageManager.getTextString('option_noteCamera_on') : LanguageManager.getTextString('option_noteCamera_off'))
 			+ "\n"
 			+ LanguageManager.getTextString('option_change_langauge')
