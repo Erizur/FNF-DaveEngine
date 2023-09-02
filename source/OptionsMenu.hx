@@ -63,7 +63,7 @@ class OptionsMenu extends MusicBeatState
 			+ "\n"
 			+ (FlxG.save.data.donoteclick ? LanguageManager.getTextString('option_hitsound_on') : LanguageManager.getTextString('option_hitsound_off'))
 			+ "\n"
-			+ (FlxG.save.data.botplay ? "Botplay On" : "Botplay Off")
+			+ (FlxG.save.data.botplay ? LanguageManager.getTextString('option_enable_botplay') : LanguageManager.getTextString('option_disable_botplay'))
 			+ "\n"
 			+ (FlxG.save.data.noteCamera ? LanguageManager.getTextString('option_noteCamera_on') : LanguageManager.getTextString('option_noteCamera_off'))
 			+ "\n"
@@ -178,6 +178,10 @@ class OptionsMenu extends MusicBeatState
 					CompatTool.save.data.compatMode = !CompatTool.save.data.compatMode;
 					updateGroupControls(CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_disable_compat') : LanguageManager.getTextString('option_enable_compat'),
 						10, 'Vertical');
+				case 10:
+					FlxG.save.data.botplay = !FlxG.save.data.botplay;
+					updateGroupControls((FlxG.save.data.botplay ? LanguageManager.getTextString('option_enable_botplay') : LanguageManager.getTextString('option_disable_botplay')),
+						12, 'Vertical');
 			}
 		}
 	}

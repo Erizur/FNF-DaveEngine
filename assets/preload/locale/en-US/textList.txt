@@ -71,6 +71,9 @@ option_enable_fps==Enable FPS & Memory Counter
 option_enable_compat==Compatibility Mode OFF
 option_disable_compat==Compatibility Mode ON
 
+option_enable_botplay==Botplay Enabled
+option_disable_botplay==Botplay Disabled
+
 en-US==English
 es-US==Spanish
 pt-br==Brazilian-Portuguese
