@@ -616,7 +616,8 @@ class Character extends FlxSprite
 		}
 		dance();
 
-		if (isPlayer) flipX = !flipX;
+		if (isPlayer)
+			flipX = !flipX;
 	}
 
 	public function loadMappedAnims()
@@ -679,7 +680,8 @@ class Character extends FlxSprite
 				holdTimer = 0;
 			}
 
-			if (specialAnim && animation.finished){
+			if (specialAnim && animation.finished)
+			{
 				specialAnim = false;
 				dance();
 			}
@@ -781,7 +783,8 @@ class Character extends FlxSprite
 					else
 						playAnim('danceLeft');
 				default:
-					if (!specialAnim){
+					if (!specialAnim)
+					{
 						playAnim('idle');
 					}
 			}

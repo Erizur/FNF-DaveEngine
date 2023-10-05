@@ -168,7 +168,6 @@ class Alphabet extends FlxSpriteGroup
 
 			if (AlphaCharacter.alphabet.indexOf(splitWords[loopNum].toLowerCase()) != -1 || isNumber || isSymbol)
 				// if (AlphaCharacter.alphabet.contains(splitWords[loopNum].toLowerCase()) || isNumber || isSymbol)
-
 			{
 				if (lastSprite != null && !xPosResetted)
 				{

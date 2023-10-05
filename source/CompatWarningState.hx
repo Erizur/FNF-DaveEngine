@@ -28,7 +28,7 @@ class CompatWarningState extends MusicBeatState
 
 	public override function create():Void
 	{
-		bg = new FlxBackdrop(Paths.image('ui/checkeredBG', 'preload'), #if (flixel_addons < "3.0.0")  1, 1, true, true, #else XY, #end 1, 1);
+		bg = new FlxBackdrop(Paths.image('ui/checkeredBG', 'preload'), #if (flixel_addons < "3.0.0") 1, 1, true, true, #else XY, #end 1, 1);
 		bg.antialiasing = true;
 		add(bg);
 

@@ -47,7 +47,8 @@ class Song
 		if (rawJson == null)
 			throw 'Failed to locate chart JSON in $jsonInput'; // better error when it can't find the JSON
 
-		if (rawJson != null){
+		if (rawJson != null)
+		{
 			while (!rawJson.endsWith("}"))
 				rawJson = rawJson.substr(0, rawJson.length - 1);
 		}

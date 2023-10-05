@@ -11,13 +11,11 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import flixel.system.FlxSound;
 import flixel.FlxG;
-
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
 #end
-
 #if sys
 import sys.FileSystem;
 import sys.io.File;
@@ -65,7 +63,8 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
-		FlxG.signals.preStateSwitch.add(function(){
+		FlxG.signals.preStateSwitch.add(function()
+		{
 			FlxG.bitmap.dumpCache();
 			FlxG.sound.destroy(false);
 
@@ -76,7 +75,8 @@ class Main extends Sprite
 			openfl.system.System.gc();
 		});
 
-		FlxG.signals.postStateSwitch.add(function(){
+		FlxG.signals.postStateSwitch.add(function()
+		{
 			#if cpp
 			cpp.NativeGc.enable(true);
 			cpp.NativeGc.run(true);
@@ -128,7 +128,9 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/Erizur/FNF-DaveEngine\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\nUncaught Error: "
+			+ e.error
+			+ "\nPlease report this error to the GitHub page: https://github.com/Erizur/FNF-DaveEngine\n\n> Crash Handler written by: sqirra-rng";
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");

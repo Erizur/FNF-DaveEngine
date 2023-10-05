@@ -41,7 +41,6 @@ import VideoHandler;
 import vlc.MP4Handler as VideoHandler;
 #end
 #end
-
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -263,11 +262,13 @@ class PlayState extends MusicBeatState
 		// and it will automatically get the dialogue in this function
 		if (Assets.exists(Paths.txt('dialogue/${SONG.song.toLowerCase()}')))
 		{
-			try {
+			try
+			{
 				dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/${SONG.song.toLowerCase()}'));
 				hasDialogue = true;
 			}
-			catch (e){
+			catch (e)
+			{
 				hasDialogue = false;
 			}
 		}
@@ -505,8 +506,8 @@ class PlayState extends MusicBeatState
 		healthBarBG.antialiasing = true;
 		add(healthBarBG);
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8),
-			Std.int(healthBarBG.height - 8), this, 'health', 0, 2);
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		healthBar.createFilledBar(dad.barColor, boyfriend.barColor);
 		insert(members.indexOf(healthBarBG), healthBar);
@@ -520,8 +521,7 @@ class PlayState extends MusicBeatState
 		add(engineWatermark);
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER,
-			FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.5;
 		scoreTxt.antialiasing = true;
@@ -549,22 +549,27 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camDialogue];
 
 		#if HSCRIPT_ALLOWED
-		if (Assets.exists(Paths.scriptFile(SONG.song.toLowerCase()))){
-			try {
+		if (Assets.exists(Paths.scriptFile(SONG.song.toLowerCase())))
+		{
+			try
+			{
 				scriptThing = HScriptTool.create(Paths.scriptFile(SONG.song.toLowerCase()));
 				canRunScript = true;
 			}
-			catch (e){
+			catch (e)
+			{
 				scriptThing = null;
 				canRunScript = false;
 			}
 		}
-		else{
+		else
+		{
 			scriptThing = null;
 			canRunScript = false;
 		}
 
-		if (scriptThing != null && canRunScript){
+		if (scriptThing != null && canRunScript)
+		{
 			scriptThing.setVariable("create", function()
 			{
 			});
@@ -578,9 +583,9 @@ class PlayState extends MusicBeatState
 			{
 			});
 			scriptThing.setVariable("PlayState", this);
-	
+
 			scriptThing.loadFile();
-	
+
 			scriptThing.executeFunc("create");
 		}
 		#end
@@ -904,7 +909,8 @@ class PlayState extends MusicBeatState
 				var bg:BGSprite = new BGSprite('tankSky', -400, -400, Paths.image('stages/tank/tankSky'), null, 0, 0);
 				add(bg);
 
-				var tankSky:BGSprite = new BGSprite('tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), Paths.image('stages/tank/tankClouds'), null, 0.1, 0.1);
+				var tankSky:BGSprite = new BGSprite('tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20),
+					Paths.image('stages/tank/tankClouds'), null, 0.1, 0.1);
 				tankSky.active = true;
 				tankSky.velocity.x = FlxG.random.float(5, 15);
 				add(tankSky);
@@ -1048,7 +1054,8 @@ class PlayState extends MusicBeatState
 		return sprites;
 	}
 
-	inline function initDiscord():Void{
+	inline function initDiscord():Void
+	{
 		// Making difficulty text for Discord Rich Presence.
 		storyDifficultyText = CoolUtil.difficultyString();
 
@@ -1463,7 +1470,7 @@ class PlayState extends MusicBeatState
 			{
 				FlxG.sound.music.pause();
 				vocals.pause();
-				@:privateAccess { //This is so hiding the debugger doesn't play the music again
+				@:privateAccess { // This is so hiding the debugger doesn't play the music again
 					FlxG.sound.music._alreadyPaused = true;
 					vocals._alreadyPaused = true;
 				}
@@ -1607,7 +1614,7 @@ class PlayState extends MusicBeatState
 		{
 			FlxG.sound.music.pause();
 			vocals.pause();
-			@:privateAccess { //This is so hiding the debugger doesn't play the music again
+			@:privateAccess { // This is so hiding the debugger doesn't play the music again
 				FlxG.sound.music._alreadyPaused = true;
 				vocals._alreadyPaused = true;
 			}
@@ -1747,7 +1754,8 @@ class PlayState extends MusicBeatState
 			for (i in 0...unspawnNotes.length)
 			{
 				var daNote:Note = unspawnNotes.shift();
-				if (daNote.strumTime + 800 >= Conductor.songPosition) break;
+				if (daNote.strumTime + 800 >= Conductor.songPosition)
+					break;
 
 				daNote.destroy();
 			}
@@ -1843,10 +1851,12 @@ class PlayState extends MusicBeatState
 
 					if (currentSection != null)
 					{
-						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation'){
+						if (currentSection.altAnim || daNote.noteStyle == 'alt-animation')
+						{
 							altAnim = '-alt';
 
-							if (!daNote.mustPress){
+							if (!daNote.mustPress)
+							{
 								dad.specialAnim = true;
 
 								if (dadmirror != null)
@@ -2131,14 +2141,16 @@ class PlayState extends MusicBeatState
 		if (daStyle.length <= 0)
 			daStyle = '';
 
-		var assetPath:String = switch(daStyle){
+		var assetPath:String = switch (daStyle)
+		{
 			case 'pixel': 'pixel/';
 			default: '';
 		}
 
 		// assetPath is for week6
 		var rating = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + daRating));
-		if (rating.graphic == null){
+		if (rating.graphic == null)
+		{
 			rating.loadGraphic(Paths.image("ui/" + daRating));
 			trace("Rating image not found in " + (Paths.image('ui/$assetPath')));
 		}
@@ -2150,7 +2162,8 @@ class PlayState extends MusicBeatState
 		rating.velocity.x -= FlxG.random.int(0, 10);
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "combo"));
-		if (comboSpr.graphic == null){
+		if (comboSpr.graphic == null)
+		{
 			comboSpr.loadGraphic(Paths.image("ui/combo"));
 			trace("Combo image not found in " + (Paths.image('ui/$assetPath')));
 		}
@@ -2192,7 +2205,8 @@ class PlayState extends MusicBeatState
 		for (i in seperatedScore)
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "num" + Std.int(i)));
-			if (numScore.graphic == null){
+			if (numScore.graphic == null)
+			{
 				numScore.loadGraphic(Paths.image("ui/num" + Std.int(i)));
 				trace("Number images not found in " + (Paths.image('ui/$assetPath')));
 			}
@@ -2429,8 +2443,10 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				for (shit in 0...controlArray.length){
-					if (controlArray[shit] && !theFunne && !inCutscene){
+				for (shit in 0...controlArray.length)
+				{
+					if (controlArray[shit] && !theFunne && !inCutscene)
+					{
 						noteMiss(shit);
 						updateAccuracy();
 					}
@@ -2643,14 +2659,21 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 			resyncVocals();
 
-		switch (SONG.song.toLowerCase()){
-			case 'ugh': switch(curStep){
-				case 60 | 444 | 524 | 828:
-					FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {ease: FlxEase.quadInOut, onComplete: function(tween){
-						FlxTween.tween(camGame, {zoom: defaultCamZoom}, 0.5, {ease: FlxEase.quadInOut});
-					}});
-					subtitleManager.addSubtitle(LanguageManager.getTextString('ugh'), 0.02, 1);
-			}
+		switch (SONG.song.toLowerCase())
+		{
+			case 'ugh':
+				switch (curStep)
+				{
+					case 60 | 444 | 524 | 828:
+						FlxTween.tween(camGame, {zoom: 1.3}, 0.5, {
+							ease: FlxEase.quadInOut,
+							onComplete: function(tween)
+							{
+								FlxTween.tween(camGame, {zoom: defaultCamZoom}, 0.5, {ease: FlxEase.quadInOut});
+							}
+						});
+						subtitleManager.addSubtitle(LanguageManager.getTextString('ugh'), 0.02, 1);
+				}
 		}
 
 		#if desktop
@@ -2794,7 +2817,8 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	override function destroy(){
+	override function destroy()
+	{
 		instance = null;
 		if (scriptThing != null)
 			scriptThing = null;
@@ -2854,7 +2878,7 @@ class PlayState extends MusicBeatState
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
 				add(evilTrail);
 		}
-	}	
+	}
 
 	function fastCarDrive()
 	{

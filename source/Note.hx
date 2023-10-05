@@ -48,7 +48,8 @@ class Note extends FlxSprite
 
 	var notes = ['purple', 'blue', 'green', 'red'];
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal", inCharter:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal",
+			inCharter:Bool = false)
 	{
 		super();
 
@@ -152,7 +153,8 @@ class Note extends FlxSprite
 
 			animation.play('${notes[noteData]}holdend');
 
-			if (PlayState.scrollType == 'downscroll') flipY = true;
+			if (PlayState.scrollType == 'downscroll')
+				flipY = true;
 
 			updateHitbox();
 
@@ -185,9 +187,8 @@ class Note extends FlxSprite
 
 		if (MyStrum != null)
 			GoToStrum(MyStrum);
-		else
-			if (isInState('PlayState'))
-				SearchForStrum(mustPress);
+		else if (isInState('PlayState'))
+			SearchForStrum(mustPress);
 
 		if (mustPress && isInState('PlayState'))
 		{

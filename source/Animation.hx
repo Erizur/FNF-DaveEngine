@@ -1,6 +1,7 @@
 package;
 
-typedef Animation = {
+typedef Animation =
+{
 	public var name:String;
 	public var prefixName:String;
 	public var frames:Int;

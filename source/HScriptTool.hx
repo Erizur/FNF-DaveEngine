@@ -30,7 +30,8 @@ class HScriptTool implements IFlxDestroyable
 	public static function loadScript(path:String):HScriptTool
 	{
 		#if HSCRIPT_ALLOWED
-		if (!PlayState.canRunScript) return null;
+		if (!PlayState.canRunScript)
+			return null;
 
 		var script = create(path);
 		if (script != null)
@@ -177,7 +178,8 @@ class Script extends HScriptTool
 
 	public override function setVariable(name:String, val:Dynamic)
 	{
-		if (!PlayState.canRunScript || hscript == null) return;
+		if (!PlayState.canRunScript || hscript == null)
+			return;
 		#if HSCRIPT_ALLOWED
 		hscript.variables.set(name, val);
 		@:privateAccess
@@ -187,7 +189,8 @@ class Script extends HScriptTool
 
 	public override function getVariable(name:String):Dynamic
 	{
-		if (!PlayState.canRunScript || hscript == null) return null;
+		if (!PlayState.canRunScript || hscript == null)
+			return null;
 
 		#if HSCRIPT_ALLOWED
 		if (@:privateAccess hscript.locals.exists(name) && @:privateAccess hscript.locals[name] != null)

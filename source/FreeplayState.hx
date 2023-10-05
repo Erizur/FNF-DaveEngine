@@ -550,7 +550,8 @@ class FreeplayState extends MusicBeatState
 
 			item.alpha = 0.6;
 
-			if (item.targetY == 0) item.alpha = 1;
+			if (item.targetY == 0)
+				item.alpha = 1;
 		}
 	}
 }
