@@ -2,18 +2,11 @@ package;
 
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-import Controls.KeyboardScheme;
-import Controls.Control;
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.input.keyboard.FlxKey;
-import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
 import flixel.util.FlxTimer;
 #if desktop
 import Discord.DiscordClient;
@@ -27,8 +20,6 @@ class OptionsMenu extends MusicBeatState
 
 	private var grpControls:FlxTypedGroup<Alphabet>;
 	var versionShit:FlxText;
-
-	var bgShader:Shaders.GlitchEffect;
 
 	var languages:Array<Language> = new Array<Language>();
 	var curLanguage:String = LanguageManager.save.data.language;
@@ -101,13 +92,6 @@ class OptionsMenu extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		#if SHADERS_ENABLED
-		if (bgShader != null)
-		{
-			bgShader.shader.uTime.value[0] += elapsed;
-		}
-		#end
 
 		if (controls.BACK)
 		{
@@ -182,6 +166,7 @@ class OptionsMenu extends MusicBeatState
 					FlxG.save.data.botplay = !FlxG.save.data.botplay;
 					updateGroupControls((FlxG.save.data.botplay ? LanguageManager.getTextString('option_enable_botplay') : LanguageManager.getTextString('option_disable_botplay')),
 						12, 'Vertical');
+					trace(FlxG.save.data.botplay);
 			}
 		}
 	}
