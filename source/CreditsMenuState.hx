@@ -46,8 +46,6 @@ class CreditsMenuState extends MusicBeatState
 	var socialButtons:Array<SocialButton> = new Array<SocialButton>();
 	var hasSocialMedia:Bool = true;
 
-	public var DoFunnyScroll:Bool = false;
-
 	var peopleInCredits:Array<Person> = [
 		// Developers //
 		new Person("Erizur", CreditsType.Dev, [
@@ -120,26 +118,14 @@ class CreditsMenuState extends MusicBeatState
 		selectedFormat.borderSize = 2;
 		selectedFormat.borderQuality = 2;
 
-		if (!DoFunnyScroll)
-		{
-			bg.loadGraphic(Paths.image('backgrounds/menu'));
-			bg.color = FlxColor.LIME;
-			bg.scrollFactor.set();
-			add(bg);
+		bg.loadGraphic(Paths.image('backgrounds/menu'));
+		bg.color = FlxColor.LIME;
+		bg.scrollFactor.set();
+		add(bg);
 
-			overlay.color = FlxColor.LIME;
-			overlay.scrollFactor.set();
-			add(overlay);
-		}
-		else
-		{
-			FlxG.sound.playMusic(Paths.music('creditsTheme'));
-			// PLACEHOLDER.
-			bg.loadGraphic(Paths.image('backgrounds/menu'));
-			bg.color = FlxColor.GRAY;
-			bg.scrollFactor.set();
-			add(bg);
-		}
+		overlay.color = FlxColor.LIME;
+		overlay.scrollFactor.set();
+		add(overlay);
 
 		var developers:Array<Person> = new Array<Person>();
 		var translators:Array<Person> = new Array<Person>();
@@ -195,14 +181,9 @@ class CreditsMenuState extends MusicBeatState
 				titleText.screenCenter(X);
 				titleText.antialiasing = true;
 				titleText.scrollFactor.set(0, 1);
-				if (DoFunnyScroll)
-				{
-					titleText.color = FlxColor.PURPLE;
-				}
 
 				var personIcon:PersonIcon = new PersonIcon(titleText);
 				personIcon.loadGraphic(Paths.image('credits/titles/' + creditsTypeString));
-				personIcon.visible = !DoFunnyScroll;
 				add(personIcon);
 
 				var creditsTextTitleText = new CreditsText(titleText, false, personIcon);
@@ -224,7 +205,6 @@ class CreditsMenuState extends MusicBeatState
 				personIcon.loadGraphic(Paths.image('credits/icons/Developers/Placeholder'));
 			add(personIcon);
 
-			personIcon.visible = !DoFunnyScroll;
 			personIcon.antialiasing = true;
 
 			var creditsTextItem:CreditsText = new CreditsText(textItem, true, personIcon);
@@ -251,34 +231,6 @@ class CreditsMenuState extends MusicBeatState
 
 		StupidCameraFollow.x = menuItems[0].text.x;
 		StupidCameraFollow.y = menuItems[0].text.y - 460; // so close yet so far from having the offset be 420 :(
-		if (DoFunnyScroll)
-		{
-			// (FlxG.sound.music.length / 1000) - 15
-			FlxTween.tween(StupidCameraFollow, {y: (menuItems[menuItems.length - 1].text.y + 440)}, (FlxG.sound.music.length / 1000) - 10.5, {
-				ease: FlxEase.linear,
-				onComplete: function(tween:FlxTween)
-				{
-					var logoBl:FlxSprite = new FlxSprite(StupidCameraFollow.x, StupidCameraFollow.y);
-					logoBl.frames = Paths.getSparrowAtlas('ui/logoBumpin');
-					logoBl.antialiasing = true;
-					logoBl.alpha = 0;
-					logoBl.x -= logoBl.width / 2;
-					logoBl.y -= logoBl.height / 2;
-					add(logoBl);
-					FlxTween.tween(logoBl, {alpha: 1}, 5.6, {
-						ease: FlxEase.quadIn,
-						onComplete: function(tween:FlxTween)
-						{
-							new FlxTimer().start((FlxG.sound.music.length / 1000) - (FlxG.sound.music.time / 1000), function(timer:FlxTimer)
-							{
-								FlxG.sound.playMusic(Paths.music('theend'));
-								FlxG.switchState(new StoryMenuState());
-							});
-						}
-					});
-				}
-			});
-		}
 		super.create();
 	}
 
@@ -289,18 +241,6 @@ class CreditsMenuState extends MusicBeatState
 		var downPressed = controls.DOWN_P;
 		var back = controls.BACK;
 		var accept = controls.ACCEPT;
-		if (DoFunnyScroll)
-		{
-			FlxG.camera.follow(StupidCameraFollow, 0.1);
-			super.update(elapsed);
-			if (back)
-			{
-				// make sure they get the epic song no matter what
-				FlxG.sound.playMusic(Paths.music('theend'));
-				FlxG.switchState(new StoryMenuState());
-			}
-			return;
-		}
 		switch (state)
 		{
 			case State.SelectingName:
@@ -444,10 +384,6 @@ class CreditsMenuState extends MusicBeatState
 
 	function updateText(index:Int)
 	{
-		if (DoFunnyScroll)
-		{
-			return;
-		}
 		var currentText:FlxText = menuItems[index].text;
 		if (menuItems[index].menuItem)
 		{
