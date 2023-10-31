@@ -1677,17 +1677,6 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.SEVEN)
 		{
-			if (FlxTransitionableState.skipNextTransIn)
-				Transition.nextCamera = null;
-
-			switch (SONG.song.toLowerCase())
-			{
-				default:
-					FlxG.switchState(new ChartingState());
-					#if desktop
-					DiscordClient.changePresence("Chart Editor", null, null, true);
-					#end
-			}
 		}
 
 		final thingy = 0.88;
@@ -1717,58 +1706,65 @@ class PlayState extends MusicBeatState
 			iconP2.changeState('normal');
 
 		#if debug
-		if (FlxG.keys.justPressed.FOUR)
-		{
-			trace('DUMP LOL:\nDAD POSITION: ${dad.getPosition()}\nBOYFRIEND POSITION: ${boyfriend.getPosition()}\nGF POSITION: ${gf.getPosition()}\nCAMERA POSITION: ${camFollow.getPosition()}');
-		}
-		if (FlxG.keys.justPressed.FIVE)
-		{
-			FlxG.switchState(new CharacterDebug(dad.curCharacter));
-		}
-		if (FlxG.keys.justPressed.SEMICOLON)
-		{
-			FlxG.switchState(new CharacterDebug(boyfriend.curCharacter));
-		}
-		if (FlxG.keys.justPressed.COMMA)
-		{
-			FlxG.switchState(new CharacterDebug(gf.curCharacter));
-		}
-		if (FlxG.keys.justPressed.EIGHT)
-			FlxG.switchState(new AnimationDebug(dad.curCharacter));
-		if (FlxG.keys.justPressed.SIX)
-			FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
-		if (FlxG.keys.justPressed.TWO) // Go 10 seconds into the future :O
-		{
-			FlxG.sound.music.pause();
-			vocals.pause();
-			boyfriend.stunned = true;
-			Conductor.songPosition += 10000;
-			notes.forEachAlive(function(daNote:Note)
-			{
-				if (daNote.strumTime + 800 < Conductor.songPosition)
+		switch (FlxG.keys.firstJustPressed()) {
+			case FlxKey.FOUR: 
+				trace('DUMP LOL:\nDAD POSITION: ${dad.getPosition()}\nBOYFRIEND POSITION: ${boyfriend.getPosition()}\nGF POSITION: ${gf.getPosition()}\nCAMERA POSITION: ${camFollow.getPosition()}');
+			case FlxKey.FIVE: 
+				FlxG.switchState(new CharacterDebug(dad.curCharacter));
+			case FlxKey.SEMICOLON: 
+				FlxG.switchState(new CharacterDebug(boyfriend.curCharacter));
+			case FlxKey.COMMA: 
+				FlxG.switchState(new CharacterDebug(gf.curCharacter));
+			case FlxKey.EIGHT: 
+				FlxG.switchState(new AnimationDebug(dad.curCharacter));
+			case FlxKey.SIX: 
+				FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
+			case FlxKey.THREE:
+				FlxG.switchState(new AnimationDebug(gf.curCharacter));
+			case FlxKey.SEVEN:
+				
+				if (FlxTransitionableState.skipNextTransIn)
+					Transition.nextCamera = null;
+	
+				switch (SONG.song.toLowerCase())
 				{
-					notes.remove(daNote, true);
+					default:
+						FlxG.switchState(new ChartingState());
+						#if desktop
+						DiscordClient.changePresence("Chart Editor", null, null, true);
+						#end
+				}
+			case FlxKey.TWO:
+				FlxG.sound.music.pause();
+				vocals.pause();
+				boyfriend.stunned = true;
+				Conductor.songPosition += 10000;
+				notes.forEachAlive(function(daNote:Note)
+				{
+					if (daNote.strumTime + 800 < Conductor.songPosition)
+					{
+						notes.remove(daNote, true);
+						daNote.destroy();
+					}
+				});
+				for (i in 0...unspawnNotes.length)
+				{
+					var daNote:Note = unspawnNotes.shift();
+					if (daNote.strumTime + 800 >= Conductor.songPosition)
+						break;
+	
 					daNote.destroy();
 				}
-			});
-			for (i in 0...unspawnNotes.length)
-			{
-				var daNote:Note = unspawnNotes.shift();
-				if (daNote.strumTime + 800 >= Conductor.songPosition)
-					break;
-
-				daNote.destroy();
-			}
-
-			FlxG.sound.music.time = Conductor.songPosition;
-			FlxG.sound.music.play();
-
-			vocals.time = Conductor.songPosition;
-			vocals.play();
-			boyfriend.stunned = false;
-		}
-		if (FlxG.keys.justPressed.THREE)
-			FlxG.switchState(new AnimationDebug(gf.curCharacter));
+	
+				FlxG.sound.music.time = Conductor.songPosition;
+				FlxG.sound.music.play();
+	
+				vocals.time = Conductor.songPosition;
+				vocals.play();
+				boyfriend.stunned = false;
+			
+	        }
+			
 		#end
 
 		if (startingSong)
