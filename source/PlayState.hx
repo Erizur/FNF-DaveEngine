@@ -1675,9 +1675,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.justPressed.SEVEN)
-		{
-		}
 
 		final thingy = 0.88;
 
