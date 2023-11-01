@@ -30,6 +30,7 @@ import flixel.util.FlxTimer;
 import openfl.utils.Assets;
 import flixel.math.FlxAngle;
 import flixel.util.FlxDestroyUtil;
+import flixel.input.keyboard.FlxKey;
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "3.0.0")
 import hxcodec.flixel.FlxVideo as VideoHandler;
@@ -1703,65 +1704,68 @@ class PlayState extends MusicBeatState
 			iconP2.changeState('normal');
 
 		#if debug
-		switch (FlxG.keys.firstJustPressed()) {
-			case FlxKey.FOUR: 
-				trace('DUMP LOL:\nDAD POSITION: ${dad.getPosition()}\nBOYFRIEND POSITION: ${boyfriend.getPosition()}\nGF POSITION: ${gf.getPosition()}\nCAMERA POSITION: ${camFollow.getPosition()}');
-			case FlxKey.FIVE: 
-				FlxG.switchState(new CharacterDebug(dad.curCharacter));
-			case FlxKey.SEMICOLON: 
-				FlxG.switchState(new CharacterDebug(boyfriend.curCharacter));
-			case FlxKey.COMMA: 
-				FlxG.switchState(new CharacterDebug(gf.curCharacter));
-			case FlxKey.EIGHT: 
-				FlxG.switchState(new AnimationDebug(dad.curCharacter));
-			case FlxKey.SIX: 
-				FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
-			case FlxKey.THREE:
-				FlxG.switchState(new AnimationDebug(gf.curCharacter));
-			case FlxKey.SEVEN:
-				
-				if (FlxTransitionableState.skipNextTransIn)
-					Transition.nextCamera = null;
-	
-				switch (SONG.song.toLowerCase())
-				{
-					default:
-						FlxG.switchState(new ChartingState());
-						#if desktop
-						DiscordClient.changePresence("Chart Editor", null, null, true);
-						#end
-				}
-			case FlxKey.TWO:
-				FlxG.sound.music.pause();
-				vocals.pause();
-				boyfriend.stunned = true;
-				Conductor.songPosition += 10000;
-				notes.forEachAlive(function(daNote:Note)
-				{
-					if (daNote.strumTime + 800 < Conductor.songPosition)
+		final keyPressed:FlxKey = FlxG.keys.firstJustPressed();
+		if (keyPressed != FlxKey.ZERO){
+			switch (keyPressed) {
+				case FOUR: 
+					trace('DUMP LOL:\nDAD POSITION: ${dad.getPosition()}\nBOYFRIEND POSITION: ${boyfriend.getPosition()}\nGF POSITION: ${gf.getPosition()}\nCAMERA POSITION: ${camFollow.getPosition()}');
+				case FIVE: 
+					FlxG.switchState(new CharacterDebug(dad.curCharacter));
+				case SEMICOLON: 
+					FlxG.switchState(new CharacterDebug(boyfriend.curCharacter));
+				case COMMA: 
+					FlxG.switchState(new CharacterDebug(gf.curCharacter));
+				case EIGHT: 
+					FlxG.switchState(new AnimationDebug(dad.curCharacter));
+				case SIX: 
+					FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
+				case THREE:
+					FlxG.switchState(new AnimationDebug(gf.curCharacter));
+				case SEVEN:
+					
+					if (FlxTransitionableState.skipNextTransIn)
+						Transition.nextCamera = null;
+		
+					switch (SONG.song.toLowerCase())
 					{
-						notes.remove(daNote, true);
+						default:
+							FlxG.switchState(new ChartingState());
+							#if desktop
+							DiscordClient.changePresence("Chart Editor", null, null, true);
+							#end
+					}
+				case TWO:
+					FlxG.sound.music.pause();
+					vocals.pause();
+					boyfriend.stunned = true;
+					Conductor.songPosition += 10000;
+					notes.forEachAlive(function(daNote:Note)
+					{
+						if (daNote.strumTime + 800 < Conductor.songPosition)
+						{
+							notes.remove(daNote, true);
+							daNote.destroy();
+						}
+					});
+					for (i in 0...unspawnNotes.length)
+					{
+						var daNote:Note = unspawnNotes.shift();
+						if (daNote.strumTime + 800 >= Conductor.songPosition)
+							break;
+		
 						daNote.destroy();
 					}
-				});
-				for (i in 0...unspawnNotes.length)
-				{
-					var daNote:Note = unspawnNotes.shift();
-					if (daNote.strumTime + 800 >= Conductor.songPosition)
-						break;
-	
-					daNote.destroy();
-				}
-	
-				FlxG.sound.music.time = Conductor.songPosition;
-				FlxG.sound.music.play();
-	
-				vocals.time = Conductor.songPosition;
-				vocals.play();
-				boyfriend.stunned = false;
-			
-	        }
-			
+		
+					FlxG.sound.music.time = Conductor.songPosition;
+					FlxG.sound.music.play();
+		
+					vocals.time = Conductor.songPosition;
+					vocals.play();
+					boyfriend.stunned = false;
+
+				default: // leave blank
+			}
+		}
 		#end
 
 		if (startingSong)
