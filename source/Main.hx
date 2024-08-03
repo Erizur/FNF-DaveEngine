@@ -11,6 +11,8 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import flixel.system.FlxSound;
 import flixel.FlxG;
+import backend.SSPlugin as ScreenShotPlugin;
+import debug.FpsDisplay;
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
@@ -34,6 +36,7 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
 	public static var fps:FpsDisplay;
+	public static var funkinGame:FlxGame = null;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -84,69 +87,29 @@ class Main extends Sprite
 			#end
 			openfl.system.System.gc();
 		});
+		backend.CrashHandler.init();
 
 		FlxG.fixedTimestep = false;
 
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
+		funkinGame = new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen); 
+		addChild(funkinGame);
 
 		fps = new FpsDisplay(10, 3, 0xFFFFFF);
-		fps.defaultTextFormat = new TextFormat("_sans", 12, 0xFFFFFF, false);
+		// fps.defaultTextFormat = new TextFormat("_sans", 12, 0xFFFFFF, false);
 		addChild(fps);
 
-		// Forever engine crash handler frfr
-		// but in all seriousness this is better then nothing
-		#if CRASH_HANDLER
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
-		#end
-
 		#if (!web && flixel < "5.5.0")
-		FlxG.plugins.add(new flixel.addons.plugin.ScreenShotPlugin());
+		FlxG.plugins.add(new ScreenShotPlugin());
 		#elseif (flixel >= "5.6.0")
-		FlxG.plugins.addIfUniqueType(new flixel.addons.plugin.ScreenShotPlugin());
+		FlxG.plugins.addIfUniqueType(new ScreenShotPlugin());
+		#end
+
+		#if FLX_SOUND_TRAY
+		@:privateAccess
+		{
+			if (funkinGame._customSoundTray != null)
+				funkinGame._customSoundTray = flixel.system.ui.DaveSoundTray;
+		}
 		#end
 	}
-
-	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
-	// very cool person for real they don't get enough credit for their work
-	// I took this from psych, since it's better to have this then just simply "Null Object Reference" or nothing at all
-	#if CRASH_HANDLER
-	function onCrash(e:UncaughtErrorEvent):Void
-	{
-		var errMsg:String = "";
-		var path:String;
-		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-		var dateNow:String = Date.now().toString();
-
-		dateNow = dateNow.replace(" ", "_");
-		dateNow = dateNow.replace(":", "'");
-
-		path = "./crash/" + "DaveEngine_" + dateNow + ".txt";
-
-		for (stackItem in callStack)
-		{
-			switch (stackItem)
-			{
-				case FilePos(s, file, line, column):
-					errMsg += file + " (line " + line + ")\n";
-				default:
-					Sys.println(stackItem);
-			}
-		}
-
-		errMsg += "\nUncaught Error: "
-			+ e.error
-			+ "\nPlease report this error to the GitHub page: https://github.com/Erizur/FNF-DaveEngine\n\n> Crash Handler written by: sqirra-rng";
-
-		if (!FileSystem.exists("./crash/"))
-			FileSystem.createDirectory("./crash/");
-
-		File.saveContent(path, errMsg + "\n");
-
-		Sys.println(errMsg);
-		Sys.println("Crash dump saved in " + Path.normalize(path));
-
-		lime.app.Application.current.window.alert(errMsg, "Error!");
-		Sys.exit(1);
-	}
-	#end
 }
