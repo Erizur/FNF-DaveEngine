@@ -42,7 +42,7 @@ import VideoHandler;
 import vlc.MP4Handler as VideoHandler;
 #end
 #end
-#if desktop
+#if (desktop && !hl)
 import Discord.DiscordClient;
 #end
 
@@ -67,6 +67,7 @@ class PlayState extends MusicBeatState
 	public var bfGroup:FlxGroup;
 	public var gfGroup:FlxGroup;
 
+	// this is for score multiplying per note
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
 	var focusOnDadGlobal:Bool = true;
@@ -215,6 +216,10 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		instance = this;
+
+		#if cpp
+		cpp.vm.Gc.enable(false); // prevent lag spikes where it matters most
+		#end
 
 		paused = false;
 		scrollType = FlxG.save.data.downscroll ? 'downscroll' : 'upscroll';
@@ -442,7 +447,7 @@ class PlayState extends MusicBeatState
 
 		add(camFollow);
 
-		FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		FlxG.camera.follow(camFollow, LOCKON, 0.1);
 		FlxG.camera.zoom = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
 
@@ -554,7 +559,7 @@ class PlayState extends MusicBeatState
 		{
 			try
 			{
-				scriptThing = HScriptTool.create(Paths.scriptFile(SONG.song.toLowerCase()));
+				scriptThing = HScriptTool.loadScript(Paths.scriptFile(SONG.song.toLowerCase()));
 				canRunScript = true;
 			}
 			catch (e)
@@ -584,10 +589,7 @@ class PlayState extends MusicBeatState
 			{
 			});
 			scriptThing.setVariable("PlayState", this);
-
-			scriptThing.loadFile();
-
-			scriptThing.executeFunc("create");
+			scriptThing.executeFunction("create");
 		}
 		#end
 
@@ -724,10 +726,8 @@ class PlayState extends MusicBeatState
 					grpLimoDancers.add(dancer);
 				}
 
-				var limoTex = Paths.getSparrowAtlas('stages/limo/limoDrive');
-
 				limo = new FlxSprite(-120, 550);
-				limo.frames = limoTex;
+				limo.frames = Paths.getSparrowAtlas('stages/limo/limoDrive');
 				limo.animation.addByPrefix('drive', "Limo stage", 24);
 				limo.animation.play('drive');
 				limo.antialiasing = true;
@@ -1076,7 +1076,7 @@ class PlayState extends MusicBeatState
 		detailsPausedText = "Paused - " + detailsText;
 
 		// Updating Discord Rich Presence.
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -1328,7 +1328,7 @@ class PlayState extends MusicBeatState
 		for (tween in tweenList)
 			tween.active = true;
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -1487,7 +1487,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			#if desktop
+			#if (desktop && !hl)
 			DiscordClient.changePresence("PAUSED on "
 				+ SONG.song
 				+ " ("
@@ -1533,7 +1533,7 @@ class PlayState extends MusicBeatState
 
 			if (startTimer != null && startTimer.finished)
 			{
-				#if desktop
+				#if (desktop && !hl)
 				DiscordClient.changePresence(detailsText
 					+ " "
 					+ SONG.song
@@ -1552,7 +1552,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				#if desktop
+				#if (desktop && !hl)
 				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ") ", iconRPC);
 				#end
 			}
@@ -1569,7 +1569,7 @@ class PlayState extends MusicBeatState
 		vocals.time = Conductor.songPosition;
 		vocals.play();
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -1602,7 +1602,7 @@ class PlayState extends MusicBeatState
 	{
 		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
-			scriptThing.executeFunc("update", [elapsed]);
+			scriptThing.executeFunction("update", [elapsed]);
 		#end
 
 		if (songName != null)
@@ -1730,7 +1730,7 @@ class PlayState extends MusicBeatState
 					{
 						default:
 							FlxG.switchState(new ChartingState());
-							#if desktop
+							#if (desktop && !hl)
 							DiscordClient.changePresence("Chart Editor", null, null, true);
 							#end
 					}
@@ -2650,7 +2650,7 @@ class PlayState extends MusicBeatState
 
 		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
-			scriptThing.executeFunc("stepHit", [curStep]);
+			scriptThing.executeFunction("stepHit", [curStep]);
 		#end
 
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
@@ -2673,7 +2673,7 @@ class PlayState extends MusicBeatState
 				}
 		}
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -2697,7 +2697,7 @@ class PlayState extends MusicBeatState
 
 		#if HSCRIPT_ALLOWED
 		if (scriptThing != null && canRunScript)
-			scriptThing.executeFunc("beatHit", [curBeat]);
+			scriptThing.executeFunction("beatHit", [curBeat]);
 		#end
 
 		var currentSection = SONG.notes[Std.int(curStep / 16)];
@@ -2816,6 +2816,10 @@ class PlayState extends MusicBeatState
 
 	override function destroy()
 	{
+		#if cpp
+		cpp.vm.Gc.enable(true);
+		#end
+
 		instance = null;
 		if (scriptThing != null)
 			scriptThing = null;
@@ -2832,7 +2836,7 @@ class PlayState extends MusicBeatState
 
 		openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y, deathSkinCheck));
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence("GAME OVER -- "
 			+ SONG.song
 			+ " ("

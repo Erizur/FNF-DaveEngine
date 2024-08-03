@@ -12,7 +12,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
-#if desktop
+#if (desktop && !hl)
 import Discord.DiscordClient;
 #end
 
@@ -97,7 +97,7 @@ class CreditsMenuState extends MusicBeatState
 
 	override function create()
 	{
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence("In the Credits Menu", null);
 		#end
 

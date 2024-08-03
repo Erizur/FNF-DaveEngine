@@ -16,10 +16,15 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+#if (flixel >= "5.6.0")
+import flixel.util.typeLimit.NextState;
+#end
 
 class FlxSplash extends FlxState
 {
+	#if (flixel < "5.6.0")
 	public static var nextState:Class<FlxState>;
+	#end
 
 	/**
 	 * @since 4.8.0
@@ -33,6 +38,15 @@ class FlxSplash extends FlxState
 	var _cachedTimestep:Bool;
 	var _cachedAutoPause:Bool;
 	var skipScreen:FlxText;
+	#if (flixel >= "5.6.0")
+	var nextState:NextState;
+	
+	public function new(nextState:NextState)
+	{
+		super();
+		this.nextState = nextState;
+	}
+	#end
 
 	override public function create():Void
 	{
@@ -118,7 +132,12 @@ class FlxSplash extends FlxState
 		#if FLX_KEYBOARD
 		FlxG.keys.enabled = true;
 		#end
+		#if (flixel < "5.6.0")
 		FlxG.switchState(Type.createInstance(nextState, []));
+		#else
+		FlxG.switchState(nextState);
+		#end
+		@:privateAccess
 		FlxG.game._gameJustStarted = true;
 
 		if (FlxG.save.data.hasSeenSplash == null)

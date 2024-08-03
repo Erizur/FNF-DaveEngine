@@ -24,7 +24,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
 import flixel.input.keyboard.FlxKey;
-#if desktop
+#if (desktop && !hl)
 import Discord.DiscordClient;
 #end
 
@@ -83,7 +83,7 @@ class MainMenuState extends MusicBeatState
 		}
 		persistentUpdate = persistentDraw = true;
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 

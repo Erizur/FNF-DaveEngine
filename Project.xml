@@ -45,7 +45,7 @@
 	<assets path="assets/fonts" embed='true'/>
 
 	<define name="CRASH_HANDLER" if="desktop release" />
-	<define name="VIDEOS_ALLOWED" if="desktop || android" unless="32bits"/>
+	<define name="VIDEOS_ALLOWED" if="desktop || android" unless="32bits || hl"/>
 	<define name="SHADERS_ENABLED" unless="mac"/>
 	<define name="HSCRIPT_ALLOWED"/>
 	<define name="PRELOAD_ALL" unless="web" />
@@ -68,7 +68,7 @@
 	<haxelib name="flixel" />
 	<haxedev set='webgl' if="web"/>
 	<haxelib name="flixel-addons" />
-	<haxelib name="hscript-improved" if="HSCRIPT_ALLOWED" />
+	<haxelib name="hscript" if="HSCRIPT_ALLOWED" />
 	<define name="hscriptPos" if="HSCRIPT_ALLOWED" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED" />
@@ -83,6 +83,8 @@
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />
 	<haxedef name="HXCPP_STACK_TRACE" />
+
+	<haxedef name="no-inline" if="html5" />
 
 	<setenv name="next"/>
 

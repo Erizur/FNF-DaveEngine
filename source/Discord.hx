@@ -1,6 +1,6 @@
 package;
 
-#if desktop
+#if (desktop && !hl)
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
 

@@ -17,7 +17,7 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.FlxObject;
-#if desktop import Discord.DiscordClient; #end
+#if (desktop && !hl) import Discord.DiscordClient; #end
 
 class FreeplayState extends MusicBeatState
 {
@@ -68,7 +68,7 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		#if desktop DiscordClient.changePresence("In the Freeplay Menu", null); #end
+		#if (desktop && !hl) DiscordClient.changePresence("In the Freeplay Menu", null); #end
 
 		openfl.system.System.gc();
 

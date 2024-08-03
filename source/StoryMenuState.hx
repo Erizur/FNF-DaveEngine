@@ -18,7 +18,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-#if desktop
+#if (desktop && !hl)
 import Discord.DiscordClient;
 #end
 
@@ -69,7 +69,7 @@ class StoryMenuState extends MusicBeatState
 				FlxColor.fromString('#F9CF51'), bannerNames[i]));
 		}
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence("In the Story Menu", null);
 		#end
 

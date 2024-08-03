@@ -19,7 +19,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import openfl.Assets;
 import flixel.input.keyboard.FlxKey;
-#if desktop
+#if (desktop && !hl)
 import Discord.DiscordClient;
 #end
 
@@ -42,7 +42,7 @@ class TitleState extends MusicBeatState
 
 		// DEBUG BULLSHIT
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.initialize();
 		#end
 
@@ -269,7 +269,7 @@ class TitleState extends MusicBeatState
 			{
 				case 3:
 					addMoreText('TheBuilderXD');
-					addMoreText('Erizur, T5mpler, MemeHoovy');
+					addMoreText('Erizur, T5mpler, Moxie');
 				case 4:
 					addMoreText('and Contributors');
 				case 5:

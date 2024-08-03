@@ -8,7 +8,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-#if desktop
+#if (desktop && !hl)
 import Discord.DiscordClient;
 #end
 
@@ -28,7 +28,7 @@ class OptionsMenu extends MusicBeatState
 
 	override function create()
 	{
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence("In the Options Menu", null);
 		#end
 		var menuBG:FlxSprite = new FlxSprite();

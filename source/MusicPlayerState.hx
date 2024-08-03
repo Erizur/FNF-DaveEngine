@@ -16,7 +16,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
-#if desktop
+#if (desktop && !hl)
 import Discord.DiscordClient;
 #end
 
@@ -71,7 +71,7 @@ class MusicPlayerState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		#if desktop
+		#if (desktop && !hl)
 		DiscordClient.changePresence("In the OST Menu", null);
 		#end
 
@@ -155,7 +155,7 @@ class MusicPlayerState extends MusicBeatState
 		{
 			if (songs[curSelected].hasVocals || songs[curSelected].ExternalSong)
 			{
-				#if desktop
+				#if (desktop && !hl)
 				DiscordClient.changePresence('In The OST Menu',
 					'\nListening To: '
 					+ CoolUtil.formatString(songs[curSelected].songName, '-')
@@ -168,7 +168,7 @@ class MusicPlayerState extends MusicBeatState
 			}
 			else
 			{
-				#if desktop
+				#if (desktop && !hl)
 				DiscordClient.changePresence('In The OST Menu',
 					'\nListening To: '
 					+ CoolUtil.formatString(songs[curSelected].songName, '-')
@@ -225,7 +225,7 @@ class MusicPlayerState extends MusicBeatState
 		{
 			if (currentlyplaying)
 			{
-				#if desktop
+				#if (desktop && !hl)
 				DiscordClient.changePresence('In The OST Menu', null);
 				#end
 

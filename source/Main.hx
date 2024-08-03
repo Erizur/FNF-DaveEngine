@@ -41,6 +41,7 @@ class Main extends Sprite
 	{
 		Lib.current.addChild(new Main());
 
+		openfl.system.System.gc();
 		#if cpp
 		cpp.NativeGc.enable(true);
 		cpp.NativeGc.run(true);
@@ -98,7 +99,11 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 		#end
 
+		#if (!web && flixel < "5.5.0")
 		FlxG.plugins.add(new flixel.addons.plugin.ScreenShotPlugin());
+		#elseif (flixel >= "5.6.0")
+		FlxG.plugins.addIfUniqueType(new flixel.addons.plugin.ScreenShotPlugin());
+		#end
 	}
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
