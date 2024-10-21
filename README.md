@@ -1,6 +1,5 @@
-# WARNING
-THE ENGINE IS AT A VERY UNSTABLE STATE AT THE MOMENT, IT HAS NO MODDING SUPPORT YET.
-IF YOU WANNA MAKE A MOD WITH THE ENGINE AS OF NOW, YOU WILL HAVE TO MODIFY THE SOURCE CODE.
+# Deprecation warning
+This engine is no longer being mantained. Wait for 3.5!
 
 # NOTICE
 If you are getting an issue with random crashes without no error messages, update your hxcpp with `haxelib update hxcpp` or use the bleeding edge version (not recommended) via `haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp master`.
